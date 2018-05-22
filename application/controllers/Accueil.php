@@ -8,9 +8,9 @@ class Accueil extends MY_controller{
     }
 
     public function index(){
-        $data['ltClient'] = $this->ClientDao->findAll();
+     //   $data['ltClient'] = $this->ClientDao->findAll();
         $data['contents'] = "index";
-        $data['titre'] = "TeleOperateur";
+        $data['titre'] = "Plane";
         $this->load->view('template',$data);
 
     }

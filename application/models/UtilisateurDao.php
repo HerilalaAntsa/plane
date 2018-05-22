@@ -70,9 +70,9 @@ Class UtilisateurDao extends CI_Model{
         throw new Exception('Agent introuvable');
     }
     public function login($email, $password){
-        $query = $this->db->get_where('listagent',array('email' => $email,'password' => $password));
+        $query = $this->db->get_where('administrateur',array('email' => $email,'password' => $password));
         if ($query->num_rows() > 0) {
-            $resultat = new AgentModel();
+            $resultat = new ManagerModel();
             $this->creer($resultat, $query->row());
             return $resultat;
         }

@@ -23,25 +23,10 @@ class Utilisateur extends MY_controller {
                 $pass=$this->input->post('pass');
                 try{
                     $user=$this->UtilisateurDao->login($login,$pass);
-                    if($table=='agent'){
-                        if($user->hierarchie>10) {
-                            $data['error'] = "Veuillez-vous connecter en tant que manager";
-                            $this->load->view('login',$data);
-                        }else{
-                            $this->session->set_userdata($table, $user);
-                            $this->session->set_userdata('connecte', $user->getFullName());
-                            $this->session->set_userdata('idAppelant', $user->getId());
-                            redirect(base_url().'Accueil');
-                        }
-                    }else{
-                        if($user->hierarchie<10) {
-                            $data['error'] = "Veuillez-vous connecter en tant que téléopérateur";
-                            $this->load->view('login',$data);
-                        }else{
-                            $this->session->set_userdata($table, $user);
-                            $this->session->set_userdata('connecte', $user->getFullName());
-                            redirect(base_url().'Accueil');
-                        }
+                    if($table=='admin'){
+                        $this->session->set_userdata($table, $user);
+                        $this->session->set_userdata('connecte', $user->getFullName());
+                        redirect(base_url().'Accueil');
                     }
                 }catch(Exception $e){
                     $data['error'] = $e->getMessage();
