@@ -5,10 +5,7 @@ Class ClientDao extends CI_Model{
     {
         parent::__construct();
         $this->load->library('class/ClientModel');
-<<<<<<< HEAD
-        $this->load->model('ManagerDAO');
-=======
->>>>>>> 257fe8b06676a51c551faf1890d1af55c3d6a2a7
+
     }
     public function save($nom,$prenom,$mail,$telephone,$adresse,$sexeclient,$table)
     {

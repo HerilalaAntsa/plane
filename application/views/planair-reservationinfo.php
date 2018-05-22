@@ -17,11 +17,11 @@
 					<li>
 						<div class="form-group">
 							<label>Nom</label>
-							<input type="text" name="villedepart" class="form-control" required="required">
+							<input type="text" name="villedepart" class="form-control" required="required" id="autocomplete">
 						</div>
 						<div class="form-group">
 							<label>Prénom</label>
-							<input type="text" name="villearrivee" class="form-control" required="required">
+							<input type="text" name="villearrivee" class="form-control" required="required" id="autocomplete">
 						</div>
 						<div class="form-group">
 							<label>Date de naissance</label>

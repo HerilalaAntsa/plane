@@ -21,7 +21,7 @@
 					<div class="col-sm-5 col-sm-offset-1">
 						<div class="form-group">
 							<label>Ville de départ *</label>
-							<input type="text" name="villedepart" class="form-control" required="required">
+							<input type="text" name="villedepart" class="form-control" required="required" id="autocomplete">
 						</div>
 						<div class="form-group">
 							<label>Date de départ *</label>
@@ -47,7 +47,7 @@
 					<div class="col-sm-5">
 						<div class="form-group">
 							<label>Ville d'arrivée *</label>
-							<input type="text" name="villearrivee" class="form-control" required="required">
+							<input type="text" name="villearrivee" class="form-control" required="required" id="autocomplete">
 						</div>
 						<div class="form-group">
 							<label>Date d'arrivée *</label>
