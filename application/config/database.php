@@ -74,12 +74,12 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-    'dsn'	=> 'pgsql:host=localhost;dbname=teleoperateur;port=5432',
+    'dsn'	=> 'mysql:host=localhost;port=3307;dbname=planeair',
     'hostname' => 'localhost',
-    'username' => 'postgres',
-    'password' => 'Antsalol',
-    'database' => 'teleoperateur',
-    'dbdriver' => 'pdo',
+    'username' => 'root',
+    'password' => 'root',
+    'database' => 'planeair',
+    'dbdriver' => 'mysqli',
     'dbprefix' => '',
     'pconnect' => FALSE,
     'db_debug' => FALSE,
