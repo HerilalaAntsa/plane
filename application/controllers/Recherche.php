@@ -33,10 +33,10 @@ class Recherche extends MY_controller{
         $start_date = date("Y-m-d", strtotime($start_date));
         $end_date = date("Y-m-d", strtotime($end_date));
 
-        $appel = new AppelModel();
-        $appel->setAgent($this->input->get('agent'));
-        $appel->setClient($this->input->get('client'));
-        $appel->setAction($this->input->get('action'));
+        $vol = new VolModel();
+        $vol->setAgent($this->input->get('agent'));
+        $vol->setClient($this->input->get('client'));
+        $vol->setAction($this->input->get('action'));
 
         $config["total_rows"] = $this->AgentDao->record_count(
             $config["per_page"],
