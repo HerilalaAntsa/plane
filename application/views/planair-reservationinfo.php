@@ -6,71 +6,82 @@
 			</div>		
 		</div>	
 	</div>
-
-	<form id="main-contact-form" class="contact-form text-left" name="contact-form" method="post" action="sendemail.php">
+	<?php echo form_open(base_url().'go',array('method'=>'post', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
 	<div class="services" style="padding: 0">
 		<div class="container">
 			<div class="row contact-wrap form-inline" style="color: initial">
 				<div class="status alert alert-success" style="display: none"></div>
+				echo form_hidden($hidden);
 				<h2>Passagers</h2>
+				<?php if($nbadulte){
+					echo form_hidden('nombreadulte', $nbadulte);
+				?>
 				<ol class="passager-list">
+					Adulte
+					<?php for($i = 0; $i < $nbadulte; $i++){ ?>
 					<li>
 						<div class="form-group">
 							<label>Nom</label>
-							<input type="text" name="villedepart" class="form-control" required="required" id="autocomplete">
+							<input type="text" name="nompassager[]" class="form-control" required="required">
 						</div>
 						<div class="form-group">
 							<label>Prénom</label>
-							<input type="text" name="villearrivee" class="form-control" required="required" id="autocomplete">
+							<input type="text" name="prenompassager[]" class="form-control">
 						</div>
 						<div class="form-group">
 							<label>Date de naissance</label>
-							<input type="date" name="datedepart" class="form-control from" required="required">
+							<input type="date" name="naissancepassager[]" class="form-control from adulte" required="required">
 						</div>
 					</li>
-					<li>
-						<div class="form-group">
-							<label>Nom</label>
-							<input type="text" name="villedepart" class="form-control" required="required">
-						</div>
-						<div class="form-group">
-							<label>Prénom</label>
-							<input type="text" name="villearrivee" class="form-control" required="required">
-						</div>
-						<div class="form-group">
-							<label>Date de naissance</label>
-							<input type="date" name="datedepart" class="form-control from" required="required">
-						</div>
-					</li>
-					<li>
-						<div class="form-group">
-							<label>Nom</label>
-							<input type="text" name="villedepart" class="form-control" required="required">
-						</div>
-						<div class="form-group">
-							<label>Prénom</label>
-							<input type="text" name="villearrivee" class="form-control" required="required">
-						</div>
-						<div class="form-group">
-							<label>Date de naissance</label>
-							<input type="date" name="datedepart" class="form-control from" required="required">
-						</div>
-					</li>
-					<li>
-						<div class="form-group">
-							<label>Nom</label>
-							<input type="text" name="villedepart" class="form-control" required="required">
-						</div>
-						<div class="form-group">
-							<label>Prénom</label>
-							<input type="text" name="villearrivee" class="form-control" required="required">
-						</div>
-						<div class="form-group">
-							<label>Date de naissance</label>
-							<input type="date" name="datedepart" class="form-control from" required="required">
-						</div>
-					</li>
+					<?php } ?>
 				</ol>
+				<?php }
+					if($nbenfant){
+						echo form_hidden('nombreenfant', $nbenfant);
+				?>
+				<ol class="passager-list">
+					Enfant
+					<?php for($i = 0; $i < $nbenfant; $i++){ ?>
+						<li>
+							<div class="form-group">
+								<label>Nom</label>
+								<input type="text" name="nompassager[]" class="form-control" required="required">
+							</div>
+							<div class="form-group">
+								<label>Prénom</label>
+								<input type="text" name="prenompassager[]" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>Date de naissance</label>
+								<input type="date" name="naissancepassager[]" class="form-control from enfant" required="required">
+							</div>
+						</li>
+					<?php } ?>
+				</ol>
+				<?php }
+				if($nbbebe){
+					echo form_hidden('nombrebebe', $nbbebe);
+				?>
+				<ol class="passager-list">
+					Bébé
+					<?php for($i = 0; $i < $nbbebe; $i++){ ?>
+						<li>
+							<div class="form-group">
+								<label>Nom</label>
+								<input type="text" name="nompassager[]" class="form-control" required="required">
+							</div>
+							<div class="form-group">
+								<label>Prénom</label>
+								<input type="text" name="prenompassager[]" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>Date de naissance</label>
+								<input type="date" name="naissancepassager[]" class="form-control from bebe" required="required">
+							</div>
+						</li>
+					<?php } ?>
+				</ol>
+				<?php } ?>
 			</div><!--/.row-->
 		</div>
 	</div>	
