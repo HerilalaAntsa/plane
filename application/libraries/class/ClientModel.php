@@ -21,82 +21,120 @@ class ClientModel
     var $sexe;
     var $datenaissance;
     var $age;
-    var $occupe;
 
+    /**
+     * @return mixed
+     */
     public function getNom()
     {
         return $this->nom;
     }
+
+    /**
+     * @param mixed $nom
+     */
     public function setNom($nom)
     {
         $this->nom = $nom;
     }
 
+    /**
+     * @return mixed
+     */
     public function getPrenom()
     {
         return $this->prenom;
     }
+
+    /**
+     * @param mixed $prenom
+     */
     public function setPrenom($prenom)
     {
         $this->prenom = $prenom;
     }
-    public function getFullName(){
-        return trim($this->nom.' '.$this->prenom);
-    }
+
+    /**
+     * @return mixed
+     */
     public function getTelephone()
     {
         return $this->telephone;
     }
+
+    /**
+     * @param mixed $telephone
+     */
     public function setTelephone($telephone)
     {
         $this->telephone = $telephone;
     }
 
+    /**
+     * @return mixed
+     */
     public function getEmail()
     {
         return $this->email;
     }
+
+    /**
+     * @param mixed $email
+     */
     public function setEmail($email)
     {
         $this->email = $email;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAdresse()
     {
         return $this->adresse;
     }
+
+    /**
+     * @param mixed $adresse
+     */
     public function setAdresse($adresse)
     {
         $this->adresse = $adresse;
     }
 
+    /**
+     * @return mixed
+     */
     public function getSexe()
     {
         return $this->sexe;
     }
+
+    /**
+     * @param mixed $sexe
+     */
     public function setSexe($sexe)
     {
         $this->sexe = $sexe;
     }
-    public function getSexeString(){
 
-        switch ($this->sexe){
-            case 'M' :
-                return 'Homme';
-            default :
-                return 'Femme';
-        }
-    }
-
+    /**
+     * @return mixed
+     */
     public function getDatenaissance()
     {
         return $this->datenaissance;
     }
+
+    /**
+     * @param mixed $datenaissance
+     */
     public function setDatenaissance($datenaissance)
     {
         $this->datenaissance = $datenaissance;
-        $this->setAge($datenaissance);
     }
+
+
 
     public function getAge()
     {
@@ -111,20 +149,4 @@ class ClientModel
         }
         $this->age = $age;
     }
-    public function isOccupe()
-    {
-        if($this->getOccupe()){
-            return true;
-        }
-        return false;
-    }
-    public function getOccupe()
-    {
-        return $this->occupe;
-    }
-    public function setOccupe($occupe)
-    {
-        $this->occupe = $occupe;
-    }
-
 }
