@@ -1,57 +1,41 @@
-<!-- footer content -->
 <footer>
-    <div class="pull-right">
-        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+    <div class="footer">
+        <div class="container">
+            <div class="social-icon">
+                <div class="col-md-4">
+                    <ul class="social-network">
+                        <li><a href="#" class="fb tool-tip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" class="twitter tool-tip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" class="gplus tool-tip" title="Google Plus"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#" class="linkedin tool-tip" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#" class="ytube tool-tip" title="You Tube"><i class="fa fa-youtube-play"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-md-offset-4">
+                <div class="copyright">
+                    &copy; Mai  2018 by <a target="_blank" href="http://planair.com/" title="Plan'Air">Plan'Air</a>. All Rights Reserved.
+                </div>
+                <!--
+                    All links in the footer should remain intact.
+                    Licenseing information is available at: http://bootstraptaste.com/license/
+                    You can buy this theme without footer links online at: http://bootstraptaste.com/buy/?theme=Company
+                -->
+            </div>
+        </div>
+
+        <div class="pull-right">
+            <a href="#home" class="scrollup"><i class="fa fa-angle-up fa-3x"></i></a>
+        </div>
     </div>
-    <div class="clearfix"></div>
 </footer>
-<!-- /footer content -->
-</div>
-</div>
 
-<!-- jQuery -->
-<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="<?php echo base_url(); ?>assets/vendors/js/fastclick.js"></script>
-<!-- NProgress -->
-<script src="<?php echo base_url(); ?>assets/vendors/js/nprogress.js"></script>
-<!-- Chart.js -->
-<script src="<?php echo base_url(); ?>assets/vendors/js/Chart.min.js"></script>
-<!-- gauge.js -->
-<script src="<?php echo base_url(); ?>assets/vendors/js/gauge.min.js"></script>
-<!-- bootstrap-progressbar -->
-<script src="<?php echo base_url(); ?>assets/vendors/js/bootstrap-progressbar.min.js"></script>
-<!-- iCheck -->
-<script src="<?php echo base_url(); ?>assets/vendors/js/icheck.min.js"></script>
-<!-- Skycons -->
-<script src="<?php echo base_url(); ?>assets/vendors/js/skycons.js"></script>
-<!-- Flot -->
-<script src="<?php echo base_url(); ?>assets/vendors/js/jquery.flot.js"></script>
-<script src="<?php echo base_url(); ?>assets/vendors/js/jquery.flot.pie.js"></script>
-<script src="<?php echo base_url(); ?>assets/vendors/js/jquery.flot.time.js"></script>
-<script src="<?php echo base_url(); ?>assets/vendors/js/jquery.flot.stack.js"></script>
-<script src="<?php echo base_url(); ?>assets/vendors/js/jquery.flot.resize.js"></script>
-<!-- Flot plugins -->
-<script src="<?php echo base_url(); ?>assets/vendors/js/jquery.flot.orderBars.js"></script>
-<script src="<?php echo base_url(); ?>assets/vendors/js/jquery.flot.spline.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/vendors/js/curvedLines.js"></script>
-<!-- DateJS -->
-<script src="<?php echo base_url(); ?>assets/vendors/js/date.js"></script>
-<!-- JQVMap -->
-<script src="<?php echo base_url(); ?>assets/vendors/js/jquery.vmap.js"></script>
-<script src="<?php echo base_url(); ?>assets/vendors/js/jquery.vmap.world.js"></script>
-<script src="<?php echo base_url(); ?>assets/vendors/js/jquery.vmap.sampledata.js"></script>
-<!-- bootstrap-daterangepicker -->
-<script src="<?php echo base_url(); ?>assets/vendors/js/moment.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/vendors/js/daterangepicker.js"></script>
-
-<script src="<?php echo base_url(); ?>assets/vendors/js/custom.min.js"></script>
-
-<script src="<?php echo base_url(); ?>assets/vendors/js/jquery.tablesorter.min.js"></script>
-
-<script src="<?php echo base_url(); ?>assets/js/function.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.prettyPhoto.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.isotope.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery-ui.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/wow.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/functions.js"></script>
 
 </body>
 </html>
