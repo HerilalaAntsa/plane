@@ -6,57 +6,38 @@ class Vol extends MY_controller{
         parent::__construct();
         $this->load->library("pagination");
         $this->load->library('class/VolModel');
+        $this->load->library('class/DetailReservationModel');
+        $this->load->library('class/ReservationModel');
         $this->load->model('VolDao');
     }
     public function index(){
         $data['contents'] = "planair-index";
         $this->load->view('template',$data);
     }
-    public function ajoutAgent(){
-        $data['contents'] = "ajoutAgent";
-        $data['titre'] = "TeleOperateur";
+    public function reservation(){
+        $data['contents'] = "planair-reservation";
         $this->load->view('template',$data);
     }
-    public function listAgent($page=1,$error='') {
+    public function recherche(){
+        $villedepart = $this->input->get('villedepart');
+        $datedepart = $this->input->get('datedepart');
+        $typevol = $this->input->get('typevol');
+        $villearrivee = $this->input->get('villearrivee');
+        $datearrivee = $this->input->get('datearrivee');
+        $nbadulte = $this->input->get('nombreadulte');
+        $nbenfant = $this->input->get('nombreenfant');
+        $nbbebe = $this->input->get('nombrebebe');
+        $classe = $this->input->get('classe');
 
-        $data['error'] = trim($error);
-        $config = array();
-        $config["base_url"] = base_url() . "Agent/listAgent/";
-        $config["per_page"] = 5;
-        $config["uri_segment"] = 3;
-        $config["use_page_numbers"] = TRUE;
-
-
-        $date = '01/01/1950 - 01/01/2017';
-        if($this->input->get('dateRecherche')){
-            $date  = $this->input->get('dateRecherche');
+        $paginate = $this->VolDao->rechercheAvance($maxResult, $page, $typevol, $villedepart, $villearrivee, $datedepart, $datearrivee);
+        if($page-1 > $paginate['total']){
+            $this->page(1);
+            return;
         }
-        $pieces = explode(" - ", $date);
-        $start_date = $pieces[0];
-        $end_date = $pieces[1];
-        $start_date = date("Y-m-d", strtotime($start_date));
-        $end_date = date("Y-m-d", strtotime($end_date));
-
-        $agent = new AgentModel();
-        $agent->setNom($this->input->get('agent'));
-        $agent->setEmail($this->input->get('email'));
-        $agent->setTelephone($this->input->get('telephone'));
-        $agent->setAdresse($this->input->get('adresse'));
-        $agent->setSexe($this->input->get('sexe'));
-        $agent->setHierarchie($this->input->get('hierarchie'));
-        $agent->setEnLigne($this->input->get('statut'));
-
-        $tri = $this->input->get('tri');
-
-        $config["total_rows"] = $this->UtilisateurDao->record_count(
-            $config["per_page"],
-            $page,
-            $agent,
-            $start_date,
-            $end_date
-        );
-
         $config['reuse_query_string'] = true;
+        $config['base_url'] = base_url('recherche');
+        $config['total_rows'] = $paginate['total'];
+        $config['per_page'] = $maxResult;
         $config['num_links'] = '1';
         $config['use_page_numbers'] = TRUE;
         $config['full_tag_open'] = '<ul class="pagination">'; //balise ouvrante de la pagination
@@ -74,91 +55,50 @@ class Vol extends MY_controller{
         $config['last_tag_open'] = '<li>';
         $config['last_tag_close'] = '</li>';
 
+        //Initialisation pagination
+        $data['contents'] = "planair-resultat";
+        $data['liste'] = $paginate['liste'];
         $this->pagination->initialize($config);
 
-        $data["results"] = $this->UtilisateurDao->
-        rechercheAvance(
-            $config["per_page"],
-            $page,
-            $agent,
-            $start_date,
-            $end_date,
-            $tri
+        $this->load->view('template',$data);
+    }
+    public function reserver(){
+        if(!$this->input->post('numerovolaller')){
+            redirect('reservation','refresh');
+        }
+        $data['nbadulte'] = $this->input->post('nombreadulte');
+        $data['nbenfant'] = $this->input->post('nombreenfant');
+        $data['nbbebe'] = $this->input->post('nombrebebe');
+        $numerovolaller = $this->input->post('numerovolaller');
+        $numerovolretour = $this->input->post('numerovolretour');
+        $data['hidden'] = array(
+            'numerovolaller' => $numerovolretour,
+            'numerovolretour' => $numerovolaller
         );
 
-        $data["links"] = $this->pagination->create_links();
-
-        $data['contents'] = "listAgentTableau";
-        $data['titre'] = "TeleOperateur";
+        $data['contents'] = "plainair-reservationinfo";
         $this->load->view('template',$data);
     }
-    public function fiche($id){
-//        var_dump($this->upload->do_upload('photo'));
-        $data['error'] = "";
-        $data['agent'] = $this->UtilisateurDao->findById($id);
-        $data['ltAppel'] = $this->AgentDao->findAppelById($data['agent']);
-        $data['ltAppelEntrant'] = $this->AgentDao->findAppelEntrantById($data['agent']);
-        $data['ltAppelSortant'] = $this->AgentDao->findAppelSortantById($data['agent']);
+    public function go($error='') {
 
-        $data['contents'] = "ficheAgent";
-        $data['titre'] = "TeleOperateur";
-        $this->load->view('template',$data);
-    }
-    public function statistique(){
-        $data['stats'] = $this->EtatDao->findAll();
+        $passagers = array();
 
-        $data['contents'] = "statistique";
-        $data['titre'] = "TeleOperateur";
-        $this->load->view('template',$data);
-    }
-
-    public function down() {
-        $ltAgent = $this->UtilisateurDao->findAll();
-        foreach ($ltAgent as $row){
-            $row->setLtAppel($this->AgentDao->findAppelById($row));
-        }
-        $data['ltAgent'] = $ltAgent;
-//        $data['ltAppelEntrant'] = $this->ClientDao->findAppelEntrantById($id);
-//        $data['ltAppelSortant'] = $this->ClientDao->findAppelSortantById($id);
-
-        $html = $this->load->view('listeAppelPDF', $data, true);
-        // Get output html
-//        $html = $this->output->get_output();
-
-        // Load library
-        $this->load->library('dompdf_gen');
-
-        // Convert to PDF
-//        $this->dompdf->set_base_path(base_url());
-        $this->dompdf->load_html($html);
-        $this->dompdf->render();
-        $this->dompdf->stream("Liste-Appel-teleoperateur".strval($this->input->post('listeAppel')).".pdf");
-
-    }
-
-    public function Delete($id)
-    {
-        $data['error'] = "";
-        if ($id)
+        $nom = $this->input->post('nompassager');
+        $prenom = $this->input->post('prenompassager');
+        $naissance = $this->input->post('naissancepassager');
+        for($i=0;$i<sizeof($nom);$i++)
         {
-            $agent = $this->UtilisateurDao->findById($id);
-
-            try{
-                $this->UtilisateurDao->delete($id);
-                $data['error'] = "Utilisateur supprimé.";
-            }catch (Exception $e) {
-                var_dump("aaa");
-                if($agent->getSexe()=='M') {
-                    $data['error'] = 'Impossible de supprimer ' . $agent->getFullName() . ' car il a deja effectué un appel';
-                }else{
-                    $data['error'] = 'Impossible de supprimer ' . $agent->getFullName() . ' car elle a deja effectué un appel';
-                }
-            }
-
-            $this->listAgent(1,$data['error']);
+            $passager = new DetailReservationModel();
+            $passager->setNomPassager($nom[$i]);
+            $passager->setPrenomPassager($prenom[$i]);
+            $passager->setDatenaissance($naissance[$i]);
+            array_push($passagers,$passager);
         }
-        else{
-            redirect(base_url().'Agent/listAgent');
-        }
+        $reservation = new ReservationModel();
+        $reservation->setNombreAdulte($this->input->post('nombreadulte'));
+        $reservation->setNombreEnfant($this->input->post('nombreenfant'));
+        $reservation->setNombreBebe($this->input->post('nombrebebe'));
+        $data['contents'] = 'planair-numeroreservation';
+        $this->load->view('template',$data);
     }
 }

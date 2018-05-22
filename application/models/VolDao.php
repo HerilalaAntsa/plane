@@ -104,6 +104,8 @@ Class VolDao extends CI_Model{
         $query = $this->db->get("vol");
 //    var_dump($query);
         if ($query->num_rows() > 0) {
+            $pagination = array();
+            $pagination['total'] = $query->num_rows();
             $data = array();
             foreach ($query->result() as $row) {
                 $item = new VolModel();
@@ -114,7 +116,8 @@ Class VolDao extends CI_Model{
                 }
                 array_push($data, $item);
             }
-            return $data;
+            $pagination['liste'] = $data;
+            return $pagination;
         }
 //        throw new Exception('Agent introuvable');
     }

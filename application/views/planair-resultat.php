@@ -92,6 +92,7 @@
 						</tr>
 						</tbody>
 					</table>
+					<?php echo form_hidden($hidden); ?>
 					<button type="submit" name="submit" class="btn btn-primary btn-lg pull-right" required="required">Réservez</button>
 				</form>
 			</div>
