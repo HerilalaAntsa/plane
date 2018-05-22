@@ -9,7 +9,7 @@ class Recherche extends MY_controller{
         $this->load->library('class/AppelModel');
         $this->load->model('AgentDao');
         $this->load->model('EtatDao');
-        $this->load->model('UtilisateurDao');
+        $this->load->model('ManagerDAO');
     }
     public function index(){
         $this->page();

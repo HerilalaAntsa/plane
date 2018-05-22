@@ -17,11 +17,11 @@
 
 			<div class="row contact-wrap">
 				<div class="status alert alert-success" style="display: none"></div>
-				<form style="padding-top: 4em" id="main-contact-form" class="contact-form text-left" name="contact-form" method="post" action="sendemail.php">
+				<?php echo form_open(base_url().'recherche',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form', 'style'=>'padding-top:4em;'));?>
 					<div class="col-sm-5 col-sm-offset-1">
 						<div class="form-group">
 							<label>Ville de départ *</label>
-							<input type="text" name="villedepart" class="form-control" required="required">
+							<input type="text" name="villedepart" class="form-control" required="required" id="autocomplete">
 						</div>
 						<div class="form-group">
 							<label>Date de départ *</label>
@@ -47,7 +47,7 @@
 					<div class="col-sm-5">
 						<div class="form-group">
 							<label>Ville d'arrivée *</label>
-							<input type="text" name="villearrivee" class="form-control" required="required">
+							<input type="text" name="villearrivee" class="form-control" required="required" id="autocomplete">
 						</div>
 						<div class="form-group">
 							<label>Date d'arrivée *</label>
@@ -64,7 +64,7 @@
 							<button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Réservez</button>
 						</div>
 					</div>
-				</form>
+				<?php echo form_close() ?>
 			</div><!--/.row-->
         </div><!--/.container-->
     </section><!--/#contact-page-->

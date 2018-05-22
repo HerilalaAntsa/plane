@@ -5,6 +5,7 @@ Class ClientDao extends CI_Model{
     {
         parent::__construct();
         $this->load->library('class/ClientModel');
+
     }
     public function save($nom,$prenom,$mail,$telephone,$adresse,$sexeclient,$table)
     {
@@ -39,6 +40,7 @@ Class ClientDao extends CI_Model{
         $this->db->where('id'.$table, $id);
         return $this->db->delete($table);
     }
+
     Public function findAll()
     {
         $res = $this->db->get('client');
