@@ -1,6 +1,6 @@
 <?php
 
-class Avion
+class AvionModel
 {
     var $id;
 

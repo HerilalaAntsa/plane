@@ -1,6 +1,6 @@
 <?php
 
-class Vol
+class VolModel
 {
     var $id;
 
