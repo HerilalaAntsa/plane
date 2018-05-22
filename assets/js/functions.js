@@ -55,7 +55,7 @@ jQuery(function($) {
 				changeMonth: true,
 				numberOfMonths: 3,
 				showOn: "button",
-				buttonImage: "images/calendar.png",
+				buttonImage: "assets/images/calendar.png",
 				buttonImageOnly: true,
 			})
 			.on( "change", function() {
@@ -66,7 +66,7 @@ jQuery(function($) {
 			changeMonth: true,
 			numberOfMonths: 3,
 			showOn: "button",
-			buttonImage: "images/calendar.png",
+			buttonImage: "assets/images/calendar.png",
 			buttonImageOnly: true,
 		})
 			.on( "change", function() {
