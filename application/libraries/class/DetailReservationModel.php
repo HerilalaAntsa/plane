@@ -13,27 +13,45 @@ class DetailReservationModel
     {
         $this->id = $id;
     }
-    var $idreservation;
     var $nomPassager;
-
-    /**
-     * @return mixed
-     */
-    public function getIdreservation()
-    {
-        return $this->idreservation;
-    }
-
-    /**
-     * @param mixed $idreservation
-     */
-    public function setIdreservation($idreservation)
-    {
-        $this->idreservation = $idreservation;
-    }
     var $prenomPassager;
-
     var $datenaissance;
 
+    public function getNomPassager()
+    {
+        return $this->nomPassager;
+    }
+    public function setNomPassager($nom)
+    {
+        $this->nom = nomPassager;
+    }
+
+    public function getPrenomPassager()
+    {
+        return $this->prenomPassager;
+    }
+    public function setPrenomPassager($prenom)
+    {
+        $this->prenom = prenomPassager;
+    }
+
+    public function getDatenaissance()
+    {
+        return $this->datenaissance;
+    }
+    public function setDatenaissance($datenaissance)
+    {
+        $this->datenaissance = $datenaissance;
+        $this->setAge($datenaissance);
+    }
+
+    public function setAge($date)
+    {
+        $age = date('Y') - date('Y', strtotime($date));
+        if (date('md') < date('md', strtotime($date))){
+            $age = $age - 1;
+        }
+        $this->age = $age;
+    }
 
 }
