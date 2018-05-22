@@ -9,10 +9,7 @@ class Vol extends MY_controller{
         $this->load->model('VolDao');
     }
     public function index(){
-        $data["error"] = "";
-        $data['ltAgent'] = $this->UtilisateurDao->findAll();
-        $data['contents'] = "listeAgent";
-        $data['titre'] = "TeleOperateur";
+        $data['contents'] = "planair-index";
         $this->load->view('template',$data);
     }
     public function ajoutAgent(){
