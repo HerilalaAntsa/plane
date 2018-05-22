@@ -25,6 +25,7 @@ class VolModel
     var $tarifEnfantAffaire;
     var $tarifAdulteAffaire;
     var $tarifBebeAffaire;
+    var $volRetour;
 
 public function getVilleDepart()
 {
@@ -114,9 +115,21 @@ public function setTarifBebeAffaire($tarifBebeAffaire)
 {
     $this->tarifBebeAffaire = $tarifBebeAffaire;
 }
-
-
-
-
+    public function getIdAvion()
+    {
+        return $this->idAvion;
+    }
+    public function setIdAvion($idAvion)
+    {
+        $this->idAvion = $idAvion;
+    }
+    public function getVolRetour()
+    {
+        return $this->volRetour;
+    }
+    public function setVolRetour($volRetour)
+    {
+        $this->volRetour = $volRetour;
+    }
 
 }

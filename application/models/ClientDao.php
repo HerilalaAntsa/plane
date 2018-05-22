@@ -5,17 +5,18 @@ Class ClientDao extends CI_Model{
     {
         parent::__construct();
         $this->load->library('class/ClientModel');
-        $this->load->model('UtilisateurDao');
     }
-    public function save($nom,$prenom,$mail,$pass,$table)
+    public function save($nom,$prenom,$mail,$telephone,$adresse,$sexeclient,$table)
     {
         $this->load->database();
         $data = array(
-            'idagent' => '',
-            'nom' => $nom,
-            'prenom' => $prenom,
-            'mail' => $mail,
-            'pass' => $pass,
+            'idclient' => '',
+            'nomclient' => $nom,
+            'prenomclient' => $prenom,
+            'emailclient' => $mail,
+            'telephoneclient' => $telephone,
+            'adresseclient' => $adresse,
+            'sexeclient' => $sexeclient,
         );
 
         $this->db->insert($table, $data);
@@ -29,8 +30,7 @@ Class ClientDao extends CI_Model{
             'datenaissanceclient' => $model->getDateNaissance(),
             'emailclient' => $model->getEmail(),
             'telephoneclient' => $model->getTelephone(),
-            'adresseclient' => $model->getAdresse(),
-            'isoccupe' => $model->getOccupe()
+            'adresseclient' => $model->getAdresse()
         );
         $this->db->where(array('idclient' => $model->getId()));
         return $this->db->update("client",$data);
@@ -75,7 +75,7 @@ Class ClientDao extends CI_Model{
             return $data;
         }
     }
-    public function findAppelEntrantById($client){
+    public function findReservationById($client){
         $query = $this->db->get_where('listappelentrant',array('idclient' => $client));
         if ($query->num_rows() > 0) {
             $data = array();
@@ -124,7 +124,6 @@ Class ClientDao extends CI_Model{
         $model->setAdresse($res->adresseclient);
         $model->setSexe($res->sexeclient);
         $model->setDateNaissance($res->datenaissanceclient);
-        $model->setOccupe($res->isoccupe);
     }
 }
 ?>

@@ -23,15 +23,13 @@
 
   <body class="login">
     <div>
-      <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
 
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
             <?php echo form_open(base_url().'Utilisateur',array('method'=>'post'));?>
-            <h1>TELEOPERATEUR</h1>
-            <input type="hidden"  name="table" value="agent"/>
+            <h1>ADMINISTRATEUR</h1>
+            <input type="hidden"  name="table" value="admin"/>
               <div>
                 <input type="email" class="form-control" placeholder="Adresse email" name="mail" required="" />
                   <?php echo form_error('mail'); ?>
@@ -53,63 +51,19 @@
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">Etes-vous un Manager?
-                  <a href="#signup" class="to_register"> Connectez-vous ici! </a>
-                </p>
 
                 <div class="clearfix"></div>
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> TeleOperateur!</h1>
-                  <p>©2017 All Rights Reserved. TeleOperateur.</p>
+                  <h1><i class="fa fa-paw"></i> Plane!</h1>
+                  <p>©2017 All Rights Reserved. Plane.</p>
                 </div>
               </div>
             <?php echo form_close(); ?>
           </section>
         </div>
 
-        <div id="register" class="animate form registration_form">
-          <section class="login_content">
-            <?php echo form_open(base_url().'Utilisateur',array('method'=>'post'));?>
-            <h1>MANAGER</h1>
-            <input type="hidden"  name="table" value="manager"/>
-            <div>
-              <input type="email" class="form-control" placeholder="Adresse email" name="mail" required="" />
-                <?php echo form_error('mail'); ?>
-            </div>
-            <div>
-              <input type="password" class="form-control" placeholder="Mot de passe" name="pass" required="" />
-                <?php echo form_error('pass'); ?>
-            </div>
-            <?php if ($error!=""){ ?>
-              <div class="alert alert-danger">
-                <?php echo $error; ?>
-              </div>
-            <?php } ?>
-            <div>
-              <input type="submit" class="btn btn-default submit" value="Je me connecte">
-              <a class="reset_pass" href="#">Lost your password?</a>
-            </div>
-
-            <div class="clearfix"></div>
-
-            <div class="separator">
-              <p class="change_link">Etes-vous un Agent ?
-                <a href="#signin" class="to_register"> Connectez-vous ici! </a>
-              </p>
-
-              <div class="clearfix"></div>
-              <br />
-
-              <div>
-                <h1><i class="fa fa-paw"></i> TeleOperateur!</h1>
-                <p>©2017 All Rights Reserved. TeleOperateur.</p>
-              </div>
-            </div>
-            <?php echo form_close(); ?>
-          </section>
-        </div>
       </div>
     </div>
   </body>

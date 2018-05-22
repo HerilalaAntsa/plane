@@ -1,16 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No redirect script access allowed');
 
-class Agent extends MY_controller{
+class Vol extends MY_controller{
     public function __construct(){
         parent::__construct();
-        $this->load->library('analyse/Etat');
         $this->load->library("pagination");
-        $this->load->library('class/AppelModel');
-        $this->load->library('class/AgentModel');
-        $this->load->model('AgentDao');
-        $this->load->model('EtatDao');
-        $this->load->model('UtilisateurDao');
+        $this->load->library('class/VolModel');
+        $this->load->model('VolDao');
     }
     public function index(){
         $data["error"] = "";
