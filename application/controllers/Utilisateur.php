@@ -3,7 +3,7 @@ class Utilisateur extends MY_controller {
     Public function __construct()
     {
         parent::__construct();
-        $this->load->model('UtilisateurDao');
+        $this->load->model('ManagerDAO');
         $this->load->model('AgentDao');
         $this->load->library('class/AgentModel');
     }

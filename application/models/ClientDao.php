@@ -5,7 +5,7 @@ Class ClientDao extends CI_Model{
     {
         parent::__construct();
         $this->load->library('class/ClientModel');
-        $this->load->model('UtilisateurDao');
+        $this->load->model('ManagerDAO');
     }
     public function save($nom,$prenom,$mail,$pass,$table)
     {
@@ -29,8 +29,7 @@ Class ClientDao extends CI_Model{
             'datenaissanceclient' => $model->getDateNaissance(),
             'emailclient' => $model->getEmail(),
             'telephoneclient' => $model->getTelephone(),
-            'adresseclient' => $model->getAdresse(),
-            'isoccupe' => $model->getOccupe()
+            'adresseclient' => $model->getAdresse()
         );
         $this->db->where(array('idclient' => $model->getId()));
         return $this->db->update("client",$data);
@@ -39,6 +38,7 @@ Class ClientDao extends CI_Model{
         $this->db->where('id'.$table, $id);
         return $this->db->delete($table);
     }
+
     Public function findAll()
     {
         $res = $this->db->get('client');
@@ -124,7 +124,6 @@ Class ClientDao extends CI_Model{
         $model->setAdresse($res->adresseclient);
         $model->setSexe($res->sexeclient);
         $model->setDateNaissance($res->datenaissanceclient);
-        $model->setOccupe($res->isoccupe);
     }
 }
 ?>
