@@ -48,7 +48,7 @@ jQuery(function($) {
 	});
 
 	//Datepicker
-	var dateFormat = "dd/mm/yyyy",
+	var dateFormat = "yyyy-mm-dd",
 		from = $( ".from" )
 			.datepicker({
 				defaultDate: "+1w",
