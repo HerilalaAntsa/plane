@@ -8,7 +8,9 @@ class Vol extends MY_controller{
         $this->load->library('class/VolModel');
         $this->load->library('class/DetailReservationModel');
         $this->load->library('class/ReservationModel');
+        $this->load->library('class/ClientModel');
         $this->load->model('VolDao');
+        $this->load->model('ClientDao');
     }
     public function index(){
         $data['contents'] = "planair-index";
@@ -69,17 +71,23 @@ class Vol extends MY_controller{
         $data['nbadulte'] = $this->input->post('nombreadulte');
         $data['nbenfant'] = $this->input->post('nombreenfant');
         $data['nbbebe'] = $this->input->post('nombrebebe');
-        $numerovolaller = $this->input->post('numerovolaller');
-        $numerovolretour = $this->input->post('numerovolretour');
+        $data['classe'] = $this->input->post('classe');
         $data['hidden'] = array(
-            'numerovolaller' => $numerovolretour,
-            'numerovolretour' => $numerovolaller
+            'numerovolaller' => $this->input->post('numerovolaller'),
+            'numerovolretour' => $this->input->post('numerovolretour'),
+            'classe'=> $this->input->post('classe')
         );
 
         $data['contents'] = "plainair-reservationinfo";
         $this->load->view('template',$data);
     }
     public function go($error='') {
+        $client = new ClientModel();
+        $client->setNom($this->input->post('nomclient'));
+        $client->setPrenom($this->input->post('prenomclient'));
+        $client->setAdresse($this->input->post('adresseclient'));
+        $client->setEmail($this->input->post('emailclient'));
+        $client->setTelephone($this->input->post('telephoneclient'));
 
         $passagers = array();
 
@@ -98,6 +106,16 @@ class Vol extends MY_controller{
         $reservation->setNombreAdulte($this->input->post('nombreadulte'));
         $reservation->setNombreEnfant($this->input->post('nombreenfant'));
         $reservation->setNombreBebe($this->input->post('nombrebebe'));
+        $reservation->setIdVol($this->input->post('idvolaller'));
+        $reservation->setIdVolRetour($this->input->post('idvolretour'));
+        $reservation->setClass($this->input->post('classe'));
+        $reservation->setIdClient($this->ClientDao->save($client));
+        $data['numeroaller'] = md5(uniqid($client->getNom()+$reservation->getIdVol()));
+        $data['numeroretour'] = md5(uniqid($client->getNom()+$reservation->getIdVolRetour()));
+        $reservation->setNumeroReservation($data['numeroaller']);
+        $reservation->setNumeroReservationRetour($data['numeroretour']);
+        $this->VolDao->save($reservation);
+
         $data['contents'] = 'planair-numeroreservation';
         $this->load->view('template',$data);
     }

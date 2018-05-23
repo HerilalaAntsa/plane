@@ -6,21 +6,24 @@ Class VolDao extends CI_Model{
         parent::__construct();
         $this->load->library('class/VolModel');
     }
-    public function save($model)
+    public function save($reservation)
     {
         $this->load->database();
         $data = array(
-            'idagent' => $model->getAgent()->getId(),
-            'idclient' => $model->getClient()->getId(),
-            'appelentrant' => $model->isAppelEntrant(),
-            'dateappel' => $model->getDateAppel(),
-            'dureeappel' => $model->getDureeAppel(),
-            'action' => $model->getAction(),
-            'dateaction' => $model->getDateAction(),
-            'commentaireaction' => $model->getCommentaireAction()
+            'idreservation' => '',
+            'idclient' => $reservation->getIdClient(),
+            'numeroreservation' => $reservation->getNumeroReservation(),
+            'nombreAdulte' => $reservation->getNombreAdulte(),
+            'nombreEnfant' => $reservation->getNombreEnfant(),
+            'nombreBebe' => $reservation->getNombreBebe(),
+            'classe' => $reservation->getClass(),
+            'idvol' => $reservation->getIdVol()
         );
 
-        $this->db->insert("appel", $data);
+        $this->db->insert("reservation", $data);
+        $data['idvol'] = $reservation->getIdVolRetour();
+        $data['idvolretour'] = $reservation->getNumeroReservationRetour();
+        $this->db->insert('reservation', $data);
         return $this->db->insert_id();
     }
 

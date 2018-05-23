@@ -8,7 +8,7 @@
 		</div>	
 	</div>
 	
-	<section id="contact-page" style="background: url(images/slider/bg2.jpg) no-repeat">
+	<section id="contact-page" style="background: url(<?php echo base_url(); ?>assets/images/slider/bg2.jpg) no-repeat">
         <div class="container" style="padding:6em 0">
             <div class="center">        
                 <h2>Réservez</h2>
@@ -25,7 +25,7 @@
 						</div>
 						<div class="form-group">
 							<label>Date de départ *</label>
-							<input type="date" name="datedepart" class="form-control from" required="required">
+							<input type="text" name="datedepart" class="form-control from" required="required">
 						</div>
 						<div class="form-group">
 							<div class="radio">
@@ -51,7 +51,7 @@
 						</div>
 						<div class="form-group">
 							<label>Date d'arrivée *</label>
-							<input type="date" name="datearrivee" class="form-control to" required="required">
+							<input type="text" name="datearrivee" class="form-control to" required="required">
 						</div>
 						<div class="form-group">
 							<label>Classe</label>
