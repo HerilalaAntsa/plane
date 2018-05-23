@@ -16,7 +16,9 @@ class ReservationModel
 
     var $idClient;
     var $idVol;
-    var $numeroReservaton;
+    var $idVolRetour;
+    var $numeroReservation;
+    var $numeroReservationRetour;
     var $nombreAdulte;
     var $nombreEnfant;
     var $nombreBebe;
@@ -38,13 +40,29 @@ class ReservationModel
     {
         $this->idVol = $idVol;
     }
-    public function getNumeroReservaton()
+    public function getIdVolRetour()
     {
-        return $this->numeroReservaton;
+        return $this->idVolRetour;
     }
-    public function setNumeroReservaton($numeroReservaton)
+    public function setIdVolRetour($idVolRetour)
     {
-        $this->numeroReservaton = $numeroReservaton;
+        $this->idVolRetour = $idVolRetour;
+    }
+    public function getNumeroReservation()
+    {
+        return $this->numeroReservation;
+    }
+    public function setNumeroReservation($numeroReservation)
+    {
+        $this->numeroReservation = $numeroReservation;
+    }
+    public function getNumeroReservationRetour()
+    {
+        return $this->numeroReservationRetour;
+    }
+    public function setNumeroReservationRetour($numeroReservationRetour)
+    {
+        $this->numeroReservationRetour = $numeroReservationRetour;
     }
     public function getNombreAdulte()
     {
@@ -78,6 +96,4 @@ class ReservationModel
     {
         $this->class = $class;
     }
-
-
 }

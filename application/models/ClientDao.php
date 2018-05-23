@@ -7,28 +7,25 @@ Class ClientDao extends CI_Model{
         $this->load->library('class/ClientModel');
 
     }
-    public function save($nom,$prenom,$mail,$telephone,$adresse,$sexeclient,$table)
+    public function save($client)
     {
         $this->load->database();
         $data = array(
             'idclient' => '',
-            'nomclient' => $nom,
-            'prenomclient' => $prenom,
-            'emailclient' => $mail,
-            'telephoneclient' => $telephone,
-            'adresseclient' => $adresse,
-            'sexeclient' => $sexeclient,
+            'nomclient' => $client->getNom(),
+            'prenomclient' => $client->getPrenom(),
+            'emailclient' => $client->getEmail(),
+            'telephoneclient' => $client->getTelephone(),
+            'adresseclient' => $client->getAdresse()
         );
 
-        $this->db->insert($table, $data);
+        $this->db->insert('client', $data);
         return $this->db->insert_id();
     }
     public function update($model){
         $data = array(
             'nomclient' => $model->getNom(),
             'prenomclient' => $model->getPrenom(),
-            'sexeclient' => $model->getSexe(),
-            'datenaissanceclient' => $model->getDateNaissance(),
             'emailclient' => $model->getEmail(),
             'telephoneclient' => $model->getTelephone(),
             'adresseclient' => $model->getAdresse()
@@ -65,56 +62,18 @@ Class ClientDao extends CI_Model{
         }
         log_message('error', 'Client introuvable');
     }
-    public function findAppelById($client){
-        $query = $this->db->get_where('listappel',array('idclient' => $client));
-        if ($query->num_rows() > 0) {
-            $data = array();
-            foreach ($query->result() as $row) {
-                $item = new AppelModel();
-                $this->creerByClient($item, $row);
-                array_push($data, $item);
-            }
-            return $data;
-        }
-    }
     public function findReservationById($client){
-        $query = $this->db->get_where('listappelentrant',array('idclient' => $client));
+        $query = $this->db->get_where('reservation',array('idclient' => $client));
         if ($query->num_rows() > 0) {
             $data = array();
             foreach ($query->result() as $row) {
-                $item = new AppelModel();
+                $item = new ReservationModel();
                 $this->creerByClient($item, $row);
                 array_push($data, $item);
             }
             return $data;
         }
-        throw new Exception('Agent introuvable');
-    }
-    public function findAppelSortantById($client){
-        $query = $this->db->get_where('listappelsortant',array('idclient' => $client));
-        if ($query->num_rows() > 0) {
-            $data = array();
-            foreach ($query->result() as $row) {
-                $item = new AppelModel();
-                $this->creerByClient($item, $row);
-                array_push($data, $item);
-            }
-            return $data;
-        }
-        throw new Exception('Agent introuvable');
-    }
-    public function creerByClient($model, $res)
-    {
-        $agent = $this->UtilisateurDao->findById($res->idagent);
-        $model->setId($res->idappel);
-        $model->setAgent($agent);
-        $model->setClient($res->fullname);
-        $model->setDateAppel($res->dateappel);
-        $model->setAppelEntrant($res->appelentrant);
-        $model->setDureeAppel($res->dureeappel);
-        $model->setAction($res->action);
-        $model->setDateAction($res->dateaction);
-        $model->setCommentaireAction($res->commentaireaction);
+        throw new Exception('Reservation introuvable');
     }
     public function creer($model, $res)
     {
@@ -124,8 +83,6 @@ Class ClientDao extends CI_Model{
         $model->setTelephone($res->telephoneclient);
         $model->setEmail($res->emailclient);
         $model->setAdresse($res->adresseclient);
-        $model->setSexe($res->sexeclient);
-        $model->setDateNaissance($res->datenaissanceclient);
     }
 }
 ?>
