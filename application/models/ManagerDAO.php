@@ -1,10 +1,10 @@
 <?php
-Class UtilisateurDao extends CI_Model{
+Class ManagerDAO extends CI_Model{
 
     Public function __construct()
     {
         parent::__construct();
-        $this->load->library('class/AgentModel');
+        $this->load->library('class/ManagerModel');
     }
     public function save($agent)
     {
