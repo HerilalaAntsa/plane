@@ -5,21 +5,22 @@ class Vol extends MY_controller{
     public function __construct(){
         parent::__construct();
         $this->load->library("pagination");
-
         $this->load->library('class/VolModel');
         $this->load->library('class/DetailReservationModel');
         $this->load->library('class/ReservationModel');
         $this->load->model('VolDao');
-
     }
+
     public function index(){
         $data['contents'] = "planair-index";
         $this->load->view('template',$data);
     }
+
     public function reservation(){
         $data['contents'] = "planair-reservation";
         $this->load->view('template',$data);
     }
+
     public function recherche(){
         $villedepart = $this->input->get('villedepart');
         $datedepart = $this->input->get('datedepart');
