@@ -81,6 +81,15 @@
 								</select>
 							</div>
 							<div class="form-group">
+								<label>Plus ou moins nombre de jours</label>
+								<select name="nbjour" class="form-control">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3" selected>3</option>
+									<option value="4">4</option>
+								</select>
+							</div>
+							<div class="form-group">
 								<button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Réservez</button>
 							</div>
 						</div>

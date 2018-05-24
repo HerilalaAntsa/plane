@@ -111,18 +111,14 @@ Class VolDao extends CI_Model{
 
         return $this->db->count_all_results("listappel2");
     }
-    public function rechercheAvance($limit,$depart,$arrivee,$start_date){
+    public function rechercheAvance($limit,$depart,$arrivee,$start_date, $nbjour = 3){
 //        $this->db->where('dateappel BETWEEN '. $start_date. ' and '. $end_date);
 
         $start = strtotime($start_date);
         $dates=array();
-        array_push($dates,date('Y-m-d', strtotime("-3 day", $start)));
-        array_push($dates,date('Y-m-d', strtotime("-2 day", $start)));
-        array_push($dates,date('Y-m-d', strtotime("-1 day", $start)));
-        array_push($dates,date('Y-m-d', strtotime("+0 day", $start)));
-        array_push($dates,date('Y-m-d', strtotime("+1 day", $start)));
-        array_push($dates,date('Y-m-d', strtotime("+2 day", $start)));
-        array_push($dates,date('Y-m-d', strtotime("+3 day", $start)));
+        for($i=-$nbjour; $i <= $nbjour; $i++){
+            array_push($dates,date('Y-m-d', strtotime($i." day", $start)));
+        }
         $data = array();
         foreach ($dates as $date){
             $this->db->like(array('UPPER(villedepart)' => strtoupper($depart) , 'UPPER(villearrive)' => strtoupper($arrivee)));

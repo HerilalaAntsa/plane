@@ -34,12 +34,13 @@ class Vol extends MY_controller{
         $villearrivee=$this->input->get('villearrivee');
         $datearrivee=$this->input->get('datearrivee');
         $classe=$this->input->get('classe');
+        $nbjour=$this->input->get('nbjour');
         try{
             $data["allers"] = $this->VolDao->
-            rechercheAvance(1,$villedepart,$villearrivee,$datedepart);
+            rechercheAvance(1,$villedepart,$villearrivee,$datedepart, $nbjour);
             if ($typevol){
                 $data["retours"] = $this->VolDao->
-                rechercheAvance(1,$villearrivee,$villedepart,$datearrivee);
+                rechercheAvance(1,$villearrivee,$villedepart,$datearrivee, $nbjour);
             }
             $data['hidden'] = array(
                 'nombreadulte' => $nombreadulte,
