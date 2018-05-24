@@ -48,14 +48,14 @@ jQuery(function($) {
 	});
 
 	//Datepicker
-	var dateFormat = "dd/mm/yyyy",
+	var dateFormat = "yyyy-mm-dd",
 		from = $( ".from" )
 			.datepicker({
 				defaultDate: "+1w",
 				changeMonth: true,
 				numberOfMonths: 3,
 				showOn: "button",
-				buttonImage: "assets/images/calendar.png",
+				buttonImage: "/plane/assets/images/calendar.png",
 				buttonImageOnly: true,
 			})
 			.on( "change", function() {
@@ -66,13 +66,26 @@ jQuery(function($) {
 			changeMonth: true,
 			numberOfMonths: 3,
 			showOn: "button",
-			buttonImage: "assets/images/calendar.png",
+			buttonImage: "/plane/assets/images/calendar.png",
 			buttonImageOnly: true,
 		})
 			.on( "change", function() {
 				from.datepicker( "option", "maxDate", getDate( this ) );
 			});
-
+	$('.adulte').datepicker({
+		maxDate: '-11Y',
+		buttonImage: "/plane/assets/images/calendar.png"
+	})
+	$('.enfant').datepicker({
+		maxDate: '-2Y',
+		minDate: '-11Y',
+		buttonImage: "/plane/assets/images/calendar.png"
+	})
+	$('.bebe').datepicker({
+		maxDate: '0Y',
+		minDate: '-2Y',
+		buttonImage: "/plane/assets/images/calendar.png"
+	})
 	function getDate( element ) {
 		var date;
 		try {

@@ -95,28 +95,25 @@
 						<div class="col-sm-5 col-sm-offset-1">
 							<div class="form-group">
 								<label>Nom *</label>
-								<input type="text" name="villedepart" class="form-control" required="required">
+								<input type="text" name="nomclient" class="form-control" required="required">
 							</div>
 							<div class="form-group">
-								<label>Adresse *</label>
-								<input type="date" name="datedepart" class="form-control from" required="required">
+								<label>Prénom</label>
+								<input type="text" name="prenomclient" class="form-control from" required="required">
 							</div>
 						</div>
 						<div class="col-sm-5">
 							<div class="form-group">
-								<label>Ville d'arrivée *</label>
-								<input type="text" name="villearrivee" class="form-control" required="required">
+								<label>Adresse Email</label>
+								<input type="text" name="emailclient" class="form-control" required="required">
 							</div>
 							<div class="form-group">
-								<label>Date d'arrivée *</label>
-								<input type="date" name="datearrivee" class="form-control to" required="required">
+								<label>Téléphone</label>
+								<input type="date" name="telephoneclient" class="form-control" required="required">
 							</div>
 							<div class="form-group">
-								<label>Classe</label>
-								<select name="classe" class="form-control">
-									<option value="false" selected>Economique</option>
-									<option value="true">Affaire</option>
-								</select>
+								<label>Adresse</label>
+								<input type="text" name="adresseclient" class="form-control">
 							</div>
 							<div class="form-group">
 								<button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Rechercher</button>

@@ -18,9 +18,6 @@ class ClientModel
     var $telephone;
     var $email;
     var $adresse;
-    var $sexe;
-    var $datenaissance;
-    var $age;
 
     public function getNom()
     {
@@ -61,34 +58,5 @@ class ClientModel
     public function setAdresse($adresse)
     {
         $this->adresse = $adresse;
-    }
-    public function getSexe()
-    {
-        return $this->sexe;
-    }
-    public function setSexe($sexe)
-    {
-        $this->sexe = $sexe;
-    }
-    public function getDatenaissance()
-    {
-        return $this->datenaissance;
-    }
-    public function setDatenaissance($datenaissance)
-    {
-        $this->datenaissance = $datenaissance;
-    }
-    public function getAge()
-    {
-        return $this->age;
-    }
-
-    public function setAge($date)
-    {
-        $age = date('Y') - date('Y', strtotime($date));
-        if (date('md') < date('md', strtotime($date))){
-            $age = $age - 1;
-        }
-        $this->age = $age;
     }
 }
