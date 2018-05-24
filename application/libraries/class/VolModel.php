@@ -105,7 +105,11 @@ public function getTarifAdulteAffaire()
 }
 public function setTarifAdulteAffaire($tarifAdulteAffaire)
 {
+    if($tarifAdulteAffaire>=0){
     $this->tarifAdulteAffaire = $tarifAdulteAffaire;
+    }else{
+        echo("Le tarif devrait etre plus chers que ca ?");
+    }
 }
 public function getTarifBebeAffaire()
 {

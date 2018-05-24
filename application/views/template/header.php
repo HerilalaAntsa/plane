@@ -50,7 +50,7 @@
                     <div class="menu">
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation"><a href="index.html" class="active">Accueil</a></li>
-                            <li role="presentation"><a href="reservation.html">Réservation</a></li>
+                            <li role="presentation"><a href="planair-reservation.php">Réservation</a></li>
                         </ul>
                     </div>
                 </div>
