@@ -1,3 +1,4 @@
+<?php setlocale(LC_TIME, 'fr_FR.utf8','fra') ?>
 	<div id="breadcrumb">
 		<div class="container">	
 			<div class="breadcrumb">							
@@ -11,55 +12,60 @@
 		<div class="container">
 			<div class="row contact-wrap" style="color: initial">
 				<div class="status alert alert-success" style="display: none"></div>
-				<form id="main-contact-form" class="contact-form text-left" name="contact-form" method="post" action="sendemail.php">
-					<h2>Recherche</h2>
-					<div class="col-sm-5 col-sm-offset-1">
-						<div class="form-group">
-							<label>Ville de départ *</label>
-							<input type="text" name="villedepart" class="form-control" required="required">
+				<?php echo form_open(base_url().'recherche',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
+				<div class="col-sm-5 col-sm-offset-1">
+					<div class="form-group">
+
+						<label>Ville de départ *</label>
+						<input type="text" name="villedepart" class="form-control" required="required" id="autocomplete">
+					</div>
+					<div class="form-group">
+						<label>Date de départ *</label>
+						<input type="text" name="datedepart" class="form-control from" required="required">
+					</div>
+					<div class="form-group">
+						<div class="radio">
+							<label><input type="radio" name="typevol" value="true">Aller - Retour</label>
 						</div>
-						<div class="form-group">
-							<label>Date de départ *</label>
-							<input type="date" name="datedepart" class="form-control from" required="required">
-						</div>
-						<div class="form-group">
-							<div class="radio">
-								<label><input type="radio" name="typevol">Aller - Retour</label>
-							</div>
-							<div class="radio">
-								<label><input type="radio" name="typevol">Aller simple</label>
-							</div>
-						</div>
-						<div class="form-group" style="color: initial">
-							<input type="number" min="0" max="9" value="1" name="nombreadulte">
-							<label>Adultes</label>
-							<input type="number" min="0" max="9" value="0" name="nombreenfant">
-							<label>Enfant(2 - 11ans)</label>
-							<input type="number" min="0" max="9" value="0" name="nombrebebe">
-							<label>Bébé</label>
+						<div class="radio">
+							<label><input type="radio" name="typevol" value="false">Aller simple</label>
 						</div>
 					</div>
-					<div class="col-sm-5">
-						<div class="form-group">
-							<label>Ville d'arrivée *</label>
-							<input type="text" name="villearrivee" class="form-control" required="required">
-						</div>
-						<div class="form-group">
-							<label>Date d'arrivée *</label>
-							<input type="date" name="datearrivee" class="form-control to" required="required">
-						</div>
-						<div class="form-group">
-							<label>Classe</label>
-							<select name="classe" class="form-control">
-								<option value="false" selected>Economique</option>
-								<option value="true">Affaire</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Rechercher</button>
-						</div>
+					<div class="form-group">
+						<input type="number" min="0" max="9" value="1" name="nombreadulte">
+						<label>Adultes</label>
 					</div>
-				</form>
+					<div class="form-group">
+						<input type="number" min="0" max="9" value="0" name="nombreenfant">
+						<label>Enfant(2 - 11ans)</label>
+					</div>
+					<div class="form-group">
+						<input type="number" min="0" max="9" value="0" name="nombrebebe">
+						<label>Bébé</label>
+					</div>
+				</div>
+
+				<div class="col-sm-5">
+					<div class="form-group">
+						<label>Ville d'arrivée *</label>
+						<input type="text" name="villearrivee" class="form-control" required="required" id="autocomplete1">
+					</div>
+					<div class="form-group">
+						<label>Date d'arrivée *</label>
+						<input type="text" name="datearrivee" class="form-control to" required="required">
+					</div>
+					<div class="form-group">
+						<label>Classe</label>
+						<select name="classe" class="form-control">
+							<option value="false" selected>Economique</option>
+							<option value="true">Affaire</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Rechercher</button>
+					</div>
+				</div>
+				<?php echo form_close(); ?>
 			</div><!--/.row-->
 		</div>
 	</div>	
@@ -67,34 +73,54 @@
 	<div class="sub-services">
 		<div class="container">
 			<div class="col-md-12">
-				<form>
+
+                <?php echo form_open(base_url().'Vol/reserver',array('method'=>'post'));?>
 					<table class="table text-center" style="color: initial">
 						<thead>
 						<tr class="active">
-							<th style="text-align: center !important;">19-05-2018</th>
-							<th style="text-align: center !important;">20-05-2018</th>
-							<th style="text-align: center !important;">21-05-2018</th>
-							<th style="text-align: center !important;">22-05-2018</th>
-							<th style="text-align: center !important;">23-05-2018</th>
-							<th style="text-align: center !important;">24-05-2018</th>
-							<th style="text-align: center !important;">25-05-2018</th>
+                            <?php foreach ($allers as $date => $vol){
+                                $dateformat = strtotime($date);
+                            ?>
+                                <th style="text-align: center !important;"><?php echo strftime('%A %d %b %Y', $dateformat); ?></th>
+                            <?php } ?>
 						</tr>
 						</thead>
 						<tbody>
 						<tr class="success">
-							<td><label><input type="radio" name="optradio"> Option 2</label></td>
-							<td><label><input type="radio" name="optradio"> Option 2</label></td>
-							<td><label><input type="radio" name="optradio"> Option 2</label></td>
-							<td><label><input type="radio" name="optradio"> Option 2</label></td>
-							<td><label><input type="radio" name="optradio"> Option 2</label></td>
-							<td><label><input type="radio" name="optradio"> Option 2</label></td>
-							<td><label><input type="radio" name="optradio"> Option 2</label></td>
+                            <?php foreach ($allers as $vol){
+                            if ($vol->getId()) { ?>
+                                <td><label><input type="radio" name="numerovolaller" value="<?php echo $vol->getId() ?>" checked><br>A partir de <?php echo $vol->getTarifAdulte() ?> €</label></td>
+                            <?php }else echo '<td>-</td>';
+                            } ?>
 						</tr>
 						</tbody>
 					</table>
 					<?php echo form_hidden($hidden); ?>
+                    <?php if(isset($retours)){ ?>
+                    <table class="table text-center" style="color: initial">
+                        <thead>
+                        <tr class="active">
+                            <?php foreach ($retours as $date => $vol){
+                                $dateformat = strtotime($date); ?>
+                                <th style="text-align: center !important;"><?php echo strftime('%A %d %b %Y', $dateformat); ?></th>
+                            <?php } ?>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="success">
+                            <?php foreach ($retours as $vol) {
+                                if ($vol->getId()) { ?>
+                                    <td><label>
+                                            <input type="radio" name="numerovolretour" value="<?php echo $vol->getId() ?>" checked>
+                                            <br>A partir de <?php echo $vol->getTarifAdulte() ?> €</label></td>
+                                <?php }else echo '<td>-</td>';
+                            } ?>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <?php } ?>
 					<button type="submit" name="submit" class="btn btn-primary btn-lg pull-right" required="required">Réservez</button>
-				</form>
+				<?php form_close() ?>
 			</div>
 		</div>
 	</div>

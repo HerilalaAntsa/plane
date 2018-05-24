@@ -74,7 +74,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-    'dsn'	=> 'mysql:host=localhost;port=3307;dbname=planeair',
+    'dsn'	=> 'mysql:host=localhost;dbname=planeair',
     'hostname' => 'localhost',
     'username' => 'root',
     'password' => 'root',

@@ -11,7 +11,7 @@
 		<div class="container">
 			<div class="row contact-wrap form-inline" style="color: initial">
 				<div class="status alert alert-success" style="display: none"></div>
-				echo form_hidden($hidden);
+				<?php echo form_hidden($hidden); ?>
 				<h2>Passagers</h2>
 				<?php if($nbadulte){
 					echo form_hidden('nombreadulte', $nbadulte);
@@ -30,7 +30,7 @@
 						</div>
 						<div class="form-group">
 							<label>Date de naissance</label>
-							<input type="date" name="naissancepassager[]" class="form-control from adulte" required="required">
+							<input type="date" name="naissancepassager[]" class="form-control adulte" required="required">
 						</div>
 					</li>
 					<?php } ?>
@@ -53,7 +53,7 @@
 							</div>
 							<div class="form-group">
 								<label>Date de naissance</label>
-								<input type="date" name="naissancepassager[]" class="form-control from enfant" required="required">
+								<input type="date" name="naissancepassager[]" class="form-control enfant" required="required">
 							</div>
 						</li>
 					<?php } ?>
@@ -76,7 +76,7 @@
 							</div>
 							<div class="form-group">
 								<label>Date de naissance</label>
-								<input type="date" name="naissancepassager[]" class="form-control from bebe" required="required">
+								<input type="date" name="naissancepassager[]" class="form-control bebe" required="required">
 							</div>
 						</li>
 					<?php } ?>

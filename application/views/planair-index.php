@@ -31,7 +31,7 @@
 				<div class="row contact-wrap" style="color:initial">
 					<h3>Réservez dès maintenant votre vol</h3>
 					<div class="status alert alert-success" style="display: none"></div>
-					<?php echo form_open(base_url().'recherche',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
+					<?php echo form_open(base_url().'Vol/recherche',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
 						<div class="col-sm-5 col-sm-offset-1">
 							<div class="form-group">
 
