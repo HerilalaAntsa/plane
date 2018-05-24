@@ -48,43 +48,63 @@ jQuery(function($) {
 	});
 
 	//Datepicker
-	var dateFormat = "yyyy-mm-dd",
+	var dateFormat = "yy-mm-dd",
 		from = $( ".from" )
 			.datepicker({
+				minDate: "+0d",
 				defaultDate: "+1w",
 				changeMonth: true,
 				numberOfMonths: 3,
+				dateFormat : dateFormat,
 				showOn: "button",
-				buttonImage: "/plane/assets/images/calendar.png",
-				buttonImageOnly: true,
+				buttonImage: base + "/assets/images/calendar.png",
+				buttonImageOnly: true
 			})
 			.on( "change", function() {
 				to.datepicker( "option", "minDate", getDate( this ) );
 			}),
 		to = $( ".to" ).datepicker({
+			minDate: "+0d",
 			defaultDate: "+1w",
 			changeMonth: true,
+			changeYear: true,
 			numberOfMonths: 3,
+			dateFormat : dateFormat,
 			showOn: "button",
-			buttonImage: "/plane/assets/images/calendar.png",
-			buttonImageOnly: true,
+			buttonImage: base + "assets/images/calendar.png",
+			buttonImageOnly: true
 		})
 			.on( "change", function() {
 				from.datepicker( "option", "maxDate", getDate( this ) );
 			});
 	$('.adulte').datepicker({
 		maxDate: '-11Y',
-		buttonImage: "/plane/assets/images/calendar.png"
+		changeMonth: true,
+		changeYear: true,
+		dateFormat : dateFormat,
+		showOn: "button",
+		buttonImage: base + "assets/images/calendar.png",
+		buttonImageOnly: true
 	})
 	$('.enfant').datepicker({
 		maxDate: '-2Y',
+		changeMonth: true,
+		changeYear: true,
 		minDate: '-11Y',
-		buttonImage: "/plane/assets/images/calendar.png"
+		showOn: "button",
+		dateFormat : dateFormat,
+		buttonImage: base + "assets/images/calendar.png",
+		buttonImageOnly: true
 	})
 	$('.bebe').datepicker({
 		maxDate: '0Y',
 		minDate: '-2Y',
-		buttonImage: "/plane/assets/images/calendar.png"
+		changeMonth: true,
+		changeYear: true,
+		showOn: "button",
+		dateFormat : dateFormat,
+		buttonImage: base + "assets/images/calendar.png",
+		buttonImageOnly: true
 	})
 	function getDate( element ) {
 		var date;

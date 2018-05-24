@@ -30,6 +30,9 @@
     <![endif]-->
 </head>
 <body>
+<script>
+    var base = "<?php echo base_url() ?>";
+</script>
 <header>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navigation">

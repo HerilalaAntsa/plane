@@ -8,7 +8,6 @@ Class VolDao extends CI_Model{
     }
     public function save($reservation)
     {
-        $this->load->database();
         $data = array(
             'idreservation' => '',
             'idclient' => $reservation->getIdClient(),
@@ -21,9 +20,29 @@ Class VolDao extends CI_Model{
         );
 
         $this->db->insert("reservation", $data);
+        $id = $this->db->insert_id();
+        foreach ($reservation->detailreservation as $passager){
+            $datadetail = array(
+                'nompassager' => $passager->getNomPassager(),
+                'prenompassager' => $passager->getPrenomPassager(),
+                'datenaissance' => $passager->getDateNaissance(),
+                'idreservation' => $id
+            );
+            $this->db->insert("detailreservation", $datadetail);
+        }
         $data['idvol'] = $reservation->getIdVolRetour();
-        $data['idvolretour'] = $reservation->getNumeroReservationRetour();
-        $this->db->insert('reservation', $data);
+        $data['numeroreservation'] = $reservation->getNumeroReservationRetour();
+        $this->db->insert('reservation', $data);        $id = $this->db->insert_id();
+        $id = $this->db->insert_id();
+        foreach ($reservation->detailreservation as $passager){
+            $datadetail = array(
+                'nompassager' => $passager->getNomPassager(),
+                'prenompassager' => $passager->getPrenomPassager(),
+                'datenaissance' => $passager->getDateNaissance(),
+                'idreservation' => $id
+            );
+            $this->db->insert("detailreservation", $datadetail);
+        }
         return $this->db->insert_id();
     }
 
