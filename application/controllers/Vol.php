@@ -24,52 +24,42 @@ class Vol extends MY_controller{
     }
 
     public function recherche(){
-        $villedepart = $this->input->get('villedepart');
-        $datedepart = $this->input->get('datedepart');
-        $typevol = $this->input->get('typevol');
-        $villearrivee = $this->input->get('villearrivee');
-        $datearrivee = $this->input->get('datearrivee');
-        $nbadulte = $this->input->get('nombreadulte');
-        $nbenfant = $this->input->get('nombreenfant');
-        $nbbebe = $this->input->get('nombrebebe');
-        $classe = $this->input->get('classe');
+        $data['error'] = "";
+        $data['redirection'] = "";
 
-        $paginate = $this->VolDao->rechercheAvance($maxResult, $page, $typevol, $villedepart, $villearrivee, $datedepart, $datearrivee);
-        if($page-1 > $paginate['total']){
-            $this->page(1);
-            return;
+        $villedepart=$this->input->get('villedepart');
+        $datedepart=$this->input->get('datedepart');
+        $typevol=$this->input->get('typevol');
+        $nombreadulte=$this->input->get('nombreadulte');
+        $nombreenfant=$this->input->get('nombreenfant');
+        $nombrebebe=$this->input->get('nombrebebe');
+        $villearrivee=$this->input->get('villearrivee');
+        $datearrivee=$this->input->get('datearrivee');
+        $classe=$this->input->get('classe');
+        $nbjour=$this->input->get('nbjour');
+        try{
+            $data["allers"] = $this->VolDao->
+            rechercheAvance(1,$villedepart,$villearrivee,$datedepart, $nbjour);
+            if ($typevol){
+                $data["retours"] = $this->VolDao->
+                rechercheAvance(1,$villearrivee,$villedepart,$datearrivee, $nbjour);
+            }
+            $data['hidden'] = array(
+                'nombreadulte' => $nombreadulte,
+                'nombreenfant' => $nombreenfant,
+                'nombrebebe' => $nombrebebe,
+                'classe' => $classe
+            );
+            $data['contents'] = "planair-resultat";
+            $this->load->view('template',$data);
+        }catch(Exception $e){
+            $data['error'] = $e->getMessage();
+            $this->load->view('Vol',$data);
         }
-        $config['reuse_query_string'] = true;
-        $config['base_url'] = base_url('recherche');
-        $config['total_rows'] = $paginate['total'];
-        $config['per_page'] = $maxResult;
-        $config['num_links'] = '1';
-        $config['use_page_numbers'] = TRUE;
-        $config['full_tag_open'] = '<ul class="pagination">'; //balise ouvrante de la pagination
-        $config['full_tag_close'] = '</ul>'; //balise fermante de la pagination
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="active"><a href="#">';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['prev_tag_open'] = '<li>';
-        $config['prev_tag_close'] = '</li>';
-        $config['next_tag_open'] = '<li>';
-        $config['next_tag_close'] = '</li>';
-        $config['first_tag_open'] = '<li>';
-        $config['first_tag_close'] = '</li>';
-        $config['last_tag_open'] = '<li>';
-        $config['last_tag_close'] = '</li>';
-
-        //Initialisation pagination
-        $data['contents'] = "planair-resultat";
-        $data['liste'] = $paginate['liste'];
-        $this->pagination->initialize($config);
-
-        $this->load->view('template',$data);
     }
     public function reserver(){
         if(!$this->input->post('numerovolaller')){
-            redirect('reservation','refresh');
+            redirect('Vol/reservation','refresh');
         }
         $data['nbadulte'] = $this->input->post('nombreadulte');
         $data['nbenfant'] = $this->input->post('nombreenfant');
@@ -78,10 +68,13 @@ class Vol extends MY_controller{
         $data['hidden'] = array(
             'numerovolaller' => $this->input->post('numerovolaller'),
             'numerovolretour' => $this->input->post('numerovolretour'),
-            'classe'=> $this->input->post('classe')
+            'classe'=> $this->input->post('classe'),
+            'nombreadulte' => $this->input->post('nombreadulte'),
+            'nombreenfant' => $this->input->post('nombreenfant'),
+            'nombrebebe' => $this->input->post('nombrebebe')
         );
 
-        $data['contents'] = "plainair-reservationinfo";
+        $data['contents'] = "planair-reservationinfo";
         $this->load->view('template',$data);
     }
     public function go($error='') {
@@ -92,7 +85,18 @@ class Vol extends MY_controller{
         $client->setEmail($this->input->post('emailclient'));
         $client->setTelephone($this->input->post('telephoneclient'));
 
-        $passagers = array();
+        $reservation = new ReservationModel();
+        $reservation->setNombreAdulte($this->input->post('nombreadulte'));
+        $reservation->setNombreEnfant($this->input->post('nombreenfant'));
+        $reservation->setNombreBebe($this->input->post('nombrebebe'));
+        $reservation->setIdVol($this->input->post('numerovolaller'));
+        $reservation->setIdVolRetour($this->input->post('numerovolretour'));
+        $reservation->setClass($this->input->post('classe'));
+        $reservation->setIdClient($this->ClientDao->save($client));
+        $data['numeroaller'] = md5(uniqid($client->getNom()+$reservation->getIdVol()));
+        $data['numeroretour'] = md5(uniqid($client->getNom()+$reservation->getIdVolRetour()));
+        $reservation->setNumeroReservation($data['numeroaller']);
+        $reservation->setNumeroReservationRetour($data['numeroretour']);
 
         $nom = $this->input->post('nompassager');
         $prenom = $this->input->post('prenompassager');
@@ -103,22 +107,9 @@ class Vol extends MY_controller{
             $passager->setNomPassager($nom[$i]);
             $passager->setPrenomPassager($prenom[$i]);
             $passager->setDatenaissance($naissance[$i]);
-            array_push($passagers,$passager);
+            $reservation->addDetail($passager);
         }
-        $reservation = new ReservationModel();
-        $reservation->setNombreAdulte($this->input->post('nombreadulte'));
-        $reservation->setNombreEnfant($this->input->post('nombreenfant'));
-        $reservation->setNombreBebe($this->input->post('nombrebebe'));
-        $reservation->setIdVol($this->input->post('idvolaller'));
-        $reservation->setIdVolRetour($this->input->post('idvolretour'));
-        $reservation->setClass($this->input->post('classe'));
-        $reservation->setIdClient($this->ClientDao->save($client));
-        $data['numeroaller'] = md5(uniqid($client->getNom()+$reservation->getIdVol()));
-        $data['numeroretour'] = md5(uniqid($client->getNom()+$reservation->getIdVolRetour()));
-        $reservation->setNumeroReservation($data['numeroaller']);
-        $reservation->setNumeroReservationRetour($data['numeroretour']);
         $this->VolDao->save($reservation);
-
         $data['contents'] = 'planair-numeroreservation';
         $this->load->view('template',$data);
     }

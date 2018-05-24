@@ -8,7 +8,6 @@ Class VolDao extends CI_Model{
     }
     public function save($reservation)
     {
-        $this->load->database();
         $data = array(
             'idreservation' => '',
             'idclient' => $reservation->getIdClient(),
@@ -21,9 +20,29 @@ Class VolDao extends CI_Model{
         );
 
         $this->db->insert("reservation", $data);
+        $id = $this->db->insert_id();
+        foreach ($reservation->detailreservation as $passager){
+            $datadetail = array(
+                'nompassager' => $passager->getNomPassager(),
+                'prenompassager' => $passager->getPrenomPassager(),
+                'datenaissance' => $passager->getDateNaissance(),
+                'idreservation' => $id
+            );
+            $this->db->insert("detailreservation", $datadetail);
+        }
         $data['idvol'] = $reservation->getIdVolRetour();
-        $data['idvolretour'] = $reservation->getNumeroReservationRetour();
-        $this->db->insert('reservation', $data);
+        $data['numeroreservation'] = $reservation->getNumeroReservationRetour();
+        $this->db->insert('reservation', $data);        $id = $this->db->insert_id();
+        $id = $this->db->insert_id();
+        foreach ($reservation->detailreservation as $passager){
+            $datadetail = array(
+                'nompassager' => $passager->getNomPassager(),
+                'prenompassager' => $passager->getPrenomPassager(),
+                'datenaissance' => $passager->getDateNaissance(),
+                'idreservation' => $id
+            );
+            $this->db->insert("detailreservation", $datadetail);
+        }
         return $this->db->insert_id();
     }
 
@@ -92,80 +111,46 @@ Class VolDao extends CI_Model{
 
         return $this->db->count_all_results("listappel2");
     }
-    public function rechercheAvance($limit, $start,$isAllerRetour,$depart,$arrivee,$start_date,$end_date){
-        $this->db->like(array('UPPER(villedepart)' => strtoupper($depart) , 'UPPER(villearrivee)' => strtoupper($arrivee)));
+    public function rechercheAvance($limit,$depart,$arrivee,$start_date, $nbjour = 3){
 //        $this->db->where('dateappel BETWEEN '. $start_date. ' and '. $end_date);
-        if(!$start_date) {
-            $this->db->where('datedepart >=', $end_date);
-            $this->db->where('datedepart <=', $end_date);
-        }else{
-            $this->db->where('datedepart >=', $start_date);
-            $this->db->where('datedepart <=', $start_date);
-        }
 
-        $this->db->limit($limit, ($start-1)*$limit);
-        $query = $this->db->get("vol");
-//    var_dump($query);
-        if ($query->num_rows() > 0) {
-            $pagination = array();
-            $pagination['total'] = $query->num_rows();
-            $data = array();
-            foreach ($query->result() as $row) {
-                $item = new VolModel();
-                $this->creerByVolRecherche($item, $row);
-                if($isAllerRetour){
-                    $retour = rechercheAvance(50,$start,false,$arrivee,$depart,null,$end_date);
-                    $item->setVolRetour($retour);
+        $start = strtotime($start_date);
+        $dates=array();
+        for($i=-$nbjour; $i <= $nbjour; $i++){
+            array_push($dates,date('Y-m-d', strtotime($i." day", $start)));
+        }
+        $data = array();
+        foreach ($dates as $date){
+            $this->db->like(array('UPPER(villedepart)' => strtoupper($depart) , 'UPPER(villearrive)' => strtoupper($arrivee)));
+            $this->db->where('datedepart >=', $date.' 00:00:00');
+            $this->db->where('datedepart <= ', $date.' 23:59:59');
+            $this->db->limit($limit, 0);
+            $query = $this->db->get('vol');
+            $data[$date]=new VolModel();
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $this->creerByVolRecherche($data[$date], $row);
                 }
-                array_push($data, $item);
             }
-            $pagination['liste'] = $data;
-            return $pagination;
         }
-//        throw new Exception('Agent introuvable');
-    }
-
-    public function creer($model, $res)
-    {
-        $model->setId($res->idappel);
-        $model->setClient($res->idclient);
-        $model->setDateAppel($res->dateappel);
-        $model->setAppelEntrant($res->appelentrant);
-        $model->setDureeAppel($res->dureeappel);
-        $model->setAction($res->action);
-        $model->setDateAction($res->dateaction);
-        $model->setCommentaireAction($res->commentaireaction);
-    }
-    public function creerByAgent($model, $res, $agent)
-    {
-        $model->setId($res->idappel);
-        $model->setAgent($agent);
-        $model->setClient($res->fullname);
-        $model->setDateAppel($res->dateappel);
-        $model->setAppelEntrant($res->appelentrant);
-        $model->setDureeAppel($res->dureeappel);
-        $model->setAction($res->action);
-        $model->setDateAction($res->dateaction);
-        $model->setCommentaireAction($res->commentaireaction);
+        return $data;
     }
 
     public function creerByVolRecherche($model, $res)
     {
-        $model->setId($res->idvol);
-        $model->setVilleDepart($res->villedepart);
-        $model->setVilleArrivee($res->villearrivee);
-        $model->setDateDepart($res->datedepart);
-        $model->setDateArrivee($res->datearrivee);
-        $model->setDistanceVol($res->distancevol);
-        $model->setTarifEnfant($res->tarifenfant);
-        $model->setTarifAdulte($res->tarifadulte);
-        $model->setTarifBebe($res->tarifbebe);
-        $model->setTarifEnfantAffaire($res->tarifenfant);
-        $model->setTarifAdulteAffaire($res->tarifadulte);
-        $model->setTarifBebeAffaire($res->tarifbebe);
+        $model->setId($res->IDVOL);
+        $model->setVilleDepart($res->VILLEDEPART);
+        $model->setVilleArrive($res->VILLEARRIVE);
+        $model->setDateDepart($res->DATEDEPART);
+        $model->setDateArrive($res->DATEARRIVE);
+        $model->setDistanceVol($res->DISTANCEVOL);
+        $model->setTarifEnfant($res->TARIFENFANT);
+        $model->setTarifAdulte($res->TARIFADULTE);
+        $model->setTarifBebe($res->TARIFBEBE);
+        $model->setTarifEnfantAffaire($res->TARIFENFANT);
+        $model->setTarifAdulteAffaire($res->TARIFADULTE);
+        $model->setTarifBebeAffaire($res->TARIFBEBE);
     }
 
 }
 ?>
-
-+

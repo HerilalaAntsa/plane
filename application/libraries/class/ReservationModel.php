@@ -23,6 +23,7 @@ class ReservationModel
     var $nombreEnfant;
     var $nombreBebe;
     var $class;
+    var $detailreservation = array();
 
     public function getIdClient()
     {
@@ -95,5 +96,8 @@ class ReservationModel
     public function setClass($class)
     {
         $this->class = $class;
+    }
+    public function addDetail($detail){
+        array_push($this->detailreservation, $detail);
     }
 }

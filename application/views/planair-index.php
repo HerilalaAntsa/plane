@@ -31,7 +31,7 @@
 				<div class="row contact-wrap" style="color:initial">
 					<h3>Réservez dès maintenant votre vol</h3>
 					<div class="status alert alert-success" style="display: none"></div>
-					<?php echo form_open(base_url().'recherche',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
+					<?php echo form_open(base_url().'Vol/recherche',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
 						<div class="col-sm-5 col-sm-offset-1">
 							<div class="form-group">
 
@@ -78,6 +78,15 @@
 								<select name="classe" class="form-control">
 									<option value="false" selected>Economique</option>
 									<option value="true">Affaire</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Plus ou moins nombre de jours</label>
+								<select name="nbjour" class="form-control">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3" selected>3</option>
+									<option value="4">4</option>
 								</select>
 							</div>
 							<div class="form-group">

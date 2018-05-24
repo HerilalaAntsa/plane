@@ -23,7 +23,7 @@ class DetailReservationModel
     }
     public function setNomPassager($nom)
     {
-        $this->nom = nomPassager;
+        $this->nomPassager = $nom;
     }
 
     public function getPrenomPassager()
@@ -32,7 +32,7 @@ class DetailReservationModel
     }
     public function setPrenomPassager($prenom)
     {
-        $this->prenom = prenomPassager;
+        $this->prenomPassager = $prenom;
     }
 
     public function getDatenaissance()

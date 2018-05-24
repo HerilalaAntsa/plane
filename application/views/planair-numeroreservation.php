@@ -2,14 +2,14 @@
 	<div class="about">
 		<div class="container">
 			<h2 class="fadeInDown" data-wow-duration="1000ms" data-wow-delay="100ms" >Places réservées</h2>
-			Veuillez noter ces informations concernant vos réservations :
+			<p>Veuillez noter ces informations concernant vos réservations :</p>
 			<div class="col-md-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" >
-				Vol aller :
+				<p>Vol aller :</p>
 				<p><?php echo $numeroaller ?></p>
 			</div>
 			<?php if($numeroretour){ ?>
 			<div class="col-md-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms" >
-				Vol retour :
+				<p>Vol retour :</p>
 				<p><?php echo $numeroretour ?></p>
 			</div>
 			<?php } ?>
