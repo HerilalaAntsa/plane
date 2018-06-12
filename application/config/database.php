@@ -74,11 +74,11 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-    'dsn'	=> 'mysql:host=localhost;dbname=planeair',
+    'dsn'	=> 'mysql:host=localhost;dbname=asa',
     'hostname' => 'localhost',
     'username' => 'root',
     'password' => 'root',
-    'database' => 'planeair',
+    'database' => 'asa',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
     'pconnect' => FALSE,

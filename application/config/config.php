@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/plane/';
+$config['base_url'] = 'http://localhost:89/plane/';
 
 /*
 |--------------------------------------------------------------------------
@@ -521,3 +521,13 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+$config['upload_path'] = './uploads/';
+
+$config['allowed_types'] = 'gif|jpg|png';
+
+$config['max_size'] = '100';
+
+$config['max_width'] = '1024';
+
+$config['max_height'] = '768';

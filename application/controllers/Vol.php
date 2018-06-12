@@ -4,13 +4,12 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
 class Vol extends MY_controller{
     public function __construct(){
         parent::__construct();
-        $this->load->library("pagination");
         $this->load->library('class/VolModel');
         $this->load->library('class/DetailReservationModel');
         $this->load->library('class/ReservationModel');
         $this->load->library('class/ClientModel');
         $this->load->model('VolDao');
-
+        $this->load->model('ClientDao');
     }
 
     public function index(){
@@ -38,11 +37,9 @@ class Vol extends MY_controller{
         $classe=$this->input->get('classe');
         $nbjour=$this->input->get('nbjour');
         try{
-            $data["allers"] = $this->VolDao->
-            rechercheAvance(1,$villedepart,$villearrivee,$datedepart, $nbjour);
+            $data["allers"] = $this->VolDao->rechercheAvance(1,$villedepart,$villearrivee,$datedepart, $nbjour);
             if ($typevol){
-                $data["retours"] = $this->VolDao->
-                rechercheAvance(1,$villearrivee,$villedepart,$datearrivee, $nbjour);
+                $data["retours"] = $this->VolDao->rechercheAvance(1,$villearrivee,$villedepart,$datearrivee, $nbjour);
             }
             $data['hidden'] = array(
                 'nombreadulte' => $nombreadulte,

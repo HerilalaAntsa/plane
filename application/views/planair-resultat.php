@@ -2,7 +2,7 @@
 	<div id="breadcrumb">
 		<div class="container">	
 			<div class="breadcrumb">							
-				<li><a href="planair-index.php">Plan'Air</a></li>
+				<li><a href="ezjob-index.php">Plan'Air</a></li>
 				<li>Recherche</li>
 			</div>		
 		</div>	
@@ -51,7 +51,7 @@
 						<input type="text" name="villearrivee" class="form-control" required="required" id="autocomplete1">
 					</div>
 					<div class="form-group">
-						<label>Date d'arrivée *</label>
+						<label>Date de retour *</label>
 						<input type="text" name="datearrivee" class="form-control to" required="required">
 					</div>
 					<div class="form-group">
@@ -121,7 +121,7 @@
                                 if ($vol->getId()) { ?>
                                     <td><label>
                                             <input type="radio" name="numerovolretour" value="<?php echo $vol->getId() ?>" checked>
-                                            <br>A partir de <?php echo $vol->getTarifAdulte() ?> €</label></td>
+                                            <br>A partir de <?php echo $vol->getTarifAdulte()?> €</label></td>
                                 <?php }else echo '<td>-</td>';
                             } ?>
                         </tr>

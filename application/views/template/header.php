@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Plan'Air</title>
+    <title>Easy Job</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -45,15 +45,15 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class="navbar-brand">
-                        <a href="index.html"><h1><span>Plan'</span>Air</h1></a>
+                        <a href="index.php"><h1><span>Easy</span>Job</h1></a>
                     </div>
                 </div>
 
                 <div class="navbar-collapse collapse">
                     <div class="menu">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation"><a href="index.html" class="active">Accueil</a></li>
-                            <li role="presentation"><a href="planair-reservation.php">Réservation</a></li>
+                            <li role="presentation"><a href="#" class="active">Societ&eacutes</a></li>
+                            <li role="presentation"><a href="ezjob-add">Travailleurs</a></li>
                         </ul>
                     </div>
                 </div>

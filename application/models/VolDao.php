@@ -21,6 +21,7 @@ Class VolDao extends CI_Model{
 
         $this->db->insert("reservation", $data);
         $id = $this->db->insert_id();
+
         foreach ($reservation->detailreservation as $passager){
             $datadetail = array(
                 'nompassager' => $passager->getNomPassager(),
@@ -30,10 +31,12 @@ Class VolDao extends CI_Model{
             );
             $this->db->insert("detailreservation", $datadetail);
         }
+
         $data['idvol'] = $reservation->getIdVolRetour();
         $data['numeroreservation'] = $reservation->getNumeroReservationRetour();
         $this->db->insert('reservation', $data);        $id = $this->db->insert_id();
         $id = $this->db->insert_id();
+
         foreach ($reservation->detailreservation as $passager){
             $datadetail = array(
                 'nompassager' => $passager->getNomPassager(),

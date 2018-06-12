@@ -1,7 +1,7 @@
 	<div id="breadcrumb">
 		<div class="container">	
 			<div class="breadcrumb">							
-				<li><a href="planair-index.php">Plan'Air</a></li>
+				<li><a href="ezjob-index.php">Plan'Air</a></li>
 				<li>Recherche</li>
 			</div>		
 		</div>	
@@ -113,7 +113,7 @@
 								<input type="text" name="adresseclient" class="form-control">
 							</div>
 							<div class="form-group">
-								<button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Rechercher</button>
+								<button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Enregistrer</button>
 							</div>
 						</div>
 				</div><!--/.row-->

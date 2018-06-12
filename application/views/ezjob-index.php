@@ -6,9 +6,9 @@
                         <div class="row slide-margin">
                             <div class="col-sm-6">
                                 <div class="carousel-content">
-                                    <h2 class="animation animated-item-1">Bienvenue <span>Plan'Air</span></h2>
-                                    <p class="animation animated-item-2">Prolongez votre voyage et découvrez des destinations authentiques desservies par notre réseau régional et interne au cœur du pays.</p>
-                                    <a class="btn-slide animation animated-item-3" href="#">Réservez</a>
+                                    <h2 class="animation animated-item-1">Bienvenue <span>Easy Job</span></h2>
+                                    <p class="animation animated-item-2">Trouver le <strong>JOB</strong> de votre reve avec nos services au pointe de la technologie et nos grands collaborateurs partout a Madagascar.</p>
+                                    <a class="btn-slide animation animated-item-3" href="#">Deposer mon CV</a>
                                 </div>
                             </div>
 
@@ -29,68 +29,87 @@
 		<div class="container">
 			<div class="text-center">
 				<div class="row contact-wrap" style="color:initial">
-					<h3>Réservez dès maintenant votre vol</h3>
+					<h3>Deposer votre CV dès maintenant</h3>
 					<div class="status alert alert-success" style="display: none"></div>
-					<?php echo form_open(base_url().'Vol/recherche',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
-						<div class="col-sm-5 col-sm-offset-1">
-							<div class="form-group">
+					<?php echo form_open(base_url().'Candidat/lasa',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
 
-								<label>Ville de départ *</label>
-								<input type="text" name="villedepart" class="form-control" required="required" id="autocomplete">
-							</div>
+                    <div class="col-sm-5 col-sm-offset-1">
 							<div class="form-group">
-								<label>Date de départ *</label>
-								<input type="text" name="datedepart" class="form-control from" required="required">
+								<label>Nom *</label>
+								<input type="text" name="anarana" class="form-control" required="required">
 							</div>
+
 							<div class="form-group">
-								<div class="radio">
-									<label><input type="radio" name="typevol" value="true">Aller - Retour</label>
-								</div>
-								<div class="radio">
-									<label><input type="radio" name="typevol" value="false">Aller simple</label>
-								</div>
+								<label>Prenoms *</label>
+								<input type="text" name="fanampiny" class="form-control" required="required">
 							</div>
-							<div class="form-group">
-								<input type="number" min="0" max="9" value="1" name="nombreadulte">
-								<label>Adultes</label>
-							</div>
-							<div class="form-group">
-								<input type="number" min="0" max="9" value="0" name="nombreenfant">
-								<label>Enfant(2 - 11ans)</label>
-							</div>
-							<div class="form-group">
-								<input type="number" min="0" max="9" value="0" name="nombrebebe">
-								<label>Bébé</label>
-							</div>
+
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input type="email" name="mail" class="form-control" required="required">
+                            </div>
+
+                        <div class="form-group">
+                            <label>Date de naissance *</label>
+                            <input type="text-area" name="dateNaissance" class="form-control from" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Etat civil *</label>
+                            <select class="form-control" id="etatCivil" name="etatCivil">
+                                <option value="case">Mari&eacute(e)</option>
+                                <option value="libre">C&eacutelibataire</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Votre photo *</label><!-- Error Message will show up here -->
+
+                        </div>
+
+
 						</div>
 
 						<div class="col-sm-5">
-							<div class="form-group">
-								<label>Ville d'arrivée *</label>
-								<input type="text" name="villearrivee" class="form-control" required="required" id="autocomplete1">
-							</div>
-							<div class="form-group">
-								<label>Date d'arrivée *</label>
-								<input type="text" name="datearrivee" class="form-control to" required="required">
-							</div>
-							<div class="form-group">
-								<label>Classe</label>
-								<select name="classe" class="form-control">
-									<option value="false" selected>Economique</option>
-									<option value="true">Affaire</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label>Plus ou moins nombre de jours</label>
-								<select name="nbjour" class="form-control">
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3" selected>3</option>
-									<option value="4">4</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Réservez</button>
+                            <div class="form-group">
+                                <label for="Experience">Experiences:</label>
+                                <textarea class="form-control" rows="5" id="formation"  name="experience" required="required"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Formation">Formations et Competences:</label>
+                                <textarea class="form-control" rows="5" id="formation"  name="formation" required="required"></textarea>
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label>Situation actuelle *</label>
+                                    <select class="form-control" id="situation" name="situation">
+                                        <option value="Occuper">En poste</option>
+                                        <option value="libre">En recherche</option>
+                                    </select>
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label>Disponibilite *</label>
+                                <select class="form-control" id="dispo" name="dispo">
+                                    <option value="now">Immediate</option>
+                                    <option value="later">Avec preavis</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Domaines d'activit&eacutes *</label>
+                                    <select class="form-control" id="etatCivil" name="etatCivil">
+                                        <option value="case">Gestion</option>
+                                        <option value="libre">Informatique</option>
+                                        <option value="libre">Comptabilit&eacute</option>
+                                        <option value="libre">Commerce</option>
+                                        <option value="libre">Agroalimentaire</option>
+                                    </select>
+                            </div>
+
+							<div class="form-group ">
+								<button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Envoyer CV</button>
 							</div>
 						</div>
 					<?php echo form_close(); ?>
@@ -98,29 +117,29 @@
 				<div class="col-md-3">
 					<div class="hi-icon-wrap hi-icon-effect wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" >
 						<i class="fa fa-book"></i>
-						<h2>Plan'Air E-ticket</h2>
-						<p> L’utilisation du billet électronique vous épargne les préoccupations administratives</p>
+						<h2>Easy Job E-Z</h2>
+						<p> L’utilisation de notre site vous épargne les préoccupations administratives</p>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="hi-icon-wrap hi-icon-effect wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="900ms" >
 						<i class="fa fa-cloud"></i>
-						<h2>Confort</h2>
-						<p>Un confort assuré par nos partenaires.</p>
+						<h2>Dossiers</h2>
+						<p>Un depot assuré par nos partenaires.</p>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="hi-icon-wrap hi-icon-effect wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1200ms" >
 						<i class="fa fa-laptop"></i>	
-						<h2>Réservation en ligne</h2>
-						<p>On vous évite le déplacement, la réservation se fait en ligne.</p>
+						<h2>Entretiens en ligne</h2>
+						<p>On vous évite le déplacement, les entretiens se font en ligne.</p>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="hi-icon-wrap hi-icon-effect wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms" >
 						<i class="fa fa-heart-o"></i>	
-						<h2>Plan'Air Miles</h2>
-						<p>Gagner des miles à chaque vol</p>
+						<h2>Easy Job Miles</h2>
+						<p>Gagner des miles à chaque depots</p>
 					</div>
 				</div>
 			</div>

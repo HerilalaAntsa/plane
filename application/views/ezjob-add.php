@@ -2,7 +2,7 @@
 	<div id="breadcrumb">
 		<div class="container">	
 			<div class="breadcrumb">							
-				<li><a href="planair-index.php">Plan'Air</a></li>
+				<li><a href="ezjob-index.php">Plan'Air</a></li>
 				<li>Réservation</li>
 			</div>		
 		</div>	
@@ -11,38 +11,33 @@
 	<section id="contact-page" style="background: url(<?php echo base_url(); ?>assets/images/slider/bg2.jpg) no-repeat">
         <div class="container" style="padding:6em 0">
             <div class="center">        
-                <h2>Réservez</h2>
-                <p>Recherchez et réservez votre vol.</p>
+                <h2>Depot de CV</h2>
             </div>
 
 			<div class="row contact-wrap">
 				<div class="status alert alert-success" style="display: none"></div>
-				<?php echo form_open(base_url().'Vol/recherche',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form', 'style'=>'padding-top:4em;'));?>
+				<?php echo form_open(base_url().'Candidat/soumettre',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form', 'style'=>'padding-top:4em;'));?>
 					<div class="col-sm-5 col-sm-offset-1">
 						<div class="form-group">
-							<label>Ville de départ *</label>
-							<input type="text" name="villedepart" class="form-control" required="required" id="autocomplete">
+							<label>Nom *</label>
+							<input type="text" name="names" class="form-control" required="required" id="autocomplete">
 						</div>
+
 						<div class="form-group">
-							<label>Date de départ *</label>
-							<input type="text" name="datedepart" class="form-control from" required="required">
+							<label>Prenoms *</label>
+							<input type="text" name="Prenoms" class="form-control from" required="required">
 						</div>
+
 						<div class="form-group">
+                            <label>Situation actuelle *</label>
 							<div class="radio">
-								<label><input type="radio" name="typevol">Aller - Retour</label>
+								<label><input type="radio" name="typevol">En poste</label>
 							</div>
 							<div class="radio">
-								<label><input type="radio" name="typevol">Aller simple</label>
+								<label><input type="radio" name="typevol">En recherche</label>
 							</div>
 						</div>
-						<div class="form-group" style="color: initial">
-							<input type="number" min="0" max="9" value="1" name="nombreadulte">
-							<label>Adultes</label>
-							<input type="number" min="0" max="9" value="0" name="nombreenfant">
-							<label>Enfant(2 - 11ans)</label>
-							<input type="number" min="0" max="9" value="0" name="nombrebebe">
-							<label>Bébé</label>
-						</div>
+
 					</div>
 					<div class="col-sm-5">
 						<div class="form-group">

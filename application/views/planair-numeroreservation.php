@@ -16,7 +16,7 @@
 		</div>
 	</div>
 
-	
+	<div class ="">
 	<section id="conatcat-info">
         <div class="container">
             <div class="row">
