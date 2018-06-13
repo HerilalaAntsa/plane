@@ -60,6 +60,8 @@
 
                             <div class="form-group">
                                 <label>Email *</label>
+                                <input type="mail" name="email" class="form-control" required="required">
+                                <p style="color:red;"><?php echo form_error('email'); ?></p>
 
                             </div>
 

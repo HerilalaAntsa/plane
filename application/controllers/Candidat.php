@@ -6,6 +6,7 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
         {
             parent::__construct();
             $this->load->library('class/CandidatModel');
+            $this->load->library('class/CvModel');
 
         }
 
@@ -27,8 +28,6 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
             echo json_encode($data);
         }
 
-<<<<<<< HEAD
-=======
         public function SendCV()
         {
             $data['error'] = "";
@@ -113,6 +112,5 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
             }
             throw new Exception($this->upload->display_errors());
         }
->>>>>>> a3cd3926e6dd9ba93d65bc1133a94d3815da942c
     }
 ?>
