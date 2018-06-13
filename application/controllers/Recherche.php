@@ -6,6 +6,7 @@ class Recherche extends MY_controller{
         parent::__construct();
         $this->load->library('class/CvModel');
         $this->load->model('CvDAO');
+        $this->load->library('pagination');
     }
     public function index(){
         $this->page();
@@ -24,7 +25,6 @@ class Recherche extends MY_controller{
         $cv->setNiveauEtude($this->input->get('niveauEtude'));
         $cv->setDisponibilite($this->input->get('disponibilite'));
         $cv->setDomaine($this->input->get('domaine'));
-
         $config["total_rows"] = $this->CvDAO->countrecherche($cv);
 
         $config['reuse_query_string'] = true;
