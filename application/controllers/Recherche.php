@@ -4,12 +4,8 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
 class Recherche extends MY_controller{
     public function __construct(){
         parent::__construct();
-        $this->load->library('analyse/Etat');
-        $this->load->library("pagination");
-        $this->load->library('class/AppelModel');
-        $this->load->model('AgentDao');
-        $this->load->model('EtatDao');
-        $this->load->model('ManagerDAO');
+        $this->load->library('class/CvModel');
+        $this->load->model('CvDAO');
     }
     public function index(){
         $this->page();
@@ -23,28 +19,13 @@ class Recherche extends MY_controller{
         $config["use_page_numbers"] = TRUE;
 
 
-        $date = '01/01/2017 - 01/25/2018';
-        if($this->input->get('dateRecherche')){
-            $date  = $this->input->get('dateRecherche');
-        }
-        $pieces = explode(" - ", $date);
-        $start_date = $pieces[0];
-        $end_date = $pieces[1];
-        $start_date = date("Y-m-d", strtotime($start_date));
-        $end_date = date("Y-m-d", strtotime($end_date));
+        $cv = new CvModel();
 
-        $vol = new VolModel();
-        $vol->setAgent($this->input->get('agent'));
-        $vol->setClient($this->input->get('client'));
-        $vol->setAction($this->input->get('action'));
+        $cv->setNiveauEtude($this->input->get('niveauEtude'));
+        $cv->setDisponibilite($this->input->get('disponibilite'));
+        $cv->setDomaine($this->input->get('domaine'));
 
-        $config["total_rows"] = $this->AgentDao->record_count(
-            $config["per_page"],
-            $page,
-            $appel,
-            $start_date,
-            $end_date
-        );
+        $config["total_rows"] = $this->CvDAO->countrecherche($cv);
 
         $config['reuse_query_string'] = true;
         $config['num_links'] = '1';
@@ -66,19 +47,17 @@ class Recherche extends MY_controller{
 
         $this->pagination->initialize($config);
 
-        $data["results"] = $this->AgentDao->
-        rechercheAvance(
+        $data["results"] = $this->CvDAO->
+        recherche(
             $config["per_page"],
             $page,
-            $appel,
-            $start_date,
-            $end_date
+            $cv
         );
 
         $data["links"] = $this->pagination->create_links();
 
-        $data['contents'] = "rechercheAvance";
-        $data['titre'] = "TeleOperateur";
+        $data['contents'] = "ezjob-recherche";
+        $data['titre'] = "Easy Job - recherche";
         $this->load->view('template',$data);
     }
 

@@ -41,4 +41,55 @@ Class CvDAO extends CI_Model{
             throw $e;
         }
     }
+    public function recherche($limit, $page, $cv){
+        try {
+            $this->db->like('niveauEtude', $cv->getNiveauEtude(), 'both');
+            $this->db->like('disponibilite', $cv->getDisponibilite(), 'both');
+            $this->db->like('domaine', $cv->getDomaine(), 'both');
+            $res = $this->db->get('cv',$limit,($page-1)*$limit);
+            if ($res->num_rows() > 0) {
+                $data = array();
+                foreach ($res->result() as $row) {
+                    $item = new CvModel();
+                    $this->creer($item, $row);
+                    array_push($data, $item);
+                }
+                return $data;
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+    public function countrecherche($cv){
+        try {
+            $this->db->like('niveauEtude', $cv->getNiveauEtude(), 'both');
+            $this->db->like('disponibilite', $cv->getDisponibilite(), 'both');
+            $this->db->like('domaine', $cv->getDomaine(), 'both');
+            $this->db->from('cv');
+            return $this->db->count_all_results();
+        } catch (Exception $e) {
+            return 0;
+        }
+    }
+    public function creer($model, $res)
+    {
+        $model->setId($res->id_cv);
+        $model->setCivilite($res->civilite);
+        $model->setExperience($res->experience);
+        $model->setFormation($res->formation);
+        $model->setCompetence($res->competence);
+        $model->setSituation($res->situation);
+        $model->setDomaine($res->domaine);
+        $model->setDisponibilite($res->disponibilite);
+        $model->setVille($res->ville);
+        $model->setNiveauEtude($res->niveauEtude);
+        $model->setNom($res->nom);
+        $model->setDateNaissance($res->dateNaissance);
+        $model->setTelephone($res->telephone);
+        $model->setAdresse($res->adresse);
+        $model->setPhoto($res->photo);
+        $model->setPrenom($res->prenom);
+        $model->setSexe($res->sexe);
+        $model->setEmail($res->email);
+    }
 }
