@@ -56,7 +56,7 @@ class Recherche extends MY_controller{
 
         $data["links"] = $this->pagination->create_links();
 
-        $data['contents'] = "ezjob-recherche";
+        $data['contents'] = "ezjob-search";
         $data['titre'] = "Easy Job - recherche";
         $this->load->view('template',$data);
     }
