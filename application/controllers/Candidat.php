@@ -71,14 +71,17 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
             if($this->input->post('autre')){
                 $cv->setNiveauEtude($this->input->post('autre'));
             }
-
+            $this->form_validation->set_error_delimiters('', '');
             $this->form_validation->set_rules('nom', 'Nom', 'trim|required|min_length[1]');
             $this->form_validation->set_rules('sexe', 'Sexe', 'required');
             $this->form_validation->set_rules('prenom', 'Prenom', 'trim|required|min_length[1]');
             $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[4]|max_length[30]');
             $this->form_validation->set_rules('adresse', 'Adresse', 'trim|required|min_length[1]');
             $this->form_validation->set_rules('telephone', 'Telephone', 'trim|required|min_length[1]|numeric');
-            $this->form_validation->set_rules('photo', 'Photo', 'required');
+            if (empty($_FILES['photo']['name']))
+            {
+                $this->form_validation->set_rules('photo', 'Photo', 'required');
+            }
             if ($this->form_validation->run()) {
                 try {
 
@@ -87,8 +90,8 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
                     $cv->setCandidat($candidat);
 
                     $this->CvDAO->save($cv);
-       //             $data['contents'] = 'ezjob-index.php';
-      //              $this->load->view('template', $data);
+                    $data['contents'] = 'ezjob-index.php';
+                    $this->load->view('template', $data);
                 }catch(Exception $e){
                     $data['error'] = $e->getMessage();
                     $data['cv'] = $cv;
@@ -101,7 +104,6 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
             else{
                 $data['error'] = "";
                 $data['cv'] = $cv;
-
                 $data['contents'] = "ezjob-index.php";
                 $data['titre'] = "EasyJob";
                 $this->load->view('template',$data);

@@ -77,7 +77,7 @@ $db['default'] = array(
     'dsn'	=> 'mysql:host=localhost;dbname=job',
     'hostname' => 'localhost',
     'username' => 'root',
-    'password' => 'root',
+    'password' => 'adri',
     'database' => 'job',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
