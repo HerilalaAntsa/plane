@@ -1,21 +1,16 @@
 <?php
     class CandidatModel{
-        var $id_candidat;
 
-        /**
-         * @return mixed
-         */
-        public function getIdCandidat()
+        var $id;
+
+        public function getId()
         {
-            return $this->id_candidat;
+            return $this->id;
         }
 
-        /**
-         * @param mixed $id_candidat
-         */
-        public function setIdCandidat($id_candidat)
+        public function setId($id)
         {
-            $this->id_candidat = $id_candidat;
+            $this->id = $id;
         }
         var $nom;
         var $prenom;
@@ -23,7 +18,9 @@
         var $mail;
         var $adresse;
         var $tel;
+        var $sexe;
         var $dateNaissance;
+        var $photo;
 
         /**
          * @return mixed
@@ -138,13 +135,36 @@
             $this->dateNaissance = $dateNaissance;
         }
 
-        public function getId(){
-            return $this->id;
+        /**
+         * @return mixed
+         */
+        public function getSexe()
+        {
+            return $this->sexe;
         }
 
-        public function setId($id){
-            $this->id = $id;
+        /**
+         * @param mixed $sexe
+         */
+        public function setSexe($sexe)
+        {
+            $this->sexe = $sexe;
         }
 
+        /**
+         * @return mixed
+         */
+        public function getPhoto()
+        {
+            return $this->photo;
+        }
+
+        /**
+         * @param mixed $photo
+         */
+        public function setPhoto($photo)
+        {
+            $this->photo = $photo;
+        }
     }
 ?>

@@ -1,43 +1,27 @@
 <?php
     class CvModel{
+
         var $id;
-        var $candidat;
-        var $niveauEtudes;
-        var $experience;
-        var $civilite;
-        var $ville;
 
-        /**
-         * @return mixed
-         */
-        public function getVille()
-        {
-            return $this->ville;
-        }
-
-        /**
-         * @param mixed $ville
-         */
-        public function setVille($ville)
-        {
-            $this->ville = $ville;
-        }
-
-        /**
-         * @return mixed
-         */
         public function getId()
         {
             return $this->id;
         }
 
-        /**
-         * @param mixed $id
-         */
         public function setId($id)
         {
             $this->id = $id;
         }
+        var $candidat;
+        var $civilite;
+        var $experience;
+        var $formation;
+        var $competence;
+        var $situation;
+        var $domaine;
+        var $disponibilite;
+        var $ville;
+        var $niveauEtude;
 
         /**
          * @return mixed
@@ -58,17 +42,17 @@
         /**
          * @return mixed
          */
-        public function getNiveauEtudes()
+        public function getCivilite()
         {
-            return $this->niveauEtudes;
+            return $this->civilite;
         }
 
         /**
-         * @param mixed $niveauEtudes
+         * @param mixed $civilite
          */
-        public function setNiveauEtudes($niveauEtudes)
+        public function setCivilite($civilite)
         {
-            $this->niveauEtudes = $niveauEtudes;
+            $this->civilite = $civilite;
         }
 
         /**
@@ -90,17 +74,113 @@
         /**
          * @return mixed
          */
-        public function getCivilite()
+        public function getFormation()
         {
-            return $this->civilite;
+            return $this->formation;
         }
 
         /**
-         * @param mixed $civilite
+         * @param mixed $formation
          */
-        public function setCivilite($civilite)
+        public function setFormation($formation)
         {
-            $this->civilite = $civilite;
+            $this->formation = $formation;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getCompetence()
+        {
+            return $this->competence;
+        }
+
+        /**
+         * @param mixed $competence
+         */
+        public function setCompetence($competence)
+        {
+            $this->competence = $competence;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getSituation()
+        {
+            return $this->situation;
+        }
+
+        /**
+         * @param mixed $situation
+         */
+        public function setSituation($situation)
+        {
+            $this->situation = $situation;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getDomaine()
+        {
+            return $this->domaine;
+        }
+
+        /**
+         * @param mixed $domaine
+         */
+        public function setDomaine($domaine)
+        {
+            $this->domaine = $domaine;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getDisponibilite()
+        {
+            return $this->disponibilite;
+        }
+
+        /**
+         * @param mixed $disponibilite
+         */
+        public function setDisponibilite($disponibilite)
+        {
+            $this->disponibilite = $disponibilite;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getVille()
+        {
+            return $this->ville;
+        }
+
+        /**
+         * @param mixed $ville
+         */
+        public function setVille($ville)
+        {
+            $this->ville = $ville;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getNiveauEtude()
+        {
+            return $this->niveauEtude;
+        }
+
+        /**
+         * @param mixed $niveauEtude
+         */
+        public function setNiveauEtude($niveauEtude)
+        {
+            $this->niveauEtude = $niveauEtude;
         }
     }
 ?>
