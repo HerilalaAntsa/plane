@@ -79,8 +79,8 @@
 
                         <div class="form-group">
                             <label>Ville *</label>
-                            <select class="form-control" id="ville" name="ville" value="<?php echo set_value('ville'); ?>">
-                                <option value="Antananarivo">Antananarivo</option>
+                            <select class="form-control" id="ville" name="ville">
+                                <option value="Antananarivo" <?php echo set_value('ville',"Antananarivo"); ?>>Antananarivo</option>
                             </select>
                             <p style="color:red;"><?php echo form_error('ville'); ?></p>
                         </div>
@@ -93,10 +93,10 @@
 
                         <div class="form-group">
                             <label>Etat civil *</label>
-                            <select class="form-control" id="etatCivil" name="etatCivil" value="<?php echo set_value('etatCivil'); ?>">
-                                <option value="encouple">En couple</option>
-                                <option value="celibataire">C&eacutelibataire</option>
-                                <option value="veuf">Veuf/veuve</option>
+                            <select class="form-control" id="etatCivil" name="etatCivil">
+                                <option value="encouple" <?php echo set_select('etatCivil',"encouple"); ?>>En couple</option>
+                                <option value="celibataire" <?php echo set_select('etatCivil',"celibataire"); ?>>C&eacutelibataire</option>
+                                <option value="veuf" <?php echo set_select('etatCivil',"veuf"); ?>>Veuf/veuve</option>
                             </select>
                             <p style="color:red;"><?php echo form_error('etatCivil'); ?></p>
                         </div>

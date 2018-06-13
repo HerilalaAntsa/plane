@@ -47,7 +47,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class="navbar-brand">
-                        <a href="index.php"><h1><span>Easy</span>Job</h1></a>
+                        <a href="<?php echo base_url() ?>"><h1><span>Easy</span>Job</h1></a>
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
                     <div class="menu">
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation"><a href="#" class="active">Societ&eacutes</a></li>
-                            <li role="presentation"><a href="Candidat/ficheCV/1">Travailleurs</a></li>
+                            <li role="presentation"><a href="Recherche">Travailleurs</a></li>
                         </ul>
                     </div>
                 </div>
