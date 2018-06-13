@@ -41,18 +41,45 @@ Class CvDAO extends CI_Model{
             throw $e;
         }
     }
-
+    public function update($cv)
+    {
+        $data = array(
+            'civilite' => $cv->getCivilite(),
+            'experience' => $cv->getExperience(),
+            'formation' => $cv->getFormation(),
+            'competence' => $cv->getCompetence(),
+            'situation' => $cv->getSituation(),
+            'domaine' => $cv->getDomaine(),
+            'disponibilite' => $cv->getDisponibilite(),
+            'ville' => $cv->getVille(),
+            'niveauEtude' => $cv->getNiveauEtude(),
+            'nom' => $cv->getCandidat()->getNom(),
+            'prenom' => $cv->getCandidat()->getPrenom(),
+            'email' => $cv->getCandidat()->getMail(),
+            'adresse' => $cv->getCandidat()->getAdresse(),
+            'telephone' => $cv->getCandidat()->getTel(),
+            'sexe' => $cv->getCandidat()->getSexe(),
+            'photo' => $cv->getCandidat()->getPhoto(),
+            'dateNaissance' => $cv->getCandidat()->getDateNaissance()
+        );
+        try {
+            $this->db->where('id_cv', $cv->getId());
+            $this->db->update('cv', $data);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 
     public function findCvById($cv){
-        $query = $this->db->get_where('asa',array('id_cv' => $cv->getId()));
+
+        $query = $this->db->get_where('cv',array('id_cv' => $cv));
+
         if ($query->num_rows() > 0) {
-            $data = array();
+            $item = new CvModel();
             foreach ($query->result() as $row) {
-                $item = new CvModel();
-                $this->creer($item, $row, $cv);
-                array_push($data, $item);
+                $this->creer($item, $row);
             }
-            return $data;
+            return $item;
         }
     }
 

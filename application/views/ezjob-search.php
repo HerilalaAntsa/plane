@@ -62,6 +62,7 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
+                        <th></th>
                         <th>#</th>
                         <th>Photo</th>
                         <th>Nom</th>
@@ -78,6 +79,10 @@
                     <?php if($results){
                         foreach ($results as $row){ ?>
                             <tr>
+                                <td><a class="btn btn-primary" href="<?php echo base_url()."Candidat/pdf/".$row->getId(); ?>">PDF</a>
+                                    <a class="btn btn-info" href="<?php echo base_url()."Candidat/ficheCV/".$row->getId(); ?>">Voir</a>
+                                    <a class="btn btn-warning" href="<?php echo base_url()."Candidat/Modification/".$row->getId(); ?>">Modifier</a>
+                                </td>
                                 <td><?php echo $row->getId(); ?></td>
                                 <td><img width="20px" src="<?php echo base_url()."assets/images/".$row->getCandidat()->getPhoto(); ?>"/></td>
                                 <td><?php echo $row->getCandidat()->getNom(); ?></td>

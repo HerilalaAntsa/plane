@@ -54,7 +54,9 @@
         {
             $this->nom = $nom;
         }
-
+        public function getFullName(){
+            return $this->nom.' '.$this->prenom;
+        }
         /**
          * @return mixed
          */
@@ -135,7 +137,9 @@
             $this->dateNaissance = $datenaissance;
             $this->setAge(new DateTime($this->dateNaissance));
         }
-
+        public function getDatenaissanceString(){
+            return (new DateTime($this->getDatenaissance()))->format('d M Y');
+        }
         public function getAge()
         {
             return $this->age;

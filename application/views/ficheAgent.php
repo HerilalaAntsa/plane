@@ -35,48 +35,59 @@
                             <div class="profile_img">
                                 <div id="crop-avatar">
                                     <!-- Current avatar -->
-                                    <img class="img-responsive avatar-view" src="<?php echo base_url(); ?>assets/images/<?php echo $cv->getPhoto(); ?>" alt="Avatar" title="Change the avatar">
+                                    <img width="100px" class="img-responsive avatar-view" src="<?php echo base_url(); ?>assets/images/<?php echo $cv->getCandidat()->getPhoto(); ?>" alt="Avatar" title="Change the avatar">
                                 </div>
                             </div>
-                            <h3><?php echo $cv->getFullName(); ?></h3>
+                            <h3><?php echo $cv->getCandidat()->getFullName(); ?></h3>
 
-                            <ul class="list-unstyled user_data">
-                                <li><i class="fa  user-profile-icon"></i> <?php echo $cv->getAge() ?> ans</h3>
+                            <ul class="list-unstyled user_data" style="color: initial">
+                                <li><i class="fa  user-profile-icon"></i> <?php echo $cv->getCandidat()->getAge() ?> ans</h3>
                                 </li>
 
-                                <li><i class="fa fa-map-marker user-profile-icon"></i> <?php echo $cv->getAdresse() ?></h3>
-                                </li>
-
-                                <li>
-                                    <strong>Né le </strong> <?php echo $cv->getDateNaissance() ?>
-                                </li>
-
-                                <li><i class="fa fa-sex user-profile-icon">Sexe :</i> <?php echo $cv->getSexe(); ?>
+                                <li><i class="fa fa-map-marker user-profile-icon"></i> <?php echo $cv->getCandidat()->getAdresse() ?></h3>
                                 </li>
 
                                 <li>
-                                    <i class="fa fa-briefcase user-profile-icon"></i> <?php echo $cv->getHierarchieString(); ?>
+                                    <strong>Né le </strong> <?php echo $cv->getCandidat()->getDateNaissanceString() ?>
                                 </li>
+
+                                <li><i class="fa fa-sex user-profile-icon">Sexe :</i> <?php echo $cv->getCandidat()->getSexe(); ?>
+                                </li>
+
 
                                 <li class="m-top-xs">
                                     <i class="fa fa-external-link user-profile-icon"></i>
-                                    <a href="http://www.kimlabs.com/profile/" target="_blank"><?php echo $cv->getEmail(); ?></a>
+                                    <a href="http://www.kimlabs.com/profile/" target="_blank"><?php echo $cv->getCandidat()->getMail(); ?></a>
                                 </li>
 
                                 <li>
-                                    <i class="fa fa-phone user-profile-icon"></i> <?php echo $cv->getTelephone() ?></h3>
+                                    <i class="fa fa-phone user-profile-icon"></i> <?php echo $cv->getCandidat()->getTel() ?></h3>
                                 </li>
                             </ul>
 
-                            <a href="<?php echo base_url(); ?>Cv/Modification/<?php echo $cv->getId() ?>" type="button" class="btn btn-success btn-md">
+                            <a href="<?php echo base_url(); ?>Candidat/Modification/<?php echo $cv->getId() ?>" type="button" class="btn btn-success btn-md">
                                 <i class="fa fa-edit"></i> Modifier
                             </a>
 
                             <br />
 
                         </div>
+                        <div class="col-md-9 col-sm-9 col-xs-12 well">
+                            <hr>
+                            <br><br>
+                            <p><b>Civilité</b> : <?php echo $cv->getCivilite(); ?></p>
+                            <p><b>Expérience</b> : <?php echo $cv->getExperience(); ?></p>
+                            <p><b>Formation</b> : <?php echo $cv->getFormation(); ?></p>
+                            <p><b>Compétence</b> : <?php echo $cv->getCompetence(); ?></p>
+                            <p><b>Situation</b> : <?php echo $cv->getSituation(); ?></p>
+                            <p><b> Domaine</b> : <?php echo $cv->getDomaine(); ?></p>
+                            <p><b>Disponibilité</b> : <?php echo $cv->getDisponibilite(); ?></p>
+                            <p><b>Ville</b> : <?php echo $cv->getVille(); ?></p>
+                            <p><b>Niveau d'étude</b> : <?php echo $cv->getNiveauEtude(); ?></p>
 
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
