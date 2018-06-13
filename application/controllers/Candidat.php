@@ -83,9 +83,10 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
                         $candidat->setPhoto($this->do_upload());
                     }
                     $this->CvDAO->update($cv);
-                    $data['cv'] = $cv;
-                    $data['contents'] = 'ficheAgent.php';
-                    $this->load->view('template', $data);
+                    //$data['cv'] = $cv;
+                    //$data['contents'] = 'ficheAgent.php';
+                    //$this->load->view('template', $data);
+                    redirect('Candidat/ficheCV/'.strval($cv->getId()), 'refresh');
                 }catch(Exception $e){
                     $data['error'] = $e->getMessage();
                     $data['cv'] = $cv;
