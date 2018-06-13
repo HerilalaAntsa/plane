@@ -89,33 +89,31 @@ Class ManagerDAO extends CI_Model{
 
         return $this->db->count_all_results("listagent");
     }
-    public function rechercheAvance($limit, $start,$agent,$start_date,$end_date,$tri){
+    public function rechercheAvance($limit,$start,$cv,$tri){
 
-        $this->db->like(array('UPPER(fullnameagent)' => strtoupper($agent->getNom())));
-        $this->db->like(array('email' => $agent->getEmail()));
-        $this->db->like(array('telephone' => $agent->getTelephone()));
-        $this->db->like(array('UPPER(adresse)' => strtoupper($agent->getAdresse())));
-        if($agent->getHierarchie()){
-            $this->db->where('hierarchie', $agent->getHierarchie());
-        }
-        if($agent->enLigne){
-            $this->db->where('enligne', $agent->isEnLigne());
-        }
-        if($agent->getSexe()){
-            $this->db->where('sexe', $agent->getSexe());
-        }
-        $this->db->where('datenaissance >=', $start_date);
-        $this->db->where('datenaissance <=', $end_date);
+        $this->db->like(array('niveauEtude' => $cv->getNiveauEtude()));
+        $this->db->like(array('disponibilite' => $cv->getDisponibilite()));
+        $this->db->like(array('domaine' => $cv->getDomaine()));
+
+            if($cv->getNom()){
+                $this->db->where('nom', $cv->getNom());
+            }
+            if($cv->getPrenom()){
+                $this->db->where('disponibilite', $cv->getPrenom());
+            }
+            if($cv->getDomaine()){
+                $this->db->where('domaine', $cv->getDomaine());
+            }
 
         $this->db->order_by($tri, "asc");
 
         $this->db->limit($limit, ($start-1)*$limit);
-        $query = $this->db->get("listagent");
+        $query = $this->db->get("cv");
 //    var_dump($query);
         if ($query->num_rows() > 0) {
             $data = array();
             foreach ($query->result() as $row) {
-                $item = new AgentModel();
+                $item = new CvModel();
                 $this->creer($item, $row);
                 array_push($data, $item);
             }
@@ -126,20 +124,19 @@ Class ManagerDAO extends CI_Model{
 
     public function creer($model, $res)
     {
-        $model->setId($res->idagent);
+        $model->setId($res->id_cv);
+        $model->setCivilite($res->civilite);
+        $model->setExperience($res->experience);
+        $model->setFormation($res->formation);
+        $model->setCompetence($res->competence);
+        $model->setSituation($res->situation);
+        $model->setDomaine($res->domaine);
+        $model->setDisponibilite($res->disponibilite);
+        $model->setVille($res->ville);
+        $model->setNiveauEtude($res->niveauEtude);
         $model->setNom($res->nom);
         $model->setPrenom($res->prenom);
-        $model->setSexe($res->sexe);
-        $model->setEmail($res->email);
-        $model->setPassword($res->password);
-        $model->setHierarchie($res->hierarchie);
-        $model->setEnLigne($res->enligne);
-        $model->setDernierAppel($res->dateappel);
-        $model->setNomClient($res->fullname);
-        $model->setAgo($res->ago);
-        $model->setDateNaissance($res->datenaissance);
-        $model->setTelephone($res->telephone);
-        $model->setAdresse($res->adresse);
+        $model->setDatenaissance($res->datenaissance);
         $model->setPhoto($res->photo);
     }
 }

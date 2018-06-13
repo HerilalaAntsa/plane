@@ -46,7 +46,7 @@
 
                             <div class="form-group">
                                 <label>Email *</label>
-                                <input type="email" name="mail" class="form-control" required="required">
+                                <input type="email" name="mailska" class="form-control" required="required">
                             </div>
 
                         <div class="form-group">
@@ -117,7 +117,7 @@
 				<div class="col-md-3">
 					<div class="hi-icon-wrap hi-icon-effect wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" >
 						<i class="fa fa-book"></i>
-						<h2>Easy Job E-Z</h2>
+						<h2>Easy Job E.Z</h2>
 						<p> L’utilisation de notre site vous épargne les préoccupations administratives</p>
 					</div>
 				</div>
@@ -193,10 +193,76 @@
                         </div>
                         <div class="media-body">
                             <h2>Have a question or need a custom quote?</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation +0123 456 70 80</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div><!--/.container-->    
     </section><!--/#conatcat-info-->
+
+    <!-- MODAL ADD -->
+    <form>
+        <div class="modal fade" id="Modal_Add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Mettre a jour mes informations</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Annee scolaire</label>
+                            <div class="col-md-10">
+                                <input type="text" name="anneescolaire" id="anneescolaire" class="form-control" placeholder="Product Code">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Intitul&eacute</label>
+                            <div class="col-md-10">
+                                <input type="text" name="intitule" id="intitule" class="form-control" placeholder="intitul&eacute">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Description</label>
+                            <div class="col-md-10">
+                                <text-area name="description" id="description" class="form-control" placeholder="Price"></text-area>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" type="submit" id="btn_save" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--END MODAL ADD-->
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $('#mydata').dataTable();
+
+
+            //Save product
+            $('#btn_save').on('click',function(){
+                var anneescolaire = $('#anneescolaire').val();
+                var intitule = $('#intitule').val();
+                var description = $('#description').val();
+                $.ajax({
+                    type : "POST",
+                    url  : "<?php echo site_url('candidat/save')?>",
+                    dataType : "JSON",
+                    data : {anneescolaire:anneescolaire , intitule:intitule, description:description},
+                    success: function(data){
+                        $('[name="anneescolaire"]').val("");
+                        $('[name="intitule"]').val("");
+                        $('[name="description"]').val("");
+                        $('#Modal_Add').modal('hide');
+                    }
+                });
+                return false;
+            });

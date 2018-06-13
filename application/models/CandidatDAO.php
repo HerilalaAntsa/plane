@@ -7,43 +7,19 @@ Class CandidatDAO extends CI_Model{
         $this->load->library('class/CandidatModel');
     }
 
-    /**
-     * @param $candidat
-     * @return mixed
-     */
-    public function save($candidat){
+    public function save(){
         $this->load->database;
 
         $data = array(
-            'id_candidat' => '',
-            'nom' => $candidat->getNom(),
-            'prenom' => $candidat->getPrenom(),
-            'email' => $candidat->getEmail(),
-            'pass' => $candidat->getPass(),
-            'adresse' => $candidat->getAdresse(),
-            'tel' => $candidat->getTel(),
-            'dateNaissance' => $candidat->getDateNaissance()
-
+            'nom' => $this->input->post('anarana'),
+            'prenom' => $this->input->post('fanampiny'),
+            'dateNaissance' => $this->input->post('dateNaissance'),
+            'email' => $this->input->post('mailaka'),
+            'adresse' => $this->input->post('adiresy'),
+            'pass' => $this->input->post('mdp'),
+            'telephone' => $this->input->post('phon'),
         );
-
-        $this->db->insert('candidat', $data);
-        $id = $this->db->insert_id();
-
-        foreach ($candidat->cv as $plus){
-            $dataplus = array(
-                'niveauEtudes' => $plus->getNiveauEtudes(),
-                'experience' => $plus->getExperience(),
-                'civilite' => $plus->getCivilite(),
-                'ville' => $plus->getVille(),
-                'formation' => $plus->getFormation(),
-                'competence' => $plus->getCompetence(),
-                'enposte' => $plus->getEnPoste(),
-                'domaine' => $plus->getDomaine(),
-                'disponibilite' => $plus->getDisponibilite(),
-                'idCv' => $id
-            );
-            $this->db->insert("cv", $dataplus);
-        }
-
+        $result = $this->db->insert('candidat', $data);
+        return $result;
     }
 }

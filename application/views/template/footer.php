@@ -42,6 +42,7 @@
 <script src="<?php echo base_url(); ?>assets/js/Fuse.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/airports.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/autocompletion.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/dataTable.js"></script>
 
 
 

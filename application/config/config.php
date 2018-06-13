@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:89/plane/';
+$config['base_url'] = 'http://localhost:82/sessions/';
 
 /*
 |--------------------------------------------------------------------------
@@ -333,7 +333,7 @@ $config['encryption_key'] = '';
 |
 | 'sess_driver'
 |
-|	The storage driver to use: files, database, redis, memcached
+|	The storage driver to use: files, v  , redis, memcached
 |
 | 'sess_cookie_name'
 |

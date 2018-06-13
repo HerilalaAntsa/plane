@@ -10,6 +10,8 @@
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="<?php echo base_url(); ?>assets/css/dataTable.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="<?php echo base_url(); ?>assets/css/prettyPhoto.css" rel="stylesheet">
     <!-- iCheck -->
