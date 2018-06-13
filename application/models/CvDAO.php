@@ -92,7 +92,6 @@ Class CvDAO extends CI_Model{
     {
         $model->setId($res->id_cv);
         $model->setCivilite($res->civilite);
-        $model->setAdresse($res->adresse);
 
         $model->setExperience($res->experience);
         $model->setFormation($res->formation);
@@ -102,19 +101,17 @@ Class CvDAO extends CI_Model{
         $model->setDisponibilite($res->disponibilite);
         $model->setVille($res->ville);
         $model->setNiveauEtude($res->niveauEtude);
-        $model->setNom($res->nom);
 
-        $model->setPrenom($res->prenom);
-        $model->setDatenaissance($res->datenaissance);
-        $model->setPhoto($res->photo);
+        $candidat = new CandidatModel();
+        $candidat->setDateNaissance($res->datenaissance);
+        $candidat->setTel($res->telephone);
+        $candidat->setAdresse($res->adresse);
+        $candidat->setPhoto($res->photo);
+        $candidat->setNom($res->nom);
+        $candidat->setPrenom($res->prenom);
+        $candidat->setSexe($res->sexe);
+        $candidat->setMail($res->email);
 
-        $model->setDateNaissance($res->dateNaissance);
-        $model->setTelephone($res->telephone);
-        $model->setAdresse($res->adresse);
-        $model->setPhoto($res->photo);
-        $model->setPrenom($res->prenom);
-        $model->setSexe($res->sexe);
-        $model->setEmail($res->email);
-
+        $model->setCandidat($candidat);
     }
 }
