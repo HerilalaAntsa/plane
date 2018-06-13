@@ -74,11 +74,11 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-    'dsn'	=> 'mysql:host=localhost;dbname=asa',
+    'dsn'	=> 'mysql:host=localhost:82;dbname=asa',
     'hostname' => 'localhost',
     'username' => 'root',
-    'password' => 'adri',
-    'database' => 'job',
+    'password' => 'root',
+    'database' => 'asa',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
     'pconnect' => FALSE,
