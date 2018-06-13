@@ -30,24 +30,57 @@
 			<div class="text-center">
 				<div class="row contact-wrap" style="color:initial">
 					<h3>Deposer votre CV dès maintenant</h3>
+                    <?php if ($error!=""){ ?>
+                        <div class="alert alert-danger">
+                            <?php echo $error; ?>
+                        </div>
+                    <?php } ?>
 					<div class="status alert alert-success" style="display: none"></div>
-					<?php echo form_open(base_url().'Candidat/lasa',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
-
+					<?php echo form_open_multipart(base_url().'Candidat/SendCV',array('method'=>'post', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
+                    <div class="row">
                     <div class="col-sm-5 col-sm-offset-1">
+
+                            <div class="form-group">
+                                <label class="radio-inline"><input type="radio" name="sexe" value="H">Homme</label>
+                                <label class="radio-inline"x><input type="radio" name="sexe" value="F">Femme</label>
+                                <p style="color:#dd0000;"><?php echo form_error('sexe'); ?></p>
+                            </div>
+
 							<div class="form-group">
 								<label>Nom *</label>
-								<input type="text" name="anarana" class="form-control" required="required">
+								<input type="text" name="nom" class="form-control" required="required">
+                                <p style="color:red;"><?php echo form_error('nom'); ?></p>
 							</div>
 
 							<div class="form-group">
 								<label>Prenoms *</label>
-								<input type="text" name="fanampiny" class="form-control" required="required">
+								<input type="text" name="prenom" class="form-control" required="required">
+                                <p style="color:red;"><?php echo form_error('prenom'); ?></p>
 							</div>
 
                             <div class="form-group">
                                 <label>Email *</label>
-                                <input type="email" name="mailska" class="form-control" required="required">
+
                             </div>
+
+                        <div class="form-group">
+                            <label>Telephone *</label>
+                            <input type="text" name="telephone" class="form-control" required="required">
+                            <p style="color:red;"><?php echo form_error('telephone'); ?></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Adresse *</label>
+                            <input type="text" name="adresse" class="form-control" required="required">
+                            <p style="color:red;"><?php echo form_error('adresse'); ?></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ville *</label>
+                            <select class="form-control" id="ville" name="ville">
+                                <option value="Antananarivo">Antananarivo</option>
+                            </select>
+                        </div>
 
                         <div class="form-group">
                             <label>Date de naissance *</label>
@@ -57,14 +90,18 @@
                         <div class="form-group">
                             <label>Etat civil *</label>
                             <select class="form-control" id="etatCivil" name="etatCivil">
-                                <option value="case">Mari&eacute(e)</option>
-                                <option value="libre">C&eacutelibataire</option>
+                                <option value="encouple">En couple</option>
+                                <option value="celibataire">C&eacutelibataire</option>
+                                <option value="veuf">Veuf/veuve</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label>Votre photo *</label><!-- Error Message will show up here -->
-
+                            <label class="control-label">Votre photo*</label>
+                            <div class="">
+                                <input type="file"  name="photo">
+                                <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                            </div>
                         </div>
 
 
@@ -72,46 +109,68 @@
 
 						<div class="col-sm-5">
                             <div class="form-group">
+                                <label>Niveau d'&eacute;tude *</label>
+                                <select class="form-control" id="niveauEtude" name="niveauEtude"  required="required">
+                                    <option value="bepc">BEPC</option>
+                                    <option value="bac">BAC</option>
+                                    <option value="bac+2">BAC+2</option>
+                                    <option value="bac+3">BAC+3</option>
+                                    <option value="bac+4">BAC+4</option>
+                                    <option value="bac+5">BAC+5</option>
+                                    <option value="autre">Autre</option>
+                                </select>
+
+                                <input type="text" name="niveauEtudeAutre" class="form-control" placeholder="Autre">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="Experience">Experiences:</label>
                                 <textarea class="form-control" rows="5" id="formation"  name="experience" required="required"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="Formation">Formations et Competences:</label>
+                                <label for="Formation">Formations:</label>
                                 <textarea class="form-control" rows="5" id="formation"  name="formation" required="required"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Formation">Comp&eacute;tences:</label>
+                                <textarea class="form-control" rows="5" id="comptence"  name="comptence" required="required"></textarea>
                             </div>
 
                             <div class="form-group col-sm-6">
                                 <label>Situation actuelle *</label>
                                     <select class="form-control" id="situation" name="situation">
-                                        <option value="Occuper">En poste</option>
-                                        <option value="libre">En recherche</option>
+                                        <option value="enposte">En poste</option>
+                                        <option value="enrecherche">En recherche</option>
                                     </select>
                             </div>
 
                             <div class="form-group col-sm-6">
                                 <label>Disponibilite *</label>
                                 <select class="form-control" id="dispo" name="dispo">
-                                    <option value="now">Immediate</option>
-                                    <option value="later">Avec preavis</option>
+                                    <option value="immediate">Immediate</option>
+                                    <option value="preavis">Avec preavis</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label>Domaines d'activit&eacutes *</label>
-                                    <select class="form-control" id="etatCivil" name="etatCivil">
-                                        <option value="case">Gestion</option>
-                                        <option value="libre">Informatique</option>
-                                        <option value="libre">Comptabilit&eacute</option>
-                                        <option value="libre">Commerce</option>
-                                        <option value="libre">Agroalimentaire</option>
+                                    <select class="form-control" id="domaine" name="domaine">
+                                        <option value="gestion">Gestion</option>
+                                        <option value="informatique">Informatique</option>
+                                        <option value="comptabilisation">Comptabilit&eacute</option>
+                                        <option value="commerce">Commerce</option>
+                                        <option value="agroalimentaire">Agroalimentaire</option>
                                     </select>
                             </div>
-
-							<div class="form-group ">
-								<button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Envoyer CV</button>
-							</div>
 						</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-8 form-group ">
+                            <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Envoyer CV</button>
+                        </div>
+                    </div>
 					<?php echo form_close(); ?>
 				</div><!--/.row-->
 				<div class="col-md-3">
@@ -200,69 +259,3 @@
         </div><!--/.container-->    
     </section><!--/#conatcat-info-->
 
-    <!-- MODAL ADD -->
-    <form>
-        <div class="modal fade" id="Modal_Add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Mettre a jour mes informations</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group row">
-                            <label class="col-md-2 col-form-label">Annee scolaire</label>
-                            <div class="col-md-10">
-                                <input type="text" name="anneescolaire" id="anneescolaire" class="form-control" placeholder="Product Code">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-2 col-form-label">Intitul&eacute</label>
-                            <div class="col-md-10">
-                                <input type="text" name="intitule" id="intitule" class="form-control" placeholder="intitul&eacute">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-2 col-form-label">Description</label>
-                            <div class="col-md-10">
-                                <text-area name="description" id="description" class="form-control" placeholder="Price"></text-area>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        <button type="button" type="submit" id="btn_save" class="btn btn-primary">Enregistrer</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <!--END MODAL ADD-->
-
-    <script type="text/javascript">
-        $(document).ready(function(){
-
-            $('#mydata').dataTable();
-
-
-            //Save product
-            $('#btn_save').on('click',function(){
-                var anneescolaire = $('#anneescolaire').val();
-                var intitule = $('#intitule').val();
-                var description = $('#description').val();
-                $.ajax({
-                    type : "POST",
-                    url  : "<?php echo site_url('candidat/save')?>",
-                    dataType : "JSON",
-                    data : {anneescolaire:anneescolaire , intitule:intitule, description:description},
-                    success: function(data){
-                        $('[name="anneescolaire"]').val("");
-                        $('[name="intitule"]').val("");
-                        $('[name="description"]').val("");
-                        $('#Modal_Add').modal('hide');
-                    }
-                });
-                return false;
-            });
