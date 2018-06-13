@@ -5,7 +5,6 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
         public function __construct()
         {
             parent::__construct();
-            $this->load->library('class/CandidatModel');
             $this->load->library('class/CvModel');
             $this->load->model('CvDAO');
 
