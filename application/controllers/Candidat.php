@@ -87,8 +87,8 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
                     $cv->setCandidat($candidat);
 
                     $this->CvDAO->save($cv);
-       //             $data['contents'] = 'ezjob-index.php';
-      //              $this->load->view('template', $data);
+                    $data['contents'] = 'ezjob-index.php';
+                    $this->load->view('template', $data);
                 }catch(Exception $e){
                     $data['error'] = $e->getMessage();
                     $data['cv'] = $cv;
