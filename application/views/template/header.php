@@ -55,7 +55,7 @@
                     <div class="menu">
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation"><a href="#" class="active">Societ&eacutes</a></li>
-                            <li role="presentation"><a href="ezjob-add">Travailleurs</a></li>
+                            <li role="presentation"><a href="Candidat/ficheCV/1">Travailleurs</a></li>
                         </ul>
                     </div>
                 </div>

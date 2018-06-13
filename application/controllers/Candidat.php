@@ -7,6 +7,7 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
             parent::__construct();
             $this->load->library('class/CandidatModel');
             $this->load->library('class/CvModel');
+            $this->load->model('CvDAO');
 
         }
 
@@ -19,6 +20,14 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
 
         public function add(){
             $data['contents'] = "ezjob-add";
+            $this->load->view('template',$data);
+        }
+
+        public function ficheCV($id){
+            $data["error"] = '';
+            $data['cv'] = $this->CvDAO->findCvById($id);
+            $data['contents'] = "ficheAgent";
+            $data['titre'] = "EasyJob";
             $this->load->view('template',$data);
         }
 

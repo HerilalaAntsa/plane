@@ -12,7 +12,7 @@
 		<div class="container">
 			<div class="row contact-wrap" style="color: initial">
 				<div class="status alert alert-success" style="display: none"></div>
-				<?php echo form_open(base_url().'Cv/recherche',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
+				<?php echo form_open(base_url().'Candidat/recherche',array('method'=>'get', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
 				<div class="col-sm-5 col-sm-offset-1">
 
                     <div class="form-group">

@@ -60,10 +60,7 @@
 
                             <div class="form-group">
                                 <label>Email *</label>
-                                <input type="mail" name="email" class="form-control" required="required">
-
                                 <input type="email" name="email" class="form-control" required="required" value="<?php echo set_value('email'); ?>">
-
                                 <p style="color:red;"><?php echo form_error('email'); ?></p>
 
                             </div>
