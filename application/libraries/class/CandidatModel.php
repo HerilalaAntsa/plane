@@ -54,7 +54,9 @@
         {
             $this->nom = $nom;
         }
-
+        public function getFullName(){
+            return $this->nom.' '.$this->prenom;
+        }
         /**
          * @return mixed
          */
@@ -130,9 +132,26 @@
         /**
          * @param mixed $dateNaissance
          */
-        public function setDateNaissance($dateNaissance)
+        public function setDatenaissance($datenaissance)
         {
-            $this->dateNaissance = $dateNaissance;
+            $this->dateNaissance = $datenaissance;
+            $this->setAge(new DateTime($this->dateNaissance));
+        }
+        public function getDatenaissanceString(){
+            return (new DateTime($this->getDatenaissance()))->format('d M Y');
+        }
+        public function getAge()
+        {
+            return $this->age;
+        }
+
+        public function setAge($date)
+        {
+            $age = date('Y') - $date->format('Y');
+            if (date('md') < $date->format('md')){
+                $age = $age - 1;
+            }
+            $this->age = $age;
         }
 
         /**
@@ -158,7 +177,6 @@
         {
             return $this->photo;
         }
-
         /**
          * @param mixed $photo
          */

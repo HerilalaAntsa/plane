@@ -10,6 +10,8 @@
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="<?php echo base_url(); ?>assets/css/dataTable.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="<?php echo base_url(); ?>assets/css/prettyPhoto.css" rel="stylesheet">
     <!-- iCheck -->
@@ -45,7 +47,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class="navbar-brand">
-                        <a href="index.php"><h1><span>Easy</span>Job</h1></a>
+                        <a href="<?php echo base_url() ?>"><h1><span>Easy</span>Job</h1></a>
                     </div>
                 </div>
 
@@ -53,7 +55,7 @@
                     <div class="menu">
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation"><a href="#" class="active">Societ&eacutes</a></li>
-                            <li role="presentation"><a href="ezjob-add">Travailleurs</a></li>
+                            <li role="presentation"><a href="<?php echo base_url().'Recherche' ?>">Travailleurs</a></li>
                         </ul>
                     </div>
                 </div>

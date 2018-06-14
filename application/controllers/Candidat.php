@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No redirect script access allowed');
-    class Candidat extends CI_Controller{
+    class Candidat extends MY_Controller{
+
         public function __construct()
         {
             parent::__construct();
-            $this->load->library('class/CandidatModel');
             $this->load->library('class/CvModel');
-            $this->load->model('CandidatDAO');
             $this->load->model('CvDAO');
+
         }
 
         public function index(){
@@ -22,28 +22,110 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
             $this->load->view('template',$data);
         }
 
-        public function soumettre(){
-            if(!$this->input->post('anarana')){
-                redirect('Candidat/index','refresh');
-            }
-            $data['nom'] = $this->input->post('anarana');
-            $data['prenoms'] = $this->input->post('fanampiny');
-            $data['mail'] = $this->input->post('email');
-            $data['dateNaissance'] = $this->input->post('dateNaissance');
-            $data['etatCivil'] = $this->input->post('etatCivil');
-            $data['experience'] = $this->input->post('experience');
-            $data['formation'] = $this->input->post('formation');
-
-            $data['hidden'] = array(
-
-                'enposte' => 1,
-                'disponibilite' => $this->input->post('dispo'),
-                'domaine'=> $this->input->post('domaine'),
-
-            );
-
-            $data['contents'] = "ezjob-index.php";
+        public function ficheCV($id){
+            $data["error"] = '';
+            $data['cv'] = $this->CvDAO->findCvById($id);
+            $data['contents'] = "ficheAgent";
+            $data['titre'] = "EasyJob";
             $this->load->view('template',$data);
+        }
+        public function Modification($id){
+            $data["error"] = '';
+            $data['cv'] = $this->CvDAO->findCvById($id);
+            $data['contents'] = "ezjob-edit";
+            $data['titre'] = "EasyJob";
+            $this->load->view('template',$data);
+        }
+        public function modifier()
+        {
+            $data['error'] = "";
+            $cv = new CvModel();
+            $candidat = new CandidatModel();
+            $candidat->setNom($this->input->post('nom'));
+            $candidat->setPrenom($this->input->post('prenom'));
+            $candidat->setMail($this->input->post('email'));
+            $candidat->setAdresse($this->input->post('adresse'));
+            $candidat->setTel($this->input->post('telephone'));
+            $candidat->setSexe($this->input->post('sexe'));
+            $candidat->setDateNaissance($this->input->post('dateNaissance'));
+            $candidat->setPhoto($this->input->post('prevphoto'));
+
+            $cv->setId($this->input->post('id'));
+            $cv->setCivilite($this->input->post('etatCivil'));
+            $cv->setExperience($this->input->post('experience'));
+            $cv->setFormation($this->input->post('formation'));
+            $cv->setCompetence($this->input->post('competence'));
+            $cv->setSituation($this->input->post('situation'));
+            $cv->setDomaine($this->input->post('domaine'));
+            $cv->setDisponibilite($this->input->post('dispo'));
+            $cv->setVille($this->input->post('ville'));
+            $cv->setNiveauEtude($this->input->post('niveauEtude'));
+            if($this->input->post('autre')){
+                $cv->setNiveauEtude($this->input->post('autre'));
+            }
+            $cv->setCandidat($candidat);
+            $this->form_validation->set_error_delimiters('', '');
+            $this->form_validation->set_rules('nom', 'Nom', 'trim|required|min_length[1]');
+            $this->form_validation->set_rules('sexe', 'Sexe', 'required');
+            $this->form_validation->set_rules('prenom', 'Prenom', 'trim|required|min_length[1]');
+            $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[4]|max_length[30]');
+            $this->form_validation->set_rules('adresse', 'Adresse', 'trim|required|min_length[1]');
+            $this->form_validation->set_rules('telephone', 'Telephone', 'trim|required|min_length[1]|numeric');
+
+            if (!($this->input->post('prevphoto')) && empty($_FILES['photo']['name']))
+            {
+                $this->form_validation->set_rules('photo', 'Photo', 'required');
+            }
+            if ($this->form_validation->run()) {
+                try {
+                    if (!empty($_FILES['photo']['name']))
+                    {
+                        $candidat->setPhoto($this->do_upload());
+                    }
+                    $this->CvDAO->update($cv);
+                    //$data['cv'] = $cv;
+                    //$data['contents'] = 'ficheAgent.php';
+                    //$this->load->view('template', $data);
+                    redirect('Candidat/ficheCV/'.strval($cv->getId()), 'refresh');
+                }catch(Exception $e){
+                    $data['error'] = $e->getMessage();
+                    $data['cv'] = $cv;
+
+                    $data['contents'] = "ezjob-edit.php";
+                    $data['titre'] = "EasyJob";
+                    $this->load->view('template',$data);
+                }
+            }
+            else{
+
+                $data['error'] = "";
+                $data['cv'] = $cv;
+                $data['contents'] = "ezjob-edit.php";
+                $data['titre'] = "EasyJob";
+                $this->load->view('template',$data);
+            }
+        }
+        public function pdf($id= '') {
+
+            $data['cv'] = $this->CvDAO->findCvById($id);
+
+            $this->load->view('cvPDF', $data);
+            // Get output html
+            $html = $this->output->get_output();
+
+            // Load library
+            $this->load->library('dompdf_gen');
+
+            // Convert to PDF
+            $this->dompdf->load_html($html);
+            $this->dompdf->render();
+            $this->dompdf->stream("CV-".strval($data['cv']->getCandidat()->getId()).$data['cv']->getCandidat()->getNom().".pdf");
+
+        }
+        public function save(){
+            $cd = new CandidatDAO();
+            $data=$this->$cd->save();
+            echo json_encode($data);
         }
 
         public function SendCV()
@@ -71,14 +153,17 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
             if($this->input->post('autre')){
                 $cv->setNiveauEtude($this->input->post('autre'));
             }
-
+            $this->form_validation->set_error_delimiters('', '');
             $this->form_validation->set_rules('nom', 'Nom', 'trim|required|min_length[1]');
             $this->form_validation->set_rules('sexe', 'Sexe', 'required');
             $this->form_validation->set_rules('prenom', 'Prenom', 'trim|required|min_length[1]');
             $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[4]|max_length[30]');
             $this->form_validation->set_rules('adresse', 'Adresse', 'trim|required|min_length[1]');
             $this->form_validation->set_rules('telephone', 'Telephone', 'trim|required|min_length[1]|numeric');
-            $this->form_validation->set_rules('photo', 'Photo', 'required');
+            if (empty($_FILES['photo']['name']))
+            {
+                $this->form_validation->set_rules('photo', 'Photo', 'required');
+            }
             if ($this->form_validation->run()) {
                 try {
 
@@ -101,7 +186,6 @@ defined('BASEPATH') OR exit('No redirect script access allowed');
             else{
                 $data['error'] = "";
                 $data['cv'] = $cv;
-
                 $data['contents'] = "ezjob-index.php";
                 $data['titre'] = "EasyJob";
                 $this->load->view('template',$data);

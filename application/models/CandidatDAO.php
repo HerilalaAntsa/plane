@@ -7,43 +7,54 @@ Class CandidatDAO extends CI_Model{
         $this->load->library('class/CandidatModel');
     }
 
-    /**
-     * @param $candidat
-     * @return mixed
-     */
-    public function save($candidat){
+    public function save(){
         $this->load->database;
 
         $data = array(
-            'id_candidat' => '',
-            'nom' => $candidat->getNom(),
-            'prenom' => $candidat->getPrenom(),
-            'email' => $candidat->getEmail(),
-            'pass' => $candidat->getPass(),
-            'adresse' => $candidat->getAdresse(),
-            'tel' => $candidat->getTel(),
-            'dateNaissance' => $candidat->getDateNaissance()
-
+            'nom' => $this->input->post('anarana'),
+            'prenom' => $this->input->post('fanampiny'),
+            'dateNaissance' => $this->input->post('dateNaissance'),
+            'email' => $this->input->post('mailaka'),
+            'adresse' => $this->input->post('adiresy'),
+            'pass' => $this->input->post('mdp'),
+            'telephone' => $this->input->post('phon'),
         );
+        $result = $this->db->insert('candidat', $data);
+        return $result;
+    }
 
-        $this->db->insert('candidat', $data);
-        $id = $this->db->insert_id();
+    public function rechercheAvance($limit,$start,$cv,$tri){
 
-        foreach ($candidat->cv as $plus){
-            $dataplus = array(
-                'niveauEtudes' => $plus->getNiveauEtudes(),
-                'experience' => $plus->getExperience(),
-                'civilite' => $plus->getCivilite(),
-                'ville' => $plus->getVille(),
-                'formation' => $plus->getFormation(),
-                'competence' => $plus->getCompetence(),
-                'enposte' => $plus->getEnPoste(),
-                'domaine' => $plus->getDomaine(),
-                'disponibilite' => $plus->getDisponibilite(),
-                'idCv' => $id
-            );
-            $this->db->insert("cv", $dataplus);
+        $this->db->like(array('niveauEtude' => $cv->getNiveauEtude()));
+        $this->db->like(array('disponibilite' => $cv->getDisponibilite()));
+        $this->db->like(array('domaine' => $cv->getDomaine()));
+
+        if($cv->getNom()){
+            $this->db->where('nom', $cv->getNom());
+        }
+        if($cv->getPrenom()){
+            $this->db->where('disponibilite', $cv->getPrenom());
+        }
+        if($cv->getDomaine()){
+            $this->db->where('domaine', $cv->getDomaine());
         }
 
+        $this->db->order_by($tri, "asc");
+
+        $this->db->limit($limit, ($start-1)*$limit);
+        $query = $this->db->get("cv");
+//    var_dump($query);
+        if ($query->num_rows() > 0) {
+            $data = array();
+            foreach ($query->result() as $row) {
+                $item = new CvModel();
+                $this->creer($item, $row);
+                array_push($data, $item);
+            }
+            return $data;
+        }
+//        throw new Exception('Agent introuvable');
     }
+
+
 }

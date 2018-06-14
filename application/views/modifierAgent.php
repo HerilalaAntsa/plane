@@ -34,66 +34,84 @@
 
                     <div class="x_content">
                         <br />
-                        <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url(); ?>Utilisateur/edit/<?php echo $agent->getId(); ?>" enctype="multipart/form-data">
+                        <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url(); ?>Cv/edit/<?php echo $cv->getId(); ?>" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Nom</label>
                                     <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <input type="text" class="form-control" name="nom" value="<?php echo $agent->getNom(); ?>">
+                                        <input type="text" class="form-control" name="nom" value="<?php echo $cv->getNom(); ?>">
                                         <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                         <p style="color:red;"><?php echo form_error('nom'); ?></p>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Prenom</label>
                                     <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <input type="text" class="form-control" name="prenom" value="<?php echo $agent->getPrenom(); ?>">
+                                        <input type="text" class="form-control" name="prenom" value="<?php echo $cv->getPrenom(); ?>">
                                         <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                         <p style="color:red;"><?php echo form_error('prenom'); ?></p>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Email</label>
                                     <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <input type="text" class="form-control" name="email" value="<?php echo $agent->getEmail(); ?>">
+                                        <input type="text" class="form-control" name="email" value="<?php echo $cv->getEmail(); ?>">
                                         <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                         <p style="color:red;"><?php echo form_error('email'); ?></p>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Mot de passe</label>
-                                    <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <input type="password" class="form-control" name="pass" value="<?php echo $agent->getPassword(); ?>">
-                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                                        <p style="color:red;"><?php echo form_error('pass'); ?></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Confirmer votre mot de passe</label>
-                                    <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <input type="password" class="form-control" name="confirmPass" value="<?php echo $agent->getPassword(); ?>">
-                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                                        <p style="color:red;"><?php echo form_error('confirmPass'); ?></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Poste</label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Situation</label>
                                     <div class="col-md-9 col-sm-9 col-xs-9">
                                         <select class="form-control" name="poste">
-                                            <?php if($agent->getHierarchie()<11){?>
-                                                <option value="1" selected>Agent</option>
-                                                <option value="11">Manager</option>
+                                            <?php if($cv->getSituation()<11){?>
+                                                <option value="1" selected>En poste</option>
+                                                <option value="11">En recherche</option>
                                             <?php }else{?>
-                                                <option value="1">Agent</option>
-                                                <option value="11" selected>Manager</option>
+                                                <option value="1">En poste</option>
+                                                <option value="11" selected>En recherche</option>
                                             <?php }?>
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Disponibilite</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <select class="form-control" name="poste">
+                                            <?php if($cv->getDisponibilite()<11){?>
+                                                <option value="1" selected>Immediate</option>
+                                                <option value="11">Avec pr&eacuteavis</option>
+                                            <?php }else{?>
+                                                <option value="1">Immediate</option>
+                                                <option value="11" selected>Avec pr&eacuteavis</option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Domaine</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <select class="form-control" name="poste">
+                                            <?php if($cv->getDomaine()<11){?>
+                                                <option value="1" selected><?php echo $cv->getDomaine();?></option>
+                                                <option value="11">Gestion</option>
+                                            <?php }else{?>
+                                                <option value="1">Gestion</option>
+                                                <option value="11" selected><?php echo $cv->getDomaine();?></option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Sexe</label>
                                     <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <?php if($agent->getSexe()=="M"){?>
+                                        <?php if($cv->getSexe()=="M"){?>
                                             <div class="field-wrap">
                                                 <label for="homme">Homme</label>
                                                 <input class="" name="sexe" type="radio" value="M" id="homme" checked/>
@@ -114,6 +132,7 @@
                                         <?php }?>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Date de naissance</label>
                                     <fieldset>
@@ -121,32 +140,62 @@
                                             <div class="controls">
                                                 <div class="input-prepend input-group">
                                                     <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                                                    <input type="date" style="width: 200px" name="dateNaissance" class="form-control" value="<?php echo $agent->getDateNaissance(); ?>" required/>
+                                                    <input type="date" style="width: 200px" name="dateNaissance" class="form-control" value="<?php echo $cv->getDateNaissance(); ?>" required/>
                                                 </div>
                                             </div>
                                         </div>
                                     </fieldset>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Ville</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input type="text" class="form-control" name="adresse" value="<?php echo $cv->getVille(); ?>">
+                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                        <p style="color:red;"><?php echo form_error('ville'); ?></p>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Adresse</label>
                                     <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <input type="text" class="form-control" name="adresse" value="<?php echo $agent->getAdresse(); ?>">
+                                        <input type="text" class="form-control" name="adresse" value="<?php echo $cv->getAdresse(); ?>">
                                         <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                         <p style="color:red;"><?php echo form_error('adresse'); ?></p>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Telephone</label>
                                     <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <input type="text" class="form-control" name="telephone" data-inputmask="'mask' : '(261) 99-99-999-99'" value="<?php echo $agent->getTelephone(); ?>">
+                                        <input type="text" class="form-control" name="telephone" data-inputmask="'mask' : '(261) 99-99-999-99'" value="<?php echo $cv->getTelephone(); ?>">
                                         <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                                         <p style="color:red;"><?php echo form_error('telephone'); ?></p>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Photo de profil</label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Formations</label>
                                     <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <input type="file"  name="photo" value="<?php echo $agent->getPhoto(); ?>">
+                                        <input type="text" class="form-control" name="formation" ">
+                                        <textarea class="form-control" rows="5" id="formation"  name="formation" value="<?php echo $cv->getFormation(); ?>" required="required"></textarea>
+                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+
+                                <<div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Experiences</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input type="text" class="form-control" name="formation" ">
+                                        <textarea class="form-control" rows="5" id="experience"  name="experience" value="<?php echo $cv->getExperience(); ?>" required="required"></textarea>
+                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Photo de CV</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <input type="file"  name="photo" value="<?php echo $cv->getPhoto(); ?>">
                                         <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                     </div>
                                 </div>

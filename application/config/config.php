@@ -25,6 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = 'http://localhost/plane/';
 
+
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -333,7 +334,7 @@ $config['encryption_key'] = '';
 |
 | 'sess_driver'
 |
-|	The storage driver to use: files, database, redis, memcached
+|	The storage driver to use: files, v  , redis, memcached
 |
 | 'sess_cookie_name'
 |
