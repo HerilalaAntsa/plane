@@ -5,6 +5,7 @@ class SuperMaki extends MY_Controller{
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('class/FactureModel');
         $this->load->library('class/SuperMakiModel');
         $this->load->model('CaisseDAO');
         $this->load->model('ProduitDAO');
