@@ -16,6 +16,13 @@ class SuperMaki extends MY_Controller{
         $this->load->view('template',$data);
     }
 
+    public function jumbo(){
+        $data['error'] = '';
+        $data['cv'] = new JumboDAO();
+        $data['contents'] = "jumbo-index";
+        $this->load->view('template',$data);
+    }
+
     public function add(){
         $data['contents'] = "ezjob-add";
         $this->load->view('template',$data);
