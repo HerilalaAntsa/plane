@@ -77,8 +77,8 @@ Class CaisseDao extends CI_Model{
     }
     public function creer($model, $res)
     {
-        $model->setId($res->id_caisse);
-        $model->setSupermaki($res->id_supermaki);
+        $model->setId($res->ID_CAISSE);
+        $model->setSupermaki($res->ID_SUPERMAKI);
     }
 }
 ?>

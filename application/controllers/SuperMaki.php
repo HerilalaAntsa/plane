@@ -8,16 +8,19 @@ class SuperMaki extends MY_Controller{
         $this->load->library('class/FactureModel');
         $this->load->library('class/SuperMakiModel');
         $this->load->library('class/JumboModel');
+        $this->load->model('JumboDAO');
+        $this->load->library('class/DetailFactureModel');
         $this->load->model('CaisseDAO');
         $this->load->model('ProduitDAO');
-        $this->load->model('JumboDAO');
+        $this->load->model('FactureDAO');
+
     }
 
     public function index(){
         $data['error'] = '';
         $data['facture'] = new FactureModel();
         $data['ltCaisse'] = $this->CaisseDAO->findAll();
-        $data['ltProduit'] = $this->ProduiteDAO->findAll();
+        $data['ltProduit'] = $this->ProduitDAO->findAll();
         $data['contents'] = "maki-index";
         $this->load->view('template',$data);
     }
@@ -143,29 +146,51 @@ class SuperMaki extends MY_Controller{
     public function SaveFacture()
     {
         $data['error'] = "";
-        $detail = new DetailFactureModel();
-        $detail->setProduit($this->input->post('dateheure'));
-        $detail->setQuantite($this->input->post('quantite'));
 
         $facture = new FactureModel();
         $facture->setDateHeure($this->input->post('dateheure'));
         $facture->setCaisse($this->input->post('numerocaisse'));
 
+        for($i=1; $i<=$this->input->post('nombreProduit');$i++){
+            $detail = new DetailFactureModel();
+            $detail->setProduit($this->input->post('nom'.$i));
+
+ //           if($this->input->post('quantite'.$i)!=""){
+ //               $this->form_validation->set_rules('nomProduit'.$i, 'Produit', 'required|less_than[8]');
+ //           }
+ //           if($this->input->post('nom'.$i)!=""){
+ //               $this->form_validation->set_rules('quantite'.$i, 'Quantite', 'required');
+ //           }
+            $detail->setQuantite($this->input->post('quantite'.$i));
+
+            $facture->addDetail($detail);
+        }
+
+        $total = 0;
+        foreach ($facture->getDetailFacture() as $detail){
+            $produit = $this->ProduitDAO->findById($detail->getProduit());
+            if($produit){
+                $temp = $detail->getQuantite() * $produit->getPrixUnitaire();
+                $total += $temp;
+            }
+        }
+
         $this->form_validation->set_error_delimiters('', '');
+        $this->form_validation->set_rules('quantite', 'Quantite', 'numeric|greater_than[0]');
         $this->form_validation->set_rules('dateheure', 'DateHeure', 'trim|required|min_length[1]');
-        $this->form_validation->set_rules('nomProduit', 'NomProduit', 'trim|required|min_length[1]');
-        $this->form_validation->set_rules('quantite', 'Quantite', 'required');
-        $this->form_validation->set_rules('prixunitaire', 'PrixUnitaire', 'trim|required|min_length[1]');
         if ($this->form_validation->run()) {
+            $facture->setPrixTotal($total);
             try {
                 $this->FactureDAO->save($facture);
+                $data['ltCaisse'] = $this->CaisseDAO->findAll();
+                $data['ltProduit'] = $this->ProduitDAO->findAll();
                 $data['contents'] = 'maki-index';
                 $this->load->view('template', $data);
             }catch(Exception $e){
                 $data['error'] = $e->getMessage();
                 $data['facture'] = new FactureModel();
                 $data['ltCaisse'] = $this->CaisseDAO->findAll();
-                $data['ltProduit'] = $this->ProduiteDAO->findAll();
+                $data['ltProduit'] = $this->ProduitDAO->findAll();
 
                 $data['contents'] = "maki-index";
                 $this->load->view('template',$data);
@@ -175,8 +200,8 @@ class SuperMaki extends MY_Controller{
             $data['error'] = "";
             $data['facture'] = new FactureModel();
             $data['ltCaisse'] = $this->CaisseDAO->findAll();
-            $data['ltProduit'] = $this->ProduiteDAO->findAll();
-            $data['contents'] = "ezjob-index.php";
+            $data['ltProduit'] = $this->ProduitDAO->findAll();
+            $data['contents'] = "maki-index";
             $this->load->view('template',$data);
         }
     }

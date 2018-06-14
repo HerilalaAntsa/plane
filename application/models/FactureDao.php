@@ -8,23 +8,36 @@ Class FactureDao extends CI_Model{
     }
     public function save($facture)
     {
+        var_dump($facture);
         $data = array(
-            'id_facture' => '',
-            'idcaisse' => $facture->getCaisse(),
-            'dateheure' => $facture->getDateHeure(),
-            'prixtotal' => $facture->getPrixTotal()
+            'ID_FACTURE' => '',
+            'ID_CAISSE' => $facture->getCaisse(),
+            'DATEHEURE' => $facture->getDateHeure(),
+            'PRIXTOTAL' => $facture->getPrixTotal()
         );
+        $this->db->trans_off();
+        $this->db->trans_begin();
 
         $this->db->insert("facture", $data);
         $id = $this->db->insert_id();
 
+
         foreach ($facture->detailFacture as $produit){
             $datadetail = array(
-                'id_produit' => $produit->getProduit(),
-                'idfacture' => $id,
-                'quantite' => $produit->getQuantite()
+                'ID_PRODUIT' => $produit->getProduit(),
+                'ID_FACTURE' => $id,
+                'QUANTITE' => $produit->getQuantite()
             );
             $this->db->insert("detailfacture", $datadetail);
+        }
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->trans_rollback();
+        }
+        else
+        {
+            $this->db->trans_commit();
         }
 
         return $this->db->insert_id();

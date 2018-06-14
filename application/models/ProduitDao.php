@@ -4,7 +4,7 @@ Class ProduitDao extends CI_Model{
     Public function __construct()
     {
         parent::__construct();
-        $this->load->library('class/CaisseModel');
+        $this->load->library('class/ProduitModel');
 
     }
     public function save($client)
@@ -77,9 +77,9 @@ Class ProduitDao extends CI_Model{
     }
     public function creer($model, $res)
     {
-        $model->setId($res->id_produit);
-        $model->setNom($res->nomproduit);
-        $model->setPrixUnitaire($res->prixunitaire);
+        $model->setId($res->ID_PRODUIT);
+        $model->setNom($res->NOMPRODUIT);
+        $model->setPrixUnitaire($res->PRIXUNITAIRE);
         $model->setUnite("");
     }
 }

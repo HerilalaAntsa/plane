@@ -55,14 +55,7 @@ class FactureModel
      */
     public function getPrixTotal()
     {
-        $this->load->model('ProduitDAO');
-        $total = 0;
-        foreach ($this->getDetailFacture() as $detail){
-            $produit = $this->ProduitDao->findById($detail->getProduit());
-            $temp = $detail->getQuantite() * $produit->getPrixUnitaire();
-            $total += $temp;
-        }
-        return $total;
+        return $this->prixTotal;
     }
 
     /**
@@ -72,6 +65,7 @@ class FactureModel
     {
         $this->prixTotal = $prixTotal;
     }
+
 
     /**
      * @return array
@@ -90,6 +84,6 @@ class FactureModel
     }
 
     public function addDetail($detail){
-        array_push($this->$detailFacture, $detail);
+        array_push($this->detailFacture, $detail);
     }
 }

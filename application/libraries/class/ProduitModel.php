@@ -1,6 +1,6 @@
 <?php
 
-class CaisseModel
+class ProduitModel
 {
     var $id;
 
@@ -13,25 +13,26 @@ class CaisseModel
     {
         $this->id = $id;
     }
-    var $nomProduit;
+    var $nom;
     var $prixUnitaire;
     var $unite;
 
     /**
      * @return mixed
      */
-    public function getNomProduit()
+    public function getNom()
     {
-        return $this->nomProduit;
+        return $this->nom;
     }
 
     /**
-     * @param mixed $nomProduit
+     * @param mixed $nom
      */
-    public function setNomProduit($nomProduit)
+    public function setNom($nom)
     {
-        $this->nomProduit = $nomProduit;
+        $this->nom = $nom;
     }
+
 
     /**
      * @return mixed
