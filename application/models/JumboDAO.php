@@ -7,6 +7,36 @@ Class JumboDAO extends CI_Model{
         $this->load->library('class/CaisseModel');
 
     }
+
+    public function funcname($id)
+    {
+        $this->db->select('*');
+        $this->db->from('Album a');
+        $this->db->join('Category b', 'b.cat_id=a.cat_id', 'left');
+        $this->db->join('Soundtrack c', 'c.album_id=a.album_id', 'left');
+        $this->db->where('c.album_id',$id);
+        $this->db->order_by('c.track_title','asc');
+        $query = $this->db->get();
+        if($query->num_rows() != 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function get_all_supermaki() {
+
+        $this->db->select ( '*' );
+        $this->db->from ( 'caisse' );
+        $this->db->join ( 'supermaki', 'supermaki.ID_SUPERMAKI = caisse.ID_SUPERMAKI' , 'left' );
+        $this->db->join ( 'facture', 'facture.ID_CAISSE = caisse.ID_CAISSE' , 'left' );
+        $query = $this->db->get ();
+        return $query->result ();
+    }
+
     public function save($client)
     {
         $this->load->database();

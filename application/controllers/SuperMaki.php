@@ -7,6 +7,10 @@ class SuperMaki extends MY_Controller{
         parent::__construct();
         $this->load->library('class/FactureModel');
         $this->load->library('class/SuperMakiModel');
+        $this->load->library('class/JumboModel');
+        $this->load->model('CaisseDAO');
+        $this->load->model('ProduitDAO');
+        $this->load->model('JumboDAO');
     }
 
     public function index(){
@@ -20,7 +24,7 @@ class SuperMaki extends MY_Controller{
 
     public function jumbo(){
         $data['error'] = '';
-        $data['results'] = new JumboModel();
+        $data['ltcaisseJumbo'] = $this->JumboDAO->get_all_supermaki();
         $data['contents'] = "jumbo-index";
         $this->load->view('template',$data);
     }
