@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No redirect script access allowed');
 
-class Client extends MY_controller{
+class Jumbo extends MY_controller{
     public function __construct(){
         parent::__construct();
         $this->load->library('class/ClientModel');
