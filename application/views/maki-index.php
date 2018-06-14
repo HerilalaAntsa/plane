@@ -1,7 +1,7 @@
 	<section id="main-slider" class="no-margin">
     </section><!--/#main-slider-->
 	
-	<div class="feature">
+	<div class="feature"  ng-app="myApp" ng-controller="myCtrl">
 		<div class="container">
 			<div class="text-center">
 				<div class="row contact-wrap" style="color:initial">
@@ -12,7 +12,7 @@
                             </div>
                         <?php } ?>
                         <div class="status alert alert-success" style="display: none"></div>
-                        <?php echo form_open_multipart(base_url().'Candidat/SaveFacture',array('method'=>'post', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
+                        <?php echo form_open_multipart(base_url().'SuperMaki/SaveFacture',array('method'=>'post', 'id'=>'main-contact-form', 'class'=>'contact-form text-left', 'name'=>'contact-form'));?>
 
                     <div class="row">
 
@@ -42,47 +42,44 @@
                         <div class="row">
 
 
-                            <div class="panel-heading"><h2>Produits</h2></div>
-
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label>Nom *</label>
-                                            <select name="nom1" class="form-control">
-                                                <option value="" selected></option>
-                                                <?php foreach ($ltProduit as $produit){?>
-                                                    <option value="<?php echo($produit->getId()); ?>"><?php echo($produit->getNom()); ?></option>
-                                                <?php } ?>
-                                            </select>
+                            <div class="panel-heading"><h2>Produits ( {{nb}} )</h2></div>
+                                <input type="hidden" value="{{nb}}" name="nombreProduit">
+                                <div>
+                                    <div class="row"  ng-repeat="item in items">
+                                    <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label>Nom *</label>
+                                                    <select name="nom{{item}}" class="form-control">
+                                                        <option value="" selected></option>
+                                                        <?php foreach ($ltProduit as $produit){?>
+                                                            <option value="<?php echo($produit->getId()); ?>">
+                                                                <?php echo($produit->getNom()); ?> - <?php echo($produit->getPrixUnitaire()); ?> Ar</option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                                <p style="color:red;"><?php echo form_error("nomProduit"); ?></p>
+                                            </div>
                                         </div>
-                                        <p style="color:red;"><?php echo form_error('nomProduit'); ?></p>
-                                    </div>
-                                </div>
 
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Quantite *</label>
-                                        <input type="number" step="0.001" name="quantite1" class="form-control" required="required" value="<?php echo set_value('quantite1'); ?>">
-                                        <p style="color:red;"><?php echo form_error('quantite'); ?></p>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Quantite *</label>
+                                                <input type="number" step="0.001" name="quantite{{item}}" class="form-control"  value="<?php echo set_value('quantite1'); ?>">
+                                                <p style="color:red;"><?php echo form_error("quantite"); ?></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Prix Unitaire *</label>
-                                        <input type="number" step="1000" name="prixunitaire1" class="form-control" required="required" value="<?php echo set_value('prixunitaire1'); ?>">
-                                        <p style="color:red;"><?php echo form_error('prixunitaire'); ?></p>
-                                    </div>
                                 </div>
-                        </div>
                     <div class="row">
-                        <button type="button" name="ajoutProduit" class="btn btn-primary btn-lg" required="required"><span class="fa fa-plus"></span></button>
+                        <button type="button" ng-click="add()" class="btn btn-primary btn-lg"><span class="fa fa-plus"></span></button>
                     </div>
                     <div class="row">
                         <div class="col-md-offset-6">
-                            <label for="totalprix" class="col-md-1 control-label">TOTAL </label>
+                            <label for="totalprix" class="col-md-4 control-label">TOTAL :</label>
                             <div class="col-md-4">
-                                 <input type="number" step="1000" name="prixtotal" class="form-control" required="required">
+                                 <h3>{{total}}</h3>
                             </div>
                             <div class="col-md-4">
                                 <p>Ar</p>
@@ -101,6 +98,29 @@
 
 
 			</div>
+        <script src="<?php echo base_url(); ?>assets/js/angular.min.js"></script>
+        <script>
+
+            var app = angular.module('myApp', []);
+            app.controller('myCtrl', function($scope,$http,$interval) {
+                $scope.items = [];
+                $scope.nb = 1;
+                $scope.items.push(1);
+                $scope.total = 0;
+
+                $scope.add = function () {
+                    $scope.nb++;
+                    $scope.items.push($scope.nb);
+                    $scope.total = <?php echo($produit->getPrixUnitaire()); ?>;
+                };
+
+                $scope.prixTotal = function () {
+                    $scope.total = <?php echo($produit->getPrixUnitaire()); ?>;
+                };
+            });
+
+
+        </script>
 		</div>
 
 
