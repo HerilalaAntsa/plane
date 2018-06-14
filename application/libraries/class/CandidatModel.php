@@ -138,8 +138,10 @@
             $this->setAge(new DateTime($this->dateNaissance));
         }
         public function getDatenaissanceString(){
+
             return (new DateTime($this->getDatenaissance()))->format('d M Y');
         }
+
         public function getAge()
         {
             return $this->age;
