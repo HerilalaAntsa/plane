@@ -6,12 +6,15 @@ class SuperMaki extends MY_Controller{
     {
         parent::__construct();
         $this->load->library('class/SuperMakiModel');
-        $this->load->model('SuperMakiDAO');
+        $this->load->model('CaisseDAO');
+        $this->load->model('ProduitDAO');
     }
 
     public function index(){
         $data['error'] = '';
-        $data['cv'] = new SuperMakiModel();
+        $data['facture'] = new FactureModel();
+        $data['ltCaisse'] = $this->CaisseDAO->findAll();
+        $data['ltProduit'] = $this->ProduiteDAO->findAll();
         $data['contents'] = "maki-index";
         $this->load->view('template',$data);
     }
@@ -127,66 +130,43 @@ class SuperMaki extends MY_Controller{
         echo json_encode($data);
     }
 
-    public function SendCV()
+    public function SaveFacture()
     {
         $data['error'] = "";
-        $cv = new CvModel();
-        $candidat = new CandidatModel();
-        $candidat->setNom($this->input->post('nom'));
-        $candidat->setPrenom($this->input->post('prenom'));
-        $candidat->setMail($this->input->post('email'));
-        $candidat->setAdresse($this->input->post('adresse'));
-        $candidat->setTel($this->input->post('telephone'));
-        $candidat->setSexe($this->input->post('sexe'));
-        $candidat->setDateNaissance($this->input->post('dateNaissance'));
+        $detail = new DetailFactureModel();
+        $detail->setProduit($this->input->post('dateheure'));
+        $detail->setQuantite($this->input->post('quantite'));
 
-        $cv->setCivilite($this->input->post('etatCivil'));
-        $cv->setExperience($this->input->post('experience'));
-        $cv->setFormation($this->input->post('formation'));
-        $cv->setCompetence($this->input->post('competence'));
-        $cv->setSituation($this->input->post('situation'));
-        $cv->setDomaine($this->input->post('domaine'));
-        $cv->setDisponibilite($this->input->post('dispo'));
-        $cv->setVille($this->input->post('ville'));
-        $cv->setNiveauEtude($this->input->post('niveauEtude'));
-        if($this->input->post('autre')){
-            $cv->setNiveauEtude($this->input->post('autre'));
-        }
+        $facture = new FactureModel();
+        $facture->setDateHeure($this->input->post('dateheure'));
+        $facture->setCaisse($this->input->post('numerocaisse'));
+
         $this->form_validation->set_error_delimiters('', '');
-        $this->form_validation->set_rules('nom', 'Nom', 'trim|required|min_length[1]');
-        $this->form_validation->set_rules('sexe', 'Sexe', 'required');
-        $this->form_validation->set_rules('prenom', 'Prenom', 'trim|required|min_length[1]');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[4]|max_length[30]');
-        $this->form_validation->set_rules('adresse', 'Adresse', 'trim|required|min_length[1]');
-        $this->form_validation->set_rules('telephone', 'Telephone', 'trim|required|min_length[1]|numeric');
-        if (empty($_FILES['photo']['name']))
-        {
-            $this->form_validation->set_rules('photo', 'Photo', 'required');
-        }
+        $this->form_validation->set_rules('dateheure', 'DateHeure', 'trim|required|min_length[1]');
+        $this->form_validation->set_rules('nomProduit', 'NomProduit', 'trim|required|min_length[1]');
+        $this->form_validation->set_rules('quantite', 'Quantite', 'required');
+        $this->form_validation->set_rules('prixunitaire', 'PrixUnitaire', 'trim|required|min_length[1]');
         if ($this->form_validation->run()) {
             try {
-
-                $candidat->setPhoto($this->do_upload());
-
-                $cv->setCandidat($candidat);
-
-                $this->CvDAO->save($cv);
-                $data['contents'] = 'ezjob-index.php';
+                $this->FactureDAO->save($facture);
+                $data['contents'] = 'maki-index';
                 $this->load->view('template', $data);
             }catch(Exception $e){
                 $data['error'] = $e->getMessage();
-                $data['cv'] = $cv;
+                $data['facture'] = new FactureModel();
+                $data['ltCaisse'] = $this->CaisseDAO->findAll();
+                $data['ltProduit'] = $this->ProduiteDAO->findAll();
 
-                $data['contents'] = "ezjob-index.php";
-                $data['titre'] = "EasyJob";
+                $data['contents'] = "maki-index";
                 $this->load->view('template',$data);
             }
         }
         else{
             $data['error'] = "";
-            $data['cv'] = $cv;
+            $data['facture'] = new FactureModel();
+            $data['ltCaisse'] = $this->CaisseDAO->findAll();
+            $data['ltProduit'] = $this->ProduiteDAO->findAll();
             $data['contents'] = "ezjob-index.php";
-            $data['titre'] = "EasyJob";
             $this->load->view('template',$data);
         }
     }
