@@ -71,7 +71,9 @@ Class CvDAO extends CI_Model{
     }
 
     public function findCvById($cv){
+
         $query = $this->db->get_where('cv',array('id_cv' => $cv));
+
         if ($query->num_rows() > 0) {
             $item = new CvModel();
             foreach ($query->result() as $row) {

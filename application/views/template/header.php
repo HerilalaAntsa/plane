@@ -55,7 +55,9 @@
                     <div class="menu">
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation"><a href="#" class="active">Societ&eacutes</a></li>
+
                             <li role="presentation"><a href="<?php echo base_url().'Recherche' ?>">Travailleurs</a></li>
+
                         </ul>
                     </div>
                 </div>
