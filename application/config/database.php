@@ -74,11 +74,11 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-    'dsn'	=> 'mysql:host=localhost;dbname=asa',
+    'dsn'	=> 'mysql:host=localhost;dbname=supermaki',
     'hostname' => 'localhost',
     'username' => 'root',
     'password' => 'root',
-    'database' => 'asa',
+    'database' => 'supermaki',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
     'pconnect' => FALSE,

@@ -6,7 +6,9 @@ class SuperMaki extends MY_Controller{
     {
         parent::__construct();
         $this->load->library('class/SuperMakiModel');
+        $this->load->library('class/JumboModel');
         $this->load->model('SuperMakiDAO');
+        $this->load->model('JumboDAO');
     }
 
     public function index(){
@@ -18,7 +20,7 @@ class SuperMaki extends MY_Controller{
 
     public function jumbo(){
         $data['error'] = '';
-        $data['cv'] = new JumboDAO();
+        $data['results'] = new JumboModel();
         $data['contents'] = "jumbo-index";
         $this->load->view('template',$data);
     }
