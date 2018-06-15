@@ -13,7 +13,6 @@ class SuperMaki extends MY_Controller{
         $this->load->model('CaisseDAO');
         $this->load->model('ProduitDAO');
         $this->load->model('FactureDAO');
-
     }
 
     public function index(){
@@ -21,6 +20,7 @@ class SuperMaki extends MY_Controller{
         $data['facture'] = new FactureModel();
         $data['ltCaisse'] = $this->CaisseDAO->findAll();
         $data['ltProduit'] = $this->ProduitDAO->findAll();
+        $data['ltSupermaki'] = $this->FactureDAO->findAllSupermaki();
         $data['contents'] = "maki-index";
         $this->load->view('template',$data);
     }
@@ -184,6 +184,7 @@ class SuperMaki extends MY_Controller{
                 $this->FactureDAO->save($facture);
                 $data['ltCaisse'] = $this->CaisseDAO->findAll();
                 $data['ltProduit'] = $this->ProduitDAO->findAll();
+                $data['ltSupermaki'] = $this->FactureDAO->findAllSupermaki();
                 $data['contents'] = 'maki-index';
                 $this->load->view('template', $data);
             }catch(Exception $e){
@@ -191,6 +192,7 @@ class SuperMaki extends MY_Controller{
                 $data['facture'] = new FactureModel();
                 $data['ltCaisse'] = $this->CaisseDAO->findAll();
                 $data['ltProduit'] = $this->ProduitDAO->findAll();
+                $data['ltSupermaki'] = $this->FactureDAO->findAllSupermaki();
 
                 $data['contents'] = "maki-index";
                 $this->load->view('template',$data);
@@ -201,6 +203,7 @@ class SuperMaki extends MY_Controller{
             $data['facture'] = new FactureModel();
             $data['ltCaisse'] = $this->CaisseDAO->findAll();
             $data['ltProduit'] = $this->ProduitDAO->findAll();
+            $data['ltSupermaki'] = $this->FactureDAO->findAllSupermaki();
             $data['contents'] = "maki-index";
             $this->load->view('template',$data);
         }
@@ -227,6 +230,35 @@ class SuperMaki extends MY_Controller{
             return $var['file_name'];
         }
         throw new Exception($this->upload->display_errors());
+    }
+
+    public function Export(){
+        $supermaki = $this->FactureDAO->findByIdSupermaki($this->input->post('idSupermaki'));
+
+        header("Content-type: application/csv");
+        header("Content-Disposition: attachment; filename=\"test".".csv\"");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        $handle = fopen('php://output', 'w');
+
+        foreach ($supermaki->ltCaisse as $data) {
+            fputcsv($handle, $data);
+            foreach ($data->ltFacture as $data2) {
+                fputcsv($handle, $data2);
+                foreach ($data2->detailFacture as $data3) {
+                    fputcsv($handle, $data3);
+                }
+            }
+        }
+        fclose($handle);
+
+
+        $data['ltCaisse'] = $this->CaisseDAO->findAll();
+        $data['ltProduit'] = $this->ProduitDAO->findAll();
+        $data['ltSupermaki'] = $this->FactureDAO->findAllSupermaki();
+        $data['contents'] = 'maki-index';
+        $this->load->view('template', $data);
     }
 }
 ?>

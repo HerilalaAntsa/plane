@@ -3,11 +3,20 @@ class SuperMakiModel
 {
 
     var $id;
-    var $nom;
-
     public function getId()
     {
         return $this->id;
+    }
+
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    var $nom;
+    var $ltCaisse = array();
+    public function addDetail($detail){
+        array_push($this->ltCaisse, $detail);
     }
 
     /**
@@ -26,10 +35,25 @@ class SuperMakiModel
         $this->nom = $nom;
     }
 
-    public function setId($id)
+
+    /**
+     * @return array
+     */
+    public function getLtCaisse()
     {
-        $this->id = $id;
+        return $this->ltCaisse;
     }
+
+    /**
+     * @param array $ltCaisse
+     */
+    public function setLtCaisse($ltCaisse)
+    {
+        $this->ltCaisse = $ltCaisse;
+    }
+
+}
+?>
 
 
 }
