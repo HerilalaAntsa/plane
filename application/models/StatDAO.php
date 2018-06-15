@@ -1,5 +1,5 @@
 <?php
-Class JumboDAO extends CI_Model{
+Class StatDAO extends CI_Model{
 
     Public function __construct()
     {
@@ -14,7 +14,8 @@ Class JumboDAO extends CI_Model{
         if ($res->num_rows() > 0) {
             $data = array();
             foreach ($res->result() as $row) {
-                $this->createStat(new StatModel(), $row);
+                $item = new StatModel();
+                $this->createStat($item, $row);
                 array_push($data, $item);
             }
             return $data;

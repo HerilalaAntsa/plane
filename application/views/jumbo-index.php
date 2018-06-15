@@ -13,17 +13,23 @@
 			<div class="row contact-wrap" style="color: initial">
 
 
-                        <div class="col-sm-7">
+                        <div class="col-sm-5">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">CAISSES SUPERMAKI</div>
                                 <div class="panel-body">
                             <div class="container-fluid">
 
                                <button class="btn-success btn">Importer des donn&eacutees</button>
-                                <?foreach ($ltcaisseJumbo as $liste){?>
+                                <?
+                                foreach ($ltcaisseJumbo as $lt){
+
+                                ?>
+
                                 <table class="table table-hover">
+                                    etooo : <?var_dump($ltcaisseJumbo);?>
                                     <thead>
                                     <tr>
+
                                         <th>Nom</th>
                                         <th>Nombre de caisse</th>
                                         <th>Total Vente</th>
@@ -32,7 +38,7 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td><?php echo $liste?></td>
+                                        <td>jjj</td>
                                         <td>10</td>
                                         <td>1 200 000 Ar</td>
                                     </tr>
@@ -42,14 +48,15 @@
                                         <td>600 000 Ar</td>
                                     </tr>
                                     </tbody>
-                                    <?}?>
+
                                 </table>
+<?}?>
                             </div>
 
                         </div></div>
                 </div>
 
-                <div class="col-sm-5">
+                <div class="col-sm-7">
                     <div class="panel panel-primary">
                         <div class="panel-heading">STATISTIQUE DE VENTE</div>
                         <div class="panel-body">
@@ -58,19 +65,19 @@
                         <thead>
                         <tr>
                             <th>SuperMaki</th>
-                            <th>Nombre de tickets utilise</th>
+                            <th>Argent en caisse</th>
                             <th>Factures</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>Ambanidia</td>
-                            <td>1014</td>
+                            <td>1014 000 Ar</td>
                             <td>1123</td>
                         </tr>
                         <tr>
                             <td>Ankorondrano</td>
-                            <td>2109</td>
+                            <td>2 109 000 Ar</td>
                             <td>1001</td>
                         </tr>
                         </tbody>
@@ -78,4 +85,9 @@
                 </div>
 
 
-	
+
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
