@@ -50,10 +50,10 @@
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <label>Nom *</label>
-                                                    <select name="nom{{item}}" class="form-control">
+                                                    <select name="nom{{item}}" class="form-control" ng-model="selectedPrice">
                                                         <option value="" selected></option>
                                                         <?php foreach ($ltProduit as $produit){?>
-                                                            <option value="<?php echo($produit->getId()); ?>">
+                                                            <option value="<?php echo($produit->getId()); ?>;<?php echo($produit->getPrixUnitaire()); ?>">
                                                                 <?php echo($produit->getNom()); ?> - <?php echo($produit->getPrixUnitaire()); ?> Ar</option>
                                                         <?php } ?>
                                                     </select>
@@ -65,7 +65,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Quantite *</label>
-                                                <input type="number" step="0.001" name="quantite{{item}}" class="form-control"  value="<?php echo set_value('quantite1'); ?>">
+                                                <input type="number" step="0.001" name="quantite{{item}}" class="form-control"  value="<?php echo set_value('quantite{{item}}'); ?>"  ng-change="prixTotal(selectedPrice,quantite,{{item}})" ng-model="quantite">
                                                 <p style="color:red;"><?php echo form_error("quantite"); ?></p>
                                             </div>
                                         </div>
@@ -77,12 +77,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-offset-6">
-                            <label for="totalprix" class="col-md-4 control-label">TOTAL :</label>
-                            <div class="col-md-4">
-                                 <h3>{{total}}</h3>
-                            </div>
-                            <div class="col-md-4">
-                                <p>Ar</p>
+                            <div class="col-md-offset-4 col-md-8">
+                                 <h3>TOTAL : {{total}} Ar</h3>
                             </div>
                         </div>
                     </div>
@@ -104,6 +100,8 @@
             var app = angular.module('myApp', []);
             app.controller('myCtrl', function($scope,$http,$interval) {
                 $scope.items = [];
+                $scope.prixProduit = [];
+                $scope.prixProduit.push(0);
                 $scope.nb = 1;
                 $scope.items.push(1);
                 $scope.total = 0;
@@ -111,11 +109,15 @@
                 $scope.add = function () {
                     $scope.nb++;
                     $scope.items.push($scope.nb);
-                    $scope.total = <?php echo($produit->getPrixUnitaire()); ?>;
                 };
 
-                $scope.prixTotal = function () {
-                    $scope.total = <?php echo($produit->getPrixUnitaire()); ?>;
+                $scope.prixTotal = function (prix,quantite, index) {
+                    $scope.prixProduit[index] = ( parseFloat(prix.split(";")[1]) * parseFloat(quantite) );
+                    $scope.total = 0;
+                    console.log($scope.prixProduit);
+                    for(prix in $scope.prixProduit){
+                        $scope.total += $scope.prixProduit[prix];
+                    }
                 };
             });
 

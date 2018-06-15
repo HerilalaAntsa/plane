@@ -8,7 +8,6 @@ Class FactureDao extends CI_Model{
     }
     public function save($facture)
     {
-        var_dump($facture);
         $data = array(
             'ID_FACTURE' => '',
             'ID_CAISSE' => $facture->getCaisse(),
