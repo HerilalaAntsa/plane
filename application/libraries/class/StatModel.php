@@ -1,5 +1,6 @@
 <?
     class StatModel{
+
         var $NOMSUPERMAKI;
         var $ID_CAISSE;
         var $ARGENT_EN_CAISSE;

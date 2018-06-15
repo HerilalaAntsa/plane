@@ -1,5 +1,7 @@
 <?php setlocale(LC_TIME, 'fr_FR.utf8','fra') ?>
-	<div id="breadcrumb">
+<script type="text/javascript" src="www.gstatic.com/charts/loader.js"></script>
+
+<div id="breadcrumb">
 		<div class="container">
 			<div class="breadcrumb">
 				<li><a href="<?php echo base_url() ?>">Jumbo Maki</a></li>
@@ -20,13 +22,8 @@
                             <div class="container-fluid">
 
                                <button class="btn-success btn">Importer des donn&eacutees</button>
-                                <?
-                                foreach ($ltcaisseJumbo as $lt){
-
-                                ?>
 
                                 <table class="table table-hover">
-                                    etooo : <?var_dump($ltcaisseJumbo);?>
                                     <thead>
                                     <tr>
 
@@ -38,7 +35,7 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>jjj</td>
+                                        <td><?php ?></td>
                                         <td>10</td>
                                         <td>1 200 000 Ar</td>
                                     </tr>
@@ -50,7 +47,7 @@
                                     </tbody>
 
                                 </table>
-<?}?>
+
                             </div>
 
                         </div></div>
@@ -60,28 +57,8 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading">STATISTIQUE DE VENTE</div>
                         <div class="panel-body">
-                            <button class="btn-success btn">Mettre a jour</button>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>SuperMaki</th>
-                            <th>Argent en caisse</th>
-                            <th>Factures</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Ambanidia</td>
-                            <td>1014 000 Ar</td>
-                            <td>1123</td>
-                        </tr>
-                        <tr>
-                            <td>Ankorondrano</td>
-                            <td>2 109 000 Ar</td>
-                            <td>1001</td>
-                        </tr>
-                        </tbody>
-                    </table>
+
+                        </div>
                 </div>
 
 

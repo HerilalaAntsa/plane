@@ -65,7 +65,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Quantite *</label>
-                                                <input type="number" step="0.001" name="quantite{{item}}" class="form-control"  value="<?php echo set_value('quantite{{item}}'); ?>"  ng-change="prixTotal(selectedPrice,quantite,{{item}})" ng-model="quantite">
+                                                <input type="number" step="1" name="quantite{{item}}" class="form-control"  value="<?php echo set_value('quantite{{item}}'); ?>"  ng-change="prixTotal(selectedPrice,quantite,{{item}})" ng-model="quantite">
                                                 <p style="color:red;"><?php echo form_error("quantite"); ?></p>
                                             </div>
                                         </div>

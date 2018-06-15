@@ -5,21 +5,19 @@ Class JumboDAO extends CI_Model{
     {
         parent::__construct();
         $this->load->library('class/CaisseModel');
-        $this->load->library('class/StatModel');
+
     }
 
-    Public function findStats()
-    {
-        $res = $this->db->get('statmaki');
-        if ($res->num_rows() > 0) {
-            $data = array();
-            foreach ($res->result() as $row) {
-                $this->createStat(new StatModel(), $row);
-                array_push($data, $item);
-            }
-            return $data;
-        }
-        return 'FALSE';
+    function get_all_supermaki() {
+        return $this->db->query('SELECT s.NOMSUPERMAKI, c.ID_CAISSE, SUM( PRIXTOTAL ) , f.DATEHEURE
+        FROM supermaki s, facture f, caisse c
+        WHERE s.ID_SUPERMAKI = c.ID_SUPERMAKI
+        AND f.ID_CAISSE = c.ID_CAISSE
+        GROUP BY ID_CAISSE'
+
+        )->result_array();
+
+
     }
 
     public function save($client)
@@ -96,13 +94,5 @@ Class JumboDAO extends CI_Model{
         $model->setId($res->id_caisse);
         $model->setSupermaki($res->id_supermaki);
     }
-
-    public function createStat($model, $res){
-        $model->setNOMSUPERMAKI($res->NOMSUPERMAKI);
-        $model->setIDCAISSE($res->ID_CAISSE);
-        $model->setARGENTENCAISSE($res->ARGENT_EN_CAISSE);
-        $model->setNOMBREFACTUREPARMAKI($res->NOMBRE_FACTURE_PAR_MAKI);
-    }
 }
-
 ?>
