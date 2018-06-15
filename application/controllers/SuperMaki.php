@@ -152,7 +152,8 @@ class SuperMaki extends MY_Controller{
 
         for($i=1; $i<=$this->input->post('nombreProduit');$i++){
             $detail = new DetailFactureModel();
-            $detail->setProduit($this->input->post('nom'.$i));
+            $idProduit = explode(';', $this->input->post('nom'.$i));
+            $detail->setProduit($idProduit[0]);
 
  //           if($this->input->post('quantite'.$i)!=""){
  //               $this->form_validation->set_rules('nomProduit'.$i, 'Produit', 'required|less_than[8]');
