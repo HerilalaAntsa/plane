@@ -92,6 +92,19 @@
 					<?php echo form_close(); ?>
 				</div><!--/.row-->
 
+            <form method="post" action="<?php echo(base_url()) ?>SuperMaki/Export">
+                <label>Supermaki</label>
+                <select name="idSupermaki" class="form-control">
+                    <?php foreach ($ltSupermaki as $super){?>
+                        <option value="<?php echo($super->getId()); ?>"><?php echo($super->getNom()); ?></option>
+                    <?php } ?>
+                </select>
+                <div class="row">
+                    <div class="form-group col-md-offset-10">
+                        <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">EXPORT</button>
+                    </div>
+                </div>
+            </form>
 
 			</div>
         <script src="<?php echo base_url(); ?>assets/js/angular.min.js"></script>

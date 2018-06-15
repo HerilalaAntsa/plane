@@ -14,6 +14,10 @@ class CaisseModel
         $this->id = $id;
     }
     var $Supermaki;
+    var $ltFacture = array();
+    public function addDetail($detail){
+        array_push($this->ltFacture, $detail);
+    }
 
     /**
      * @return mixed
@@ -29,6 +33,22 @@ class CaisseModel
     public function setSupermaki($supermaki)
     {
         $this->Supermaki = $supermaki;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLtFacture()
+    {
+        return $this->ltFacture;
+    }
+
+    /**
+     * @param array $ltFacture
+     */
+    public function setLtFacture($ltFacture)
+    {
+        $this->ltFacture = $ltFacture;
     }
 
 }

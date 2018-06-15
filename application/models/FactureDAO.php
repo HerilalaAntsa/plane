@@ -5,6 +5,9 @@ Class FactureDao extends CI_Model{
     {
         parent::__construct();
         $this->load->library('class/FactureModel');
+        $this->load->library('class/SuperMakiModel');
+        $this->load->library('class/DetailFactureModel');
+        $this->load->library('class/CaisseModel');
     }
     public function save($facture)
     {
@@ -55,6 +58,78 @@ Class FactureDao extends CI_Model{
     public function delete($id,$table){
         $this->db->where('id'.$table, $id);
         return $this->db->delete($table);
+    }
+
+    public function findByIdSupermaki($id){
+        $query = $this->db->get_where('supermaki',array('id_supermaki' => $id));
+        if ($query->num_rows() > 0) {
+            $item = new SuperMakiModel();
+            $this->creerSupermaki($item, $query->row());
+            $query = $this->db->get_where('caisse',array('id_supermaki' => $item->getId()));
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $item2 = new CaisseModel();
+                    $this->creerCaisse($item2, $row);
+                    $item->addDetail($item2);
+
+                    $query3 = $this->db->get_where('facture',array('id_caisse' => $item2->getId()));
+                    if ($query3->num_rows() > 0) {
+                        foreach ($query3->result() as $row3) {
+                            $item3 = new FactureModel();
+                            $this->creer($item3, $row3);
+                            $item2->addDetail($item3);
+
+                            $query4 = $this->db->get_where('detailfacture',array('id_facture' => $item3->getId()));
+                            if ($query->num_rows() > 0) {
+                                foreach ($query4->result() as $row4) {
+                                    $item4 = new DetailFactureModel();
+                                    $this->creerDetail($item4, $row4);
+                                    $item3->addDetail($item4);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return $item;
+        }
+    }
+
+    Public function findAllSupermaki()
+    {
+        $res = $this->db->get('supermaki');
+        if ($res->num_rows() > 0) {
+            $data = array();
+            foreach ($res->result() as $row) {
+                $item = new SuperMakiModel();
+                $this->creerSupermaki($item, $row);
+                $this->findByIdSupermaki($item->getId());
+                array_push($data, $item);
+            }
+            return $data;
+        }
+        return 'FALSE';
+    }
+
+    public function findByIdCaisse($id){
+        $query = $this->db->get_where('facture',array('id_caisse' => $id));
+        if ($query->num_rows() > 0) {
+            $data = array();
+            foreach ($query->result() as $row) {
+                $item = new FactureModel();
+                $this->creer($item, $row);
+                $query2 = $this->db->get_where('detailfacture',array('id_facture' => $item->getId()));
+                if ($query->num_rows() > 0) {
+                    foreach ($query2->result() as $row2) {
+                        $item2 = new DetailFactureModel();
+                        $this->creerDetail($item2, $row2);
+                        $item->addDetail($item2);
+                    }
+                }
+                array_push($data, $item);
+            }
+            return $data;
+        }
     }
 
     public function findAppelById($agent){
@@ -148,5 +223,30 @@ Class FactureDao extends CI_Model{
         $model->setTarifBebeAffaire($res->TARIFBEBE);
     }
 
+    public function creer($model, $res)
+    {
+        $model->setId($res->ID_FACTURE);
+        $model->setCaisse($res->ID_CAISSE);
+        $model->setDateHeure($res->DATEHEURE);
+        $model->setPrixTotal($res->PRIXTOTAL);
+    }
+    public function creerDetail($model, $res)
+    {
+        $model->setProduit($res->ID_PRODUIT);
+        $model->setFacture($res->ID_FACTURE);
+        $model->setQuantite($res->QUANTITE);
+    }
+
+    public function creerSupermaki($model, $res)
+    {
+        $model->setId($res->ID_SUPERMAKI);
+        $model->setNom($res->NOMSUPERMAKI);
+    }
+
+    public function creerCaisse($model, $res)
+    {
+        $model->setId($res->ID_CAISSE);
+        $model->setSupermaki($res->ID_SUPERMAKI);
+    }
 }
 ?>

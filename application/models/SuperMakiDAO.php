@@ -56,5 +56,20 @@ Class SuperMakiDAO extends CI_Model{
 //        throw new Exception('Agent introuvable');
     }
 
+    public function findById($id){
+        $query = $this->db->get_where('supermaki',array('id_supermaki' => $id));
+        if ($query->num_rows() > 0) {
+            $resultat = new SuperMakiModel();
+            $this->creer($resultat, $query->row());
+            return $resultat;
+        }
+        log_message('error', 'Supermaki introuvable');
+    }
 
+
+    public function creer($model, $res)
+    {
+        $model->setId($res->ID_SUPERMAKI);
+        $model->setNom($res->NOMSUPERMAKI);
+    }
 }

@@ -54,9 +54,9 @@ Class CaisseDao extends CI_Model{
     }
 
     public function findById($id){
-        $query = $this->db->get_where('client',array('idclient' => $id));
+        $query = $this->db->get_where('caisse',array('id_caisse' => $id));
         if ($query->num_rows() > 0) {
-            $resultat = new ClientModel();
+            $resultat = new CaisseModel();
             $this->creer($resultat, $query->row());
             return $resultat;
         }
