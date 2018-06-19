@@ -102,7 +102,7 @@ Class StatDAO extends CI_Model{
         $model->setNOMSUPERMAKI($res->NOMSUPERMAKI);
         $model->setIDCAISSE($res->ID_CAISSE);
         $model->setARGENTENCAISSE($res->ARGENT_EN_CAISSE);
-        $model->setNOMBREFACTUREPARMAKI($res->NOMBRE_FACTURE_PAR_MAKI);
+        $model->setNOMBREFACTUREPARSUPERMAKI($res->NOMBRE_FACTURE_PAR_SUPERMAKI);
     }
 }
 

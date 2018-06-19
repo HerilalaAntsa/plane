@@ -1,10 +1,10 @@
-<?
+<?php
     class StatModel{
 
         var $NOMSUPERMAKI;
         var $ID_CAISSE;
         var $ARGENT_EN_CAISSE;
-        var $NOMBRE_FACTURE_PAR_MAKI;
+        var $NOMBRE_FACTURE_PAR_SUPERMAKI;
 
         /**
          * @return mixed
@@ -57,17 +57,17 @@
         /**
          * @return mixed
          */
-        public function getNOMBREFACTUREPARMAKI()
+        public function getNOMBREFACTUREPARSUPERMAKI()
         {
-            return $this->NOMBRE_FACTURE_PAR_MAKI;
+            return $this->NOMBRE_FACTURE_PAR_SUPERMAKI;
         }
 
         /**
          * @param mixed $NOMBRE_FACTURE_PAR_MAKI
          */
-        public function setNOMBREFACTUREPARMAKI($NOMBRE_FACTURE_PAR_MAKI)
+        public function setNOMBREFACTUREPARSUPERMAKI($NOMBRE_FACTURE_PAR_SUPERMAKI)
         {
-            $this->NOMBRE_FACTURE_PAR_MAKI = $NOMBRE_FACTURE_PAR_MAKI;
+            $this->NOMBRE_FACTURE_PAR_SUPERMAKI = $NOMBRE_FACTURE_PAR_SUPERMAKI;
         }
     }
 ?>

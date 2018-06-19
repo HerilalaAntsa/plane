@@ -11,14 +11,11 @@
     <!-- Font Awesome -->
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="<?php echo base_url(); ?>assets/css/dataTable.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="<?php echo base_url(); ?>assets/css/prettyPhoto.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="<?php echo base_url(); ?>assets/css/animate.css" rel="stylesheet">
 
     <!-- bootstrap-progressbar -->
-    <link href="<?php echo base_url(); ?>assets/css/prettyPhoto.css" rel="stylesheet">
     <!-- JQVMap -->
     <link href="<?php echo base_url(); ?>assets/css/jquery-ui.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
@@ -47,16 +44,16 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class="navbar-brand">
-                        <a href="<?php echo base_url() ?>"><h1><span>Easy</span>Job</h1></a>
+                        <a href="<?php echo base_url() ?>"><h1><span>NEW</span>Rest</h1></a>
                     </div>
                 </div>
 
                 <div class="navbar-collapse collapse">
                     <div class="menu">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation"><a href="#" class="active">Societ&eacutes</a></li>
+                            <li role="presentation"><a href="#" class="active">Commandes</a></li>
 
-                            <li role="presentation"><a href="<?php echo base_url().'Recherche' ?>">Travailleurs</a></li>
+                            <li role="presentation"><a href="<?php echo base_url().'Recherche' ?>">Stock</a></li>
 
                         </ul>
                     </div>

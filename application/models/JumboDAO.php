@@ -5,6 +5,7 @@ Class JumboDAO extends CI_Model{
     {
         parent::__construct();
         $this->load->library('class/CaisseModel');
+        $this->load->library('class/StatModel');
 
     }
 
@@ -13,10 +14,7 @@ Class JumboDAO extends CI_Model{
         FROM supermaki s, facture f, caisse c
         WHERE s.ID_SUPERMAKI = c.ID_SUPERMAKI
         AND f.ID_CAISSE = c.ID_CAISSE
-        GROUP BY ID_CAISSE'
-
-        )->result_array();
-
+        GROUP BY ID_CAISSE')->result_array();
 
     }
 
@@ -94,5 +92,6 @@ Class JumboDAO extends CI_Model{
         $model->setId($res->id_caisse);
         $model->setSupermaki($res->id_supermaki);
     }
+
 }
 ?>
